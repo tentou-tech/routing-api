@@ -1,6 +1,6 @@
 import { StaticJsonRpcProvider, TransactionRequest } from '@ethersproject/providers'
 import { SingleJsonRpcProviderConfig } from './config'
-import { metric, MetricLoggerUnit } from '@uniswap/smart-order-router'
+import { metric, MetricLoggerUnit } from '@tentou-tech/smart-order-router'
 import {
   BlockTag,
   BlockWithTransactions,

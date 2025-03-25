@@ -7,10 +7,10 @@ import {
   V3SubgraphPool,
   V3SubgraphProvider,
   V4SubgraphPool,
-} from '@uniswap/smart-order-router'
+} from '@tentou-tech/smart-order-router'
 import { EventBridgeEvent, ScheduledHandler } from 'aws-lambda'
 import { S3 } from 'aws-sdk'
-import { ChainId } from '@uniswap/sdk-core'
+import { ChainId } from '@tentou-tech/uniswap-sdk-core'
 import { default as bunyan, default as Logger } from 'bunyan'
 import { S3_POOL_CACHE_KEY } from '../util/pool-cache-key'
 import {

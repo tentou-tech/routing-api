@@ -1,4 +1,4 @@
-import { ChainId } from '@uniswap/sdk-core'
+import { ChainId } from '@tentou-tech/uniswap-sdk-core'
 import { ADDRESS_ZERO } from '@uniswap/router-sdk'
 
 // all hook addresses need to be lower case, since the check in isHooksPoolRoutable assumes lower case
@@ -65,4 +65,6 @@ export const HOOKS_ADDRESSES_ALLOWLIST: { [chain in ChainId]: Array<string> } = 
   [ChainId.UNICHAIN]: [ADDRESS_ZERO],
   [ChainId.MONAD_TESTNET]: [ADDRESS_ZERO],
   [ChainId.SONEIUM]: [ADDRESS_ZERO],
+  [ChainId.STORY_AENEID]: [ADDRESS_ZERO],
+  [ChainId.STORY]: [ADDRESS_ZERO],
 }

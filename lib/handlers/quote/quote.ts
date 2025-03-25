@@ -1,6 +1,6 @@
 import Joi from '@hapi/joi'
 import { Protocol } from '@uniswap/router-sdk'
-import { ChainId, Currency, CurrencyAmount, Token, TradeType } from '@uniswap/sdk-core'
+import { ChainId, Currency, CurrencyAmount, Token, TradeType } from '@tentou-tech/uniswap-sdk-core'
 import {
   AlphaRouterConfig,
   getAddress,
@@ -14,7 +14,7 @@ import {
   SwapOptions,
   SwapRoute,
   V4_ETH_WETH_FAKE_POOL,
-} from '@uniswap/smart-order-router'
+} from '@tentou-tech/smart-order-router'
 import { Pool as V3Pool } from '@uniswap/v3-sdk'
 import { Pool as V4Pool } from '@uniswap/v4-sdk'
 import JSBI from 'jsbi'

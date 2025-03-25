@@ -1,4 +1,4 @@
-import { ChainId, Currency, CurrencyAmount, Percent } from '@uniswap/sdk-core'
+import { ChainId, Currency, CurrencyAmount, Percent } from '@tentou-tech/uniswap-sdk-core'
 import {
   AlphaRouterConfig,
   CacheMode,
@@ -6,7 +6,7 @@ import {
   LowerCaseStringArray,
   MapWithLowerCaseKey,
   ProtocolPoolSelection,
-} from '@uniswap/smart-order-router'
+} from '@tentou-tech/smart-order-router'
 import { FeeOptions } from '@uniswap/v3-sdk'
 import { FlatFeeOptions } from '@uniswap/universal-router-sdk'
 

@@ -1,4 +1,4 @@
-import { SimulationStatus } from '@uniswap/smart-order-router'
+import { SimulationStatus } from '@tentou-tech/smart-order-router'
 import Logger from 'bunyan'
 
 export enum RoutingApiSimulationStatus {

@@ -8,9 +8,9 @@ import {
   V2SubgraphPool,
   V3SubgraphPool,
   V4SubgraphPool,
-} from '@uniswap/smart-order-router'
+} from '@tentou-tech/smart-order-router'
 import { S3 } from 'aws-sdk'
-import { ChainId } from '@uniswap/sdk-core'
+import { ChainId } from '@tentou-tech/uniswap-sdk-core'
 import NodeCache from 'node-cache'
 import { S3_POOL_CACHE_KEY } from '../../util/pool-cache-key'
 import { PoolCachingFilePrefixes } from '../../util/poolCachingFilePrefixes'

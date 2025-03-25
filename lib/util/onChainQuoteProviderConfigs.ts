@@ -9,10 +9,10 @@ import {
   DEFAULT_GAS_ERROR_FAILURE_OVERRIDES,
   DEFAULT_RETRY_OPTIONS,
   DEFAULT_SUCCESS_RATE_FAILURE_OVERRIDES,
-} from '@uniswap/smart-order-router/build/main/util/onchainQuoteProviderConfigs'
-import { CHAIN_TO_ADDRESSES_MAP, ChainId } from '@uniswap/sdk-core'
+} from '@tentou-tech/smart-order-router/build/main/util/onchainQuoteProviderConfigs'
+import { CHAIN_TO_ADDRESSES_MAP, ChainId } from '@tentou-tech/uniswap-sdk-core'
 import AsyncRetry from 'async-retry'
-import { AddressMap, BatchParams, BlockNumberConfig, FailureOverrides } from '@uniswap/smart-order-router'
+import { AddressMap, BatchParams, BlockNumberConfig, FailureOverrides } from '@tentou-tech/smart-order-router'
 import { Protocol } from '@uniswap/router-sdk'
 
 export const RETRY_OPTIONS: { [chainId: number]: AsyncRetry.Options | undefined } = {
@@ -1002,6 +1002,8 @@ export const NEW_QUOTER_DEPLOY_BLOCK: { [chainId in ChainId]: number } = {
   [ChainId.UNICHAIN]: -1,
   [ChainId.MONAD_TESTNET]: -1,
   [ChainId.SONEIUM]: -1,
+  [ChainId.STORY_AENEID]: -1,
+  [ChainId.STORY]: -1,
 }
 
 // 0 threshold means it's not deployed yet
@@ -1036,6 +1038,8 @@ export const LIKELY_OUT_OF_GAS_THRESHOLD: { [chainId in ChainId]: number } = {
   [ChainId.UNICHAIN]: 0,
   [ChainId.MONAD_TESTNET]: 0,
   [ChainId.SONEIUM]: 0,
+  [ChainId.STORY_AENEID]: 0,
+  [ChainId.STORY]: 0,
 }
 
 // TODO: Move this new addresses to SOR

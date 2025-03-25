@@ -1,6 +1,6 @@
 import { Protocol } from '@uniswap/router-sdk'
-import { ChainId, Currency, TradeType } from '@uniswap/sdk-core'
-import { CachedRoutes, getAddress } from '@uniswap/smart-order-router'
+import { ChainId, Currency, TradeType } from '@tentou-tech/uniswap-sdk-core'
+import { CachedRoutes, getAddress } from '@tentou-tech/smart-order-router'
 
 interface PairTradeTypeChainIdArgs {
   currencyIn: string

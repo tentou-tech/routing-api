@@ -1,11 +1,11 @@
-import { Currency, Token } from '@uniswap/sdk-core'
+import { Currency, Token } from '@tentou-tech/uniswap-sdk-core'
 import {
   getAddress,
   ITokenListProvider,
   ITokenProvider,
   NATIVE_NAMES_BY_ID,
   nativeOnChain,
-} from '@uniswap/smart-order-router'
+} from '@tentou-tech/smart-order-router'
 import Logger from 'bunyan'
 import { isAddress } from '../util/isAddress'
 

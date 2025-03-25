@@ -10,16 +10,16 @@ import {
   MetricLoggerUnit,
   routeToString,
   SupportedRoutes,
-} from '@uniswap/smart-order-router'
+} from '@tentou-tech/smart-order-router'
 import { AWSError, DynamoDB, Lambda } from 'aws-sdk'
-import { ChainId, Currency, CurrencyAmount, Fraction, Token, TradeType } from '@uniswap/sdk-core'
+import { ChainId, Currency, CurrencyAmount, Fraction, Token, TradeType } from '@tentou-tech/uniswap-sdk-core'
 import { Protocol } from '@uniswap/router-sdk'
 import { PairTradeTypeChainId } from './model/pair-trade-type-chain-id'
 import { CachedRoutesMarshaller } from '../../marshalling/cached-routes-marshaller'
 import { PromiseResult } from 'aws-sdk/lib/request'
 import { DEFAULT_BLOCKS_TO_LIVE_ROUTES_DB } from '../../../util/defaultBlocksToLiveRoutesDB'
 import { getSymbolOrAddress } from '../../../util/getSymbolOrAddress'
-import { serializeRouteIds } from '@uniswap/smart-order-router/build/main/util/serializeRouteIds'
+import { serializeRouteIds } from '@tentou-tech/smart-order-router/build/main/util/serializeRouteIds'
 import { UniversalRouterVersion } from '@uniswap/universal-router-sdk'
 
 interface ConstructorParams {

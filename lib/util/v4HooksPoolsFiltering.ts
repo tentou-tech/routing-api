@@ -1,7 +1,7 @@
-import { log, V4SubgraphPool } from '@uniswap/smart-order-router'
+import { log, V4SubgraphPool } from '@tentou-tech/smart-order-router'
 import { Hook } from '@uniswap/v4-sdk'
 import { HOOKS_ADDRESSES_ALLOWLIST } from './hooksAddressesAllowlist'
-import { ChainId } from '@uniswap/sdk-core'
+import { ChainId } from '@tentou-tech/uniswap-sdk-core'
 import { PriorityQueue } from '@datastructures-js/priority-queue'
 
 type V4PoolGroupingKey = string

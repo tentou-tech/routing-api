@@ -1,6 +1,6 @@
-import { Currency, Token } from '@uniswap/sdk-core'
+import { Currency, Token } from '@tentou-tech/uniswap-sdk-core'
 import { BigNumber } from 'ethers'
-import { getAddress, nativeOnChain } from '@uniswap/smart-order-router'
+import { getAddress, nativeOnChain } from '@tentou-tech/smart-order-router'
 import { isNativeCurrency } from '@uniswap/universal-router-sdk'
 
 export interface MarshalledCurrency {

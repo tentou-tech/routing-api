@@ -1,5 +1,5 @@
-import { CacheMode } from '@uniswap/smart-order-router'
-import { ChainId, CurrencyAmount, Token, TradeType } from '@uniswap/sdk-core'
+import { CacheMode } from '@tentou-tech/smart-order-router'
+import { ChainId, CurrencyAmount, Token, TradeType } from '@tentou-tech/uniswap-sdk-core'
 import {
   CachedRoutesBucket,
   CachedRoutesStrategy,

@@ -7,7 +7,7 @@ import {
   PairTradeTypeChainId,
 } from '../../../../../../lib/handlers/router-entities/route-caching'
 import { ADDRESS_ZERO, Protocol } from '@uniswap/router-sdk'
-import { ChainId, CurrencyAmount, Ether, TradeType } from '@uniswap/sdk-core'
+import { ChainId, CurrencyAmount, Ether, TradeType } from '@tentou-tech/uniswap-sdk-core'
 import JSBI from 'jsbi'
 import { encodeSqrtRatioX96, FeeAmount, Pool as V3Pool } from '@uniswap/v3-sdk'
 import { Pool as V4Pool } from '@uniswap/v4-sdk'
@@ -21,12 +21,12 @@ import {
   V3Route,
   nativeOnChain,
   MetricLoggerUnit,
-} from '@uniswap/smart-order-router'
+} from '@tentou-tech/smart-order-router'
 import { DynamoDBTableProps } from '../../../../../../bin/stacks/routing-database-stack'
-import { V4Route } from '@uniswap/smart-order-router/build/main/routers'
+import { V4Route } from '@tentou-tech/smart-order-router/build/main/routers'
 import { NEW_CACHED_ROUTES_ROLLOUT_PERCENT } from '../../../../../../lib/util/newCachedRoutesRolloutPercent'
 import sinon, { SinonSpy } from 'sinon'
-import { metric } from '@uniswap/smart-order-router/build/main/util/metric'
+import { metric } from '@tentou-tech/smart-order-router/build/main/util/metric'
 import { DynamoDB } from 'aws-sdk'
 
 chai.use(chaiAsPromised)

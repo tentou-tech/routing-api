@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount } from '@uniswap/sdk-core'
+import { Currency, CurrencyAmount } from '@tentou-tech/uniswap-sdk-core'
 import { MarshalledCurrency, TokenMarshaller } from './token-marshaller'
 
 export interface MarshalledCurrencyAmount {

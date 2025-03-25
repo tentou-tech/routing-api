@@ -1,4 +1,4 @@
-import { ChainId } from '@uniswap/sdk-core'
+import { ChainId } from '@tentou-tech/uniswap-sdk-core'
 
 export const TENDERLY_NEW_ENDPOINT_ROLLOUT_PERCENT: { [chain in ChainId]: number } = {
   [ChainId.MAINNET]: 100,
@@ -31,4 +31,6 @@ export const TENDERLY_NEW_ENDPOINT_ROLLOUT_PERCENT: { [chain in ChainId]: number
   [ChainId.UNICHAIN]: 100,
   [ChainId.MONAD_TESTNET]: 0,
   [ChainId.SONEIUM]: 100,
+  [ChainId.STORY_AENEID]: 0,
+  [ChainId.STORY]: 100,
 }

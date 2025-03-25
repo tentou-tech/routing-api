@@ -1,6 +1,6 @@
 import { DynamoCaching, DynamoCachingProps } from '../cache-dynamo'
 import { Pool } from '@uniswap/v3-sdk'
-import { log, metric, MetricLoggerUnit } from '@uniswap/smart-order-router'
+import { log, metric, MetricLoggerUnit } from '@tentou-tech/smart-order-router'
 import { PoolMarshaller } from '../../../marshalling/v3/pool-marshaller'
 
 interface DynamoCachingV3PoolProps extends DynamoCachingProps {}
