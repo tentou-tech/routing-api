@@ -300,6 +300,20 @@ export const chainProtocols = [
       v3SubgraphUrlOverride(ChainId.SONEIUM)
     ),
   },
+  {
+    protocol: Protocol.V3,
+    chainId: ChainId.STORY_AENEID,
+    timeout: 90000,
+    provider: new V3SubgraphProvider(
+      ChainId.STORY_AENEID,
+      3,
+      90000,
+      true,
+      v3TrackedEthThreshold,
+      v3UntrackedUsdThreshold,
+      v3SubgraphUrlOverride(ChainId.STORY_AENEID)
+    ),
+  },
   // V2.
   {
     protocol: Protocol.V2,

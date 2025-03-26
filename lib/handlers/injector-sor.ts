@@ -377,6 +377,8 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
             case ChainId.BASE_SEPOLIA:
             case ChainId.UNICHAIN:
             case ChainId.SONEIUM:
+            case ChainId.STORY:
+            case ChainId.STORY_AENEID:
             default:
               const currentQuoteProvider = new OnChainQuoteProvider(
                 chainId,
