@@ -113,6 +113,8 @@ export const SUPPORTED_CHAINS: ChainId[] = [
   ChainId.BASE_SEPOLIA,
   ChainId.UNICHAIN,
   ChainId.SONEIUM,
+  ChainId.STORY,
+  ChainId.STORY_AENEID,
 ]
 const DEFAULT_TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
 
