@@ -308,7 +308,7 @@ export class RpcGatewayDashboardStack extends cdk.NestedStack {
 
     const region = cdk.Stack.of(this).region
     const MAIN_NETWORKS = SUPPORTED_CHAINS.filter((chainId) => !TESTNETS.includes(chainId))
-    const TEST_NETWORKS = SUPPORTED_CHAINS.filter((chainId) => TESTNETS.includes(chainId))
+    // const TEST_NETWORKS = SUPPORTED_CHAINS.filter((chainId) => TESTNETS.includes(chainId))
 
     const perChainWidgets: any[] = _.flatMap(MAIN_NETWORKS, (chainId) => [
       {
