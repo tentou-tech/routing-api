@@ -32,10 +32,11 @@ export class GlobalRpcProviders {
       }
       for (let i = 0; i < chainConfig.providerUrls!.length; i++) {
         const urlEnvVar = chainConfig.providerUrls[i]
-        if (process.env[urlEnvVar] === undefined) {
-          throw new Error(`Environmental variable ${urlEnvVar} isn't defined!`)
-        }
-        chainConfig.providerUrls[i] = generateProviderUrl(urlEnvVar, process.env[urlEnvVar]!, chainConfig.chainId)
+        // if (process.env[urlEnvVar] === undefined) {
+        //  throw new Error(`Environmental variable ${urlEnvVar} isn't defined!`)
+        // }
+        chainConfig.providerUrls[i] = generateProviderUrl(urlEnvVar, "abc,xyz", chainConfig.chainId)
+        chainConfig.providerUrls[i] = "https://eth-mainnet.public.blastapi.io"
       }
     }
     return prodConfig
