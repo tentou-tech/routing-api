@@ -67,7 +67,7 @@ export const v3SubgraphUrlOverride = (chainId: ChainId) => {
     case ChainId.SONEIUM:
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY_2}/uniswap-2/uniswap-v3-soneium-mainnet/api`
     case ChainId.STORY_AENEID:
-      return 'https://graph-api-testnet.tentou.tech/subgraphs/name/mimboku/graphql'
+      return 'https://graph-api-testnet.tentou.tech/subgraphs/name/mimboku'
     default:
       return undefined
   }
