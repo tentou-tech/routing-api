@@ -110,7 +110,7 @@ export class RoutingLambdaStack extends cdk.NestedStack {
       // 11/8/23: URA currently calls the Routing API with a timeout of 10 seconds.
       // Set this lambda's timeout to be slightly lower to give them time to
       // log the response in the event of a failure on our end.
-      timeout: cdk.Duration.seconds(9),
+      timeout: cdk.Duration.seconds(120),
       memorySize: 2560,
       deadLetterQueueEnabled: true,
       bundling: {
@@ -174,7 +174,7 @@ export class RoutingLambdaStack extends cdk.NestedStack {
       // 11/8/23: URA currently calls the Routing API with a timeout of 10 seconds.
       // Set this lambda's timeout to be slightly lower to give them time to
       // log the response in the event of a failure on our end.
-      timeout: cdk.Duration.seconds(9),
+      timeout: cdk.Duration.seconds(120),
       memorySize: 2560,
       deadLetterQueueEnabled: true,
       bundling: {
