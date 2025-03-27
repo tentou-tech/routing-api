@@ -116,7 +116,7 @@ export const SUPPORTED_CHAINS: ChainId[] = [
   ChainId.STORY,
   ChainId.STORY_AENEID,
 ]
-const DEFAULT_TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
+const DEFAULT_TOKEN_LIST = 'https://gist.githubusercontent.com/kienvc/7257a6d2d738bfc1a0781f3ee843f991/raw/e8b5797db051342aa7479933f61e4162e7be7f1b/tokenlists.org'
 
 export interface RequestInjected<Router> extends BaseRInj {
   chainId: ChainId
