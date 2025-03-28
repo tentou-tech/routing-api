@@ -397,6 +397,7 @@ export class QuoteHandler extends APIGLambdaHandler<
       metric.putMetric('Simulation Requested', 1, MetricLoggerUnit.Count)
     }
 
+    let output
     switch (type) {
       case 'exactIn':
         amount = CurrencyAmount.fromRawAmount(currencyIn, JSBI.BigInt(amountRaw))
@@ -432,6 +433,7 @@ export class QuoteHandler extends APIGLambdaHandler<
         )
 
         swapRoute = await router.route(amount, currencyOut, TradeType.EXACT_INPUT, swapParams, routingConfig)
+        output = { amount, currencyIn, currencyOut, swapRoute, swapParams, routingConfig, gasToken }
         break
       case 'exactOut':
         amount = CurrencyAmount.fromRawAmount(currencyOut, JSBI.BigInt(amountRaw))
@@ -466,6 +468,7 @@ export class QuoteHandler extends APIGLambdaHandler<
         )
 
         swapRoute = await router.route(amount, currencyIn, TradeType.EXACT_OUTPUT, swapParams, routingConfig)
+        output = { amount, currencyIn, currencyOut, swapRoute, swapParams, routingConfig, gasToken }
         break
       default:
         throw new Error('Invalid swap type')
@@ -485,7 +488,7 @@ export class QuoteHandler extends APIGLambdaHandler<
       return {
         statusCode: 404,
         errorCode: 'NO_ROUTE',
-        detail: 'No route found',
+        detail: `No route found ${JSON.stringify(output)}`,
       }
     }
 
