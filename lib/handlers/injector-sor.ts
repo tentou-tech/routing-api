@@ -116,7 +116,7 @@ export const SUPPORTED_CHAINS: ChainId[] = [
   ChainId.STORY,
   ChainId.STORY_AENEID,
 ]
-const DEFAULT_TOKEN_LIST = 'https://gist.githubusercontent.com/kienvc/7257a6d2d738bfc1a0781f3ee843f991/raw/637292bbe6d11b897c228728f132159dd3c0821a/tokenlists.org'
+const DEFAULT_TOKEN_LIST = 'https://raw.githubusercontent.com/tentou-tech/token-list/refs/heads/main/tokenlist.org'
 
 export interface RequestInjected<Router> extends BaseRInj {
   chainId: ChainId

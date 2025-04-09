@@ -5,8 +5,7 @@ import { default as bunyan, default as Logger } from 'bunyan'
 
 const TOKEN_LISTS = [
   'https://raw.githubusercontent.com/The-Blockchain-Association/sec-notice-list/master/ba-sec-list.json',
-  'https://tokens.coingecko.com/uniswap/all.json',
-  'https://gist.githubusercontent.com/kienvc/7257a6d2d738bfc1a0781f3ee843f991/raw/637292bbe6d11b897c228728f132159dd3c0821a/tokenlists.org',
+  'https://raw.githubusercontent.com/tentou-tech/token-list/refs/heads/main/tokenlist.org',
 ]
 
 const handler: ScheduledHandler = async (event: EventBridgeEvent<string, void>) => {
