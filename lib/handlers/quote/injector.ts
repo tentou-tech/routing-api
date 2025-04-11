@@ -52,7 +52,7 @@ export class QuoteHandlerInjector extends InjectorSOR<
     // Note that we use WARN as a default rather than ERROR
     // to capture Tapcompare logs in the smart-order-router.
     //const logLevel = enableDebug ? bunyan.DEBUG : Math.random() < 0.1 ? bunyan.INFO : bunyan.WARN
-    const logLevel = bunyan.INFO
+    const logLevel = enableDebug ? bunyan.DEBUG : Math.random() < 0.1 ? bunyan.INFO : bunyan.INFO
 
     log = log.child({
       serializers: bunyan.stdSerializers,
