@@ -3,9 +3,12 @@ import { S3 } from 'aws-sdk'
 import axios from 'axios'
 import { default as bunyan, default as Logger } from 'bunyan'
 
+// const TOKEN_LISTS = [
+//   'https://raw.githubusercontent.com/The-Blockchain-Association/sec-notice-list/master/ba-sec-list.json',
+//   'https://raw.githubusercontent.com/tentou-tech/token-list/refs/heads/main/tokenlist.org',
+// ]
 const TOKEN_LISTS = [
-  'https://raw.githubusercontent.com/The-Blockchain-Association/sec-notice-list/master/ba-sec-list.json',
-  'https://raw.githubusercontent.com/tentou-tech/token-list/refs/heads/main/tokenlist.org',
+  'https://raw.githubusercontent.com/tentou-tech/token-list/refs/heads/main/tokenlist.org'
 ]
 
 const handler: ScheduledHandler = async (event: EventBridgeEvent<string, void>) => {
