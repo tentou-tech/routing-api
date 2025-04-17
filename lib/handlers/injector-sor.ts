@@ -4,7 +4,7 @@ import {
   CachingTokenListProvider,
   CachingTokenProviderWithFallback,
   CachingV2PoolProvider,
-  CachingV3PoolProvider,
+  // CachingV3PoolProvider,
   CachingV4PoolProvider,
   EIP1559GasPriceProvider,
   EthEstimateGasSimulator,
@@ -60,8 +60,8 @@ import {
 } from './router-entities/aws-subgraph-provider'
 import { AWSTokenListProvider } from './router-entities/aws-token-list-provider'
 import { DynamoRouteCachingProvider } from './router-entities/route-caching/dynamo-route-caching-provider'
-import { DynamoDBCachingV3PoolProvider } from './pools/pool-caching/v3/dynamo-caching-pool-provider'
-import { TrafficSwitchV3PoolProvider } from './pools/provider-migration/v3/traffic-switch-v3-pool-provider'
+// import { DynamoDBCachingV3PoolProvider } from './pools/pool-caching/v3/dynamo-caching-pool-provider'
+// import { TrafficSwitchV3PoolProvider } from './pools/provider-migration/v3/traffic-switch-v3-pool-provider'
 import { DefaultEVMClient } from './evm/EVMClient'
 import { InstrumentedEVMProvider } from './evm/provider/InstrumentedEVMProvider'
 import { deriveProviderName } from './evm/provider/ProviderName'
@@ -259,23 +259,24 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
             new NodeJSCache(new NodeCache({ stdTTL: 180, useClones: false }))
           )
 
-          const noCacheV3PoolProvider = new V3PoolProvider(chainId, multicall2Provider)
-          const inMemoryCachingV3PoolProvider = new CachingV3PoolProvider(
-            chainId,
-            noCacheV3PoolProvider,
-            new NodeJSCache(new NodeCache({ stdTTL: 180, useClones: false }))
-          )
-          const dynamoCachingV3PoolProvider = new DynamoDBCachingV3PoolProvider(
-            chainId,
-            noCacheV3PoolProvider,
-            'V3PoolsCachingDB'
-          )
+          const v3PoolProvider = new V3PoolProvider(chainId, multicall2Provider)
+          // const noCacheV3PoolProvider = new V3PoolProvider(chainId, multicall2Provider)
+          // const inMemoryCachingV3PoolProvider = new CachingV3PoolProvider(
+          //   chainId,
+          //   noCacheV3PoolProvider,
+          //   new NodeJSCache(new NodeCache({ stdTTL: 180, useClones: false }))
+          // )
+          // const dynamoCachingV3PoolProvider = new DynamoDBCachingV3PoolProvider(
+          //   chainId,
+          //   noCacheV3PoolProvider,
+          //   'V3PoolsCachingDB'
+          // )
 
-          const v3PoolProvider = new TrafficSwitchV3PoolProvider({
-            currentPoolProvider: inMemoryCachingV3PoolProvider,
-            targetPoolProvider: dynamoCachingV3PoolProvider,
-            sourceOfTruthPoolProvider: noCacheV3PoolProvider,
-          })
+          // const v3PoolProvider = new TrafficSwitchV3PoolProvider({
+          //   currentPoolProvider: inMemoryCachingV3PoolProvider,
+          //   targetPoolProvider: dynamoCachingV3PoolProvider,
+          //   sourceOfTruthPoolProvider: noCacheV3PoolProvider,
+          // })
 
           const onChainTokenFeeFetcher = new OnChainTokenFeeFetcher(chainId, provider)
           const graphQLTokenFeeFetcher = new GraphQLTokenFeeFetcher(
