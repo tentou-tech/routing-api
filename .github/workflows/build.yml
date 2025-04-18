@@ -1,21 +1,29 @@
-name: build test
+name: AWS Service CI/CD
 
 on:
   push:
     branches: [ dev ]
 
 jobs:
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-      - name: Set up node
+      - uses: actions/checkout@v3
+      - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: 22.x
-          registry-url: https://registry.npmjs.org
-      - name: Install Dependencies
-        run: npm i
+          node-version: "22"
+      - name: Install dependencies and CDK
+        run: |
+          npm install -g aws-cdk
+          npm i
       - name: Build
         run: npm run build
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@master
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ${{ secrets.AWS_SECRET_KEY }}
+      - name: Deploy to AWS
+        run: cdk deploy RoutingAPIStack --require-approval=never
