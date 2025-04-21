@@ -1,6 +1,6 @@
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 // import { V2SubgraphProvider, V3SubgraphProvider, V4SubgraphProvider } from '@tentou-tech/smart-order-router'
-import { V3SubgraphProvider } from '@tentou-tech/smart-order-router'
+import { V3SubgraphProvider, V3PiperxSubgraphProvider } from '@tentou-tech/smart-order-router'
 import { ChainId } from '@tentou-tech/uniswap-sdk-core'
 
 // during local cdk stack update, the env vars are not populated
@@ -306,6 +306,20 @@ export const chainProtocols = [
     chainId: ChainId.STORY_AENEID,
     timeout: 90000,
     provider: new V3SubgraphProvider(
+      ChainId.STORY_AENEID,
+      3,
+      90000,
+      true,
+      v3TrackedEthThreshold,
+      v3UntrackedUsdThreshold,
+      v3SubgraphUrlOverride(ChainId.STORY_AENEID)
+    ),
+  },
+  {
+    protocol: Protocol.V3S1,
+    chainId: ChainId.STORY_AENEID,
+    timeout: 90000,
+    provider: new V3PiperxSubgraphProvider(
       ChainId.STORY_AENEID,
       3,
       90000,
