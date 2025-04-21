@@ -35,8 +35,8 @@ export class GlobalRpcProviders {
         // if (process.env[urlEnvVar] === undefined) {
         //  throw new Error(`Environmental variable ${urlEnvVar} isn't defined!`)
         // }
-        chainConfig.providerUrls[i] = generateProviderUrl(urlEnvVar, "abc,xyz", chainConfig.chainId)
-        chainConfig.providerUrls[i] = "https://eth-mainnet.public.blastapi.io"
+        chainConfig.providerUrls[i] = generateProviderUrl(urlEnvVar, 'abc,xyz', chainConfig.chainId)
+        chainConfig.providerUrls[i] = 'https://eth-mainnet.public.blastapi.io'
       }
     }
     return prodConfig

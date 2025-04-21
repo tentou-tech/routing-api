@@ -40,7 +40,7 @@ import { GlobalRpcProviders } from '../../rpc/GlobalRpcProviders'
 import { adhocCorrectGasUsed } from '../../util/estimateGasUsed'
 import { adhocCorrectGasUsedUSD } from '../../util/estimateGasUsedUSD'
 import { Pair } from '@uniswap/v2-sdk'
-import { UniversalRouterVersion } from '@uniswap/universal-router-sdk'
+import { UniversalRouterVersion } from '@tentou-tech/uniswap-universal-router-sdk'
 import {
   convertStringRouterVersionToEnum,
   protocolVersionsToBeExcludedFromMixed,

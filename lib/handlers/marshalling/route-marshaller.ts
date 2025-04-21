@@ -1,10 +1,21 @@
-import { MixedRoute, V2Route, V3Route, V4Route } from '@tentou-tech/smart-order-router/build/main/routers'
-import { Protocol } from '@uniswap/router-sdk'
+import {
+  MixedRoute,
+  V2Route,
+  V3PiperxRoute,
+  V3Route,
+  V4Route,
+} from '@tentou-tech/smart-order-router/build/main/routers'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 import { MarshalledCurrency, TokenMarshaller } from './token-marshaller'
 import { MarshalledPair, PairMarshaller } from './pair-marshaller'
-import { MarshalledPool as V3MarshalledPool, PoolMarshaller as V3PoolMarshaller } from './v3/pool-marshaller'
+import {
+  MarshalledV3S1Pool,
+  MarshalledPool as V3MarshalledPool,
+  PoolMarshaller as V3PoolMarshaller,
+  V3S1PoolMarshaller,
+} from './v3/pool-marshaller'
 import { MarshalledPool as V4MarshalledPool, PoolMarshaller as V4PoolMarshaller } from './v4/pool-marshaller'
-import { Pool as V3Pool } from '@uniswap/v3-sdk'
+import { Pool as V3Pool } from '@tentou-tech/uniswap-v3-sdk'
 import { Pool as V4Pool } from '@uniswap/v4-sdk'
 import { SupportedRoutes } from '@tentou-tech/smart-order-router'
 import { Pair } from '@uniswap/v2-sdk'
@@ -23,6 +34,13 @@ export interface MarshalledV3Route {
   pools: V3MarshalledPool[]
 }
 
+export interface MarshalledV3S1Route {
+  protocol: Protocol
+  input: MarshalledCurrency
+  output: MarshalledCurrency
+  pools: MarshalledV3S1Pool[]
+}
+
 export interface MarshalledV4Route {
   protocol: Protocol
   input: MarshalledCurrency
@@ -34,10 +52,10 @@ export interface MarshalledMixedRoute {
   protocol: Protocol
   input: MarshalledCurrency
   output: MarshalledCurrency
-  pools: (V4MarshalledPool | V3MarshalledPool | MarshalledPair)[]
+  pools: (V4MarshalledPool | V3MarshalledPool | MarshalledPair | MarshalledV3S1Pool)[]
 }
 
-export type MarshalledRoute = MarshalledV2Route | MarshalledV3Route | MarshalledMixedRoute
+export type MarshalledRoute = MarshalledV2Route | MarshalledV3Route | MarshalledV3S1Route | MarshalledMixedRoute
 
 export class RouteMarshaller {
   public static marshal(route: SupportedRoutes): MarshalledRoute {
@@ -100,6 +118,13 @@ export class RouteMarshaller {
           v3Route.pools.map((marshalledPool) => V3PoolMarshaller.unmarshal(marshalledPool)),
           TokenMarshaller.unmarshal(v3Route.input).wrapped,
           TokenMarshaller.unmarshal(v3Route.output).wrapped
+        )
+      case Protocol.V3S1:
+        const v3s1Route = marshalledRoute as MarshalledV3S1Route
+        return new V3PiperxRoute(
+          v3s1Route.pools.map((marshalledPool) => V3S1PoolMarshaller.unmarshal(marshalledPool)),
+          TokenMarshaller.unmarshal(v3s1Route.input).wrapped,
+          TokenMarshaller.unmarshal(v3s1Route.output).wrapped
         )
       case Protocol.V4:
         const v4Route = marshalledRoute as MarshalledV4Route

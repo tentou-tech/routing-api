@@ -6,10 +6,10 @@ import {
   DynamoRouteCachingProvider,
   PairTradeTypeChainId,
 } from '../../../../../../lib/handlers/router-entities/route-caching'
-import { ADDRESS_ZERO, Protocol } from '@uniswap/router-sdk'
+import { ADDRESS_ZERO, Protocol } from '@tentou-tech/uniswap-router-sdk'
 import { ChainId, CurrencyAmount, Ether, TradeType } from '@tentou-tech/uniswap-sdk-core'
 import JSBI from 'jsbi'
-import { encodeSqrtRatioX96, FeeAmount, Pool as V3Pool } from '@uniswap/v3-sdk'
+import { encodeSqrtRatioX96, FeeAmount, Pool as V3Pool } from '@tentou-tech/uniswap-v3-sdk'
 import { Pool as V4Pool } from '@uniswap/v4-sdk'
 import { WNATIVE_ON } from '../../../../../utils/tokens'
 import {

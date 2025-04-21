@@ -5,7 +5,7 @@ import {
   V3PoolProvider,
   WRAPPED_NATIVE_CURRENCY,
 } from '@tentou-tech/smart-order-router'
-import { Pool } from '@uniswap/v3-sdk'
+import { Pool } from '@tentou-tech/uniswap-v3-sdk'
 import {
   buildMockV3PoolAccessor,
   DAI_USDT_LOW,

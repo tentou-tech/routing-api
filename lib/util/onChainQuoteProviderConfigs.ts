@@ -13,7 +13,7 @@ import {
 import { CHAIN_TO_ADDRESSES_MAP, ChainId } from '@tentou-tech/uniswap-sdk-core'
 import AsyncRetry from 'async-retry'
 import { AddressMap, BatchParams, BlockNumberConfig, FailureOverrides } from '@tentou-tech/smart-order-router'
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 
 export const RETRY_OPTIONS: { [chainId: number]: AsyncRetry.Options | undefined } = {
   ...constructSameRetryOptionsMap(DEFAULT_RETRY_OPTIONS),
@@ -250,6 +250,14 @@ export const OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]: { 
     [ChainId.SONEIUM]: {
       multicallChunk: 80,
       gasLimitPerCall: 1_200_000,
+      quoteMinSuccessRate: 0.1,
+    },
+  },
+  [Protocol.V3S1]: {
+    ...constructSameBatchParamsMap(DEFAULT_BATCH_PARAMS),
+    [ChainId.BASE]: {
+      multicallChunk: 1320,
+      gasLimitPerCall: 100_000,
       quoteMinSuccessRate: 0.1,
     },
   },
@@ -604,6 +612,14 @@ export const NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]
       [ChainId.SONEIUM]: {
         multicallChunk: 80,
         gasLimitPerCall: 1_200_000,
+        quoteMinSuccessRate: 0.1,
+      },
+    },
+    [Protocol.V3S1]: {
+      ...constructSameBatchParamsMap(DEFAULT_BATCH_PARAMS),
+      [ChainId.BASE]: {
+        multicallChunk: 660,
+        gasLimitPerCall: 200_000,
         quoteMinSuccessRate: 0.1,
       },
     },

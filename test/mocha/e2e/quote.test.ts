@@ -41,7 +41,7 @@ import {
 import {
   UNIVERSAL_ROUTER_ADDRESS as UNIVERSAL_ROUTER_ADDRESS_BY_CHAIN,
   UniversalRouterVersion,
-} from '@uniswap/universal-router-sdk'
+} from '@tentou-tech/uniswap-universal-router-sdk'
 import { fail } from 'assert'
 import axiosStatic, { AxiosResponse } from 'axios'
 import axiosRetry from 'axios-retry'

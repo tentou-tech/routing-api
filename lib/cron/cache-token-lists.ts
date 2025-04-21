@@ -7,9 +7,7 @@ import { default as bunyan, default as Logger } from 'bunyan'
 //   'https://raw.githubusercontent.com/The-Blockchain-Association/sec-notice-list/master/ba-sec-list.json',
 //   'https://raw.githubusercontent.com/tentou-tech/token-list/refs/heads/main/tokenlist.org',
 // ]
-const TOKEN_LISTS = [
-  'https://raw.githubusercontent.com/tentou-tech/token-list/refs/heads/main/tokenlist.org'
-]
+const TOKEN_LISTS = ['https://raw.githubusercontent.com/tentou-tech/token-list/refs/heads/main/tokenlist.org']
 
 const handler: ScheduledHandler = async (event: EventBridgeEvent<string, void>) => {
   const log: Logger = bunyan.createLogger({

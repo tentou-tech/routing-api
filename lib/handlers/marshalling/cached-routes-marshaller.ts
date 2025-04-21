@@ -1,6 +1,6 @@
 import { CachedRoutes } from '@tentou-tech/smart-order-router'
 import { ChainId, TradeType } from '@tentou-tech/uniswap-sdk-core'
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 import { MarshalledCurrency, TokenMarshaller } from './token-marshaller'
 import { CachedRouteMarshaller, MarshalledCachedRoute } from './cached-route-marshaller'
 

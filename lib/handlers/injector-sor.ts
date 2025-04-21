@@ -45,6 +45,7 @@ import {
   V2PoolProvider,
   V2QuoteProvider,
   V3PoolProvider,
+  V3PoolPiperxProvider,
   V4PoolProvider,
 } from '@tentou-tech/smart-order-router'
 import { TokenList } from '@uniswap/token-lists'
@@ -81,7 +82,7 @@ import {
 } from '../util/onChainQuoteProviderConfigs'
 import { v4 } from 'uuid/index'
 import { chainProtocols } from '../cron/cache-config'
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 import { UniJsonRpcProvider } from '../rpc/UniJsonRpcProvider'
 import { GraphQLTokenFeeFetcher } from '../graphql/graphql-token-fee-fetcher'
 import { UniGraphQLProvider } from '../graphql/graphql-provider'
@@ -260,6 +261,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
           )
 
           const v3PoolProvider = new V3PoolProvider(chainId, multicall2Provider)
+          const v3s1PoolProvider = new V3PoolPiperxProvider(chainId, multicall2Provider)
           // const noCacheV3PoolProvider = new V3PoolProvider(chainId, multicall2Provider)
           // const inMemoryCachingV3PoolProvider = new CachingV3PoolProvider(
           //   chainId,
@@ -457,6 +459,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
             process.env.TENDERLY_NODE_API_KEY!,
             v2PoolProvider,
             v3PoolProvider,
+            v3s1PoolProvider,
             v4PoolProvider,
             provider,
             portionProvider,
@@ -483,6 +486,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
             provider,
             v2PoolProvider,
             v3PoolProvider,
+            v3s1PoolProvider,
             v4PoolProvider,
             portionProvider
           )
