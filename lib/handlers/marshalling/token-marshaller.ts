@@ -1,7 +1,7 @@
 import { Currency, Token } from '@tentou-tech/uniswap-sdk-core'
 import { BigNumber } from 'ethers'
 import { getAddress, nativeOnChain } from '@tentou-tech/smart-order-router'
-import { isNativeCurrency } from '@uniswap/universal-router-sdk'
+import { isNativeCurrency } from '@tentou-tech/uniswap-universal-router-sdk'
 
 export interface MarshalledCurrency {
   chainId: number

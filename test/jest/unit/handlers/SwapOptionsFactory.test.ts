@@ -5,7 +5,7 @@ import { TradeTypeParam } from '../../../../lib/handlers/quote/schema/quote-sche
 import { expect, jest } from '@jest/globals'
 import { SwapType } from '@tentou-tech/smart-order-router'
 import { utils } from 'ethers'
-import { UNIVERSAL_ROUTER_ADDRESS, UniversalRouterVersion } from '@uniswap/universal-router-sdk'
+import { UNIVERSAL_ROUTER_ADDRESS, UniversalRouterVersion } from '@tentou-tech/uniswap-universal-router-sdk'
 
 import {
   SwapOptionsFactory,

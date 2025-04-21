@@ -14,7 +14,7 @@ import { getMockedOnChainQuoteProvider } from '../../../../../test-utils/mocked-
 import { ProviderConfig } from '@tentou-tech/smart-order-router/build/main/providers/provider'
 import { AmountQuote } from '@tentou-tech/smart-order-router/build/main/providers/on-chain-quote-provider'
 import { BigNumber } from 'ethers'
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 
 describe('TrafficSwitchOnChainQuoteProvider', () => {
   const amountIns = [CurrencyAmount.fromRawAmount(WRAPPED_NATIVE_CURRENCY[ChainId.MAINNET], '1000000000000000000')]

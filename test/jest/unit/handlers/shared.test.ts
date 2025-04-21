@@ -10,7 +10,7 @@ import {
 import { getAmount } from '../../../utils/tokens'
 import { CurrencyAmount, Percent } from '@tentou-tech/uniswap-sdk-core'
 import { DAI_MAINNET, SwapOptions, SwapType } from '@tentou-tech/smart-order-router'
-import { UniversalRouterVersion } from '@uniswap/universal-router-sdk'
+import { UniversalRouterVersion } from '@tentou-tech/uniswap-universal-router-sdk'
 
 describe('shared', () => {
   it('parsePortionPercent', () => {

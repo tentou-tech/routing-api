@@ -1,7 +1,7 @@
 import { IV3PoolProvider, V3PoolAccessor } from '@tentou-tech/smart-order-router'
 import { ChainId, Token } from '@tentou-tech/uniswap-sdk-core'
 import { ProviderConfig } from '@tentou-tech/smart-order-router/build/main/providers/provider'
-import { FeeAmount, Pool } from '@uniswap/v3-sdk'
+import { FeeAmount, Pool } from '@tentou-tech/uniswap-v3-sdk'
 import { IDynamoCache } from '../cache-dynamo'
 import { DynamoCachingV3Pool } from './cache-dynamo-pool'
 

@@ -5,7 +5,7 @@ import { CachingV3PoolProvider, MetricLoggerUnit, NodeJSCache } from '@tentou-te
 import NodeCache from 'node-cache'
 import sinon, { SinonSpy } from 'sinon'
 import { ChainId, Token } from '@tentou-tech/uniswap-sdk-core'
-import { encodeSqrtRatioX96, FeeAmount, Pool } from '@uniswap/v3-sdk'
+import { encodeSqrtRatioX96, FeeAmount, Pool } from '@tentou-tech/uniswap-v3-sdk'
 import {
   DAI_USDT_LOW,
   SUPPORTED_POOLS,

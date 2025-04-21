@@ -1,4 +1,4 @@
-import { encodeSqrtRatioX96, Pool } from '@uniswap/v3-sdk'
+import { encodeSqrtRatioX96, Pool } from '@tentou-tech/uniswap-v3-sdk'
 import { FeeAmount } from '../utils/ticks'
 import { V3PoolAccessor } from '@tentou-tech/smart-order-router/build/main/providers/v3/pool-provider'
 import _ from 'lodash'

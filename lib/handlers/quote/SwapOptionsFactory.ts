@@ -9,7 +9,7 @@ import JSBI from 'jsbi'
 import { TradeTypeParam } from './schema/quote-schema'
 import { computePortionAmount, parseDeadline, parseSlippageTolerance, populateFeeOptions } from '../shared'
 import { PermitSingle } from '@uniswap/permit2-sdk'
-import { UNIVERSAL_ROUTER_ADDRESS, UniversalRouterVersion } from '@uniswap/universal-router-sdk'
+import { UNIVERSAL_ROUTER_ADDRESS, UniversalRouterVersion } from '@tentou-tech/uniswap-universal-router-sdk'
 import { utils } from 'ethers'
 
 export type SwapOptionsUniversalRouterInput = {

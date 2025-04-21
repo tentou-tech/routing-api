@@ -8,7 +8,7 @@ import {
   ProtocolPoolSelection,
 } from '@tentou-tech/smart-order-router'
 import { FeeOptions } from '@uniswap/v3-sdk'
-import { FlatFeeOptions } from '@uniswap/universal-router-sdk'
+import { FlatFeeOptions } from '@tentou-tech/uniswap-universal-router-sdk'
 
 export const SECONDS_PER_BLOCK_BY_CHAIN_ID: { [chainId in ChainId]?: number } = {
   [ChainId.MAINNET]: 30,
