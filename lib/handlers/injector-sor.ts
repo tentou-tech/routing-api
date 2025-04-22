@@ -350,6 +350,8 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
             )) as V2AWSSubgraphProvider,
           ])
 
+          console.log('tokenListProvider: ', tokenListProvider)
+
           const tokenProvider = new CachingTokenProviderWithFallback(
             chainId,
             tokenCache,
