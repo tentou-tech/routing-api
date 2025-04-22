@@ -50,6 +50,7 @@ import {
   IV3PiperxSubgraphProvider,
   IV3PiperxPoolProvider,
   StaticV3PiperxSubgraphProvider,
+  V3S1_QUOTER_ADDRESSES,
 } from '@tentou-tech/smart-order-router'
 import { TokenList } from '@uniswap/token-lists'
 import { default as bunyan, default as Logger } from 'bunyan'
@@ -426,6 +427,8 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
                       : MIXED_ROUTE_QUOTER_V1_ADDRESSES[chainId]
                     : protocol === Protocol.V3
                     ? QUOTER_V2_ADDRESSES[chainId]
+                    : protocol === Protocol.V3S1
+                    ? V3S1_QUOTER_ADDRESSES[`${chainId}-${protocol}`]
                     : PROTOCOL_V4_QUOTER_ADDRESSES[chainId]
               )
               const targetQuoteProvider = new OnChainQuoteProvider(
@@ -454,6 +457,8 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
                         (chainId === ChainId.BASE ? '0xe544efae946f0008ae9a8d64493efa7886b73776' : undefined)
                     : protocol === Protocol.V3
                     ? NEW_QUOTER_V2_ADDRESSES[chainId]
+                    : protocol === Protocol.V3S1
+                    ? V3S1_QUOTER_ADDRESSES[`${chainId}-${protocol}`]
                     : PROTOCOL_V4_QUOTER_ADDRESSES[chainId],
                 (chainId: ChainId, useMixedRouteQuoter: boolean, optimisticCachedRoutes: boolean) =>
                   useMixedRouteQuoter
