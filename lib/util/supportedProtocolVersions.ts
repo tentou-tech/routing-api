@@ -1,7 +1,7 @@
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 import { UniversalRouterVersion } from '@tentou-tech/uniswap-universal-router-sdk'
 
-export const SUPPORTED_PROTOCOL_VERSIONS = [Protocol.V2, Protocol.V3, Protocol.V4]
+export const SUPPORTED_PROTOCOL_VERSIONS = [Protocol.V2, Protocol.V3, Protocol.V4, Protocol.V3S1]
 
 export function convertStringRouterVersionToEnum(routerVersion?: string): UniversalRouterVersion {
   const validVersions = Object.values(UniversalRouterVersion)
@@ -13,8 +13,8 @@ export type URVersionsToProtocolVersionsMapping = {
 }
 
 export const URVersionsToProtocolVersions: URVersionsToProtocolVersionsMapping = {
-  [UniversalRouterVersion.V1_2]: [Protocol.V2, Protocol.V3],
-  [UniversalRouterVersion.V2_0]: [Protocol.V2, Protocol.V3, Protocol.V4],
+  [UniversalRouterVersion.V1_2]: [Protocol.V2, Protocol.V3, Protocol.V3S1],
+  [UniversalRouterVersion.V2_0]: [Protocol.V2, Protocol.V3, Protocol.V4, Protocol.V3S1],
 }
 
 export function protocolVersionsToBeExcludedFromMixed(universalRouterVersion: UniversalRouterVersion): Protocol[] {
