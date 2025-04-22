@@ -10,6 +10,7 @@ import {
 } from '@tentou-tech/uniswap-sdk-core'
 import {
   AlphaRouterConfig,
+  DEXES,
   getAddress,
   ID_TO_NETWORK_NAME,
   IMetric,
@@ -619,6 +620,7 @@ export class QuoteHandler extends APIGLambdaHandler<
             type: 'v3-pool',
             address,
             routerAddress,
+            dexName: DEXES.StoryHunt.DexName,
             tokenIn: {
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
@@ -650,6 +652,7 @@ export class QuoteHandler extends APIGLambdaHandler<
             type: 'v3s1-pool',
             address,
             routerAddress,
+            dexName: DEXES.PiPerxV3.DexName,
             tokenIn: {
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
