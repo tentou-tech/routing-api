@@ -1,11 +1,13 @@
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 import {
   IV2SubgraphProvider,
+  IV3PiperxSubgraphProvider,
   IV3SubgraphProvider,
   log,
   metric,
   MetricLoggerUnit,
   V2SubgraphPool,
+  V3PiperxSubgraphPool,
   V3SubgraphPool,
   V4SubgraphPool,
 } from '@tentou-tech/smart-order-router'
@@ -128,6 +130,21 @@ export class V3AWSSubgraphProvider extends AWSSubgraphProvider<V3SubgraphPool> i
     await cachePoolsFromS3<V3SubgraphPool>(s3, bucket, baseKey, chainId, Protocol.V3)
 
     return new V3AWSSubgraphProvider(chainId, bucket, baseKey)
+  }
+}
+
+export class V3S1AWSSubgraphProvider
+  extends AWSSubgraphProvider<V3PiperxSubgraphPool>
+  implements IV3PiperxSubgraphProvider
+{
+  constructor(chainId: ChainId, bucket: string, baseKey: string) {
+    super(chainId, Protocol.V3S1, bucket, baseKey)
+  }
+
+  public static async EagerBuild(bucket: string, baseKey: string, chainId: ChainId): Promise<V3S1AWSSubgraphProvider> {
+    await cachePoolsFromS3<V3PiperxSubgraphPool>(s3, bucket, baseKey, chainId, Protocol.V3S1)
+
+    return new V3S1AWSSubgraphProvider(chainId, bucket, baseKey)
   }
 }
 

@@ -15,7 +15,8 @@ import {
   SwapRoute,
   V4_ETH_WETH_FAKE_POOL,
 } from '@tentou-tech/smart-order-router'
-import { Pool as V3Pool } from '@uniswap/v3-sdk'
+import { Pool as V3Pool } from '@tentou-tech/uniswap-v3-sdk'
+import { Pool as V3S1Pool } from '@tentou-tech/uniswap-v3s1-sdk'
 import { Pool as V4Pool } from '@uniswap/v4-sdk'
 import JSBI from 'jsbi'
 import _ from 'lodash'
@@ -248,6 +249,7 @@ export class QuoteHandler extends APIGLambdaHandler<
         tokenListProvider,
         v4PoolProvider: v4PoolProvider,
         v3PoolProvider: v3PoolProvider,
+        v3s1PoolProvider: v3s1PoolProvider,
         v2PoolProvider: v2PoolProvider,
         metric,
       },
@@ -602,6 +604,29 @@ export class QuoteHandler extends APIGLambdaHandler<
           curRoute.push({
             type: 'v3-pool',
             address: v3PoolProvider.getPoolAddress(nextPool.token0, nextPool.token1, nextPool.fee).poolAddress,
+            tokenIn: {
+              chainId: tokenIn.chainId,
+              decimals: tokenIn.decimals.toString(),
+              address: tokenIn.wrapped.address,
+              symbol: tokenIn.symbol!,
+            },
+            tokenOut: {
+              chainId: tokenOut.chainId,
+              decimals: tokenOut.decimals.toString(),
+              address: tokenOut.wrapped.address,
+              symbol: tokenOut.symbol!,
+            },
+            fee: nextPool.fee.toString(),
+            liquidity: nextPool.liquidity.toString(),
+            sqrtRatioX96: nextPool.sqrtRatioX96.toString(),
+            tickCurrent: nextPool.tickCurrent.toString(),
+            amountIn: edgeAmountIn,
+            amountOut: edgeAmountOut,
+          })
+        } else if (nextPool instanceof V3S1Pool) {
+          curRoute.push({
+            type: 'v3s1-pool',
+            address: v3s1PoolProvider.getPoolAddress(nextPool.token0, nextPool.token1, nextPool.fee).poolAddress,
             tokenIn: {
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
