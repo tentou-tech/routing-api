@@ -142,6 +142,7 @@ export abstract class APIGLambdaHandler<CInj, RInj extends BaseRInj, ReqBody, Re
           const injector = await this.injectorPromise
 
           const containerInjected = await injector.getContainerInjected()
+          log.info('containerInjected: ', containerInjected)
 
           let requestInjected: RInj
           try {
@@ -154,6 +155,7 @@ export abstract class APIGLambdaHandler<CInj, RInj extends BaseRInj, ReqBody, Re
               log,
               metric
             )
+            log.info('requestInjected: ', requestInjected)
           } catch (err) {
             log.error({ err, event }, 'Unexpected error building request injected.')
             return INTERNAL_ERROR()
@@ -167,6 +169,7 @@ export abstract class APIGLambdaHandler<CInj, RInj extends BaseRInj, ReqBody, Re
           let body: Res
 
           try {
+            log.info('handleRequest')
             const handleRequestResult = await this.handleRequest({
               context,
               event,

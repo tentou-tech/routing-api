@@ -180,6 +180,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
       level: bunyan.INFO,
       activityId: activityId,
     })
+    log.info('buildContainerInjected')
     setGlobalLogger(log)
 
     try {
@@ -202,6 +203,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
       const dependenciesByChainArray = await Promise.all(
         _.map(SUPPORTED_CHAINS, async (chainId: ChainId) => {
           let url = ''
+          log.info('getGlobalUniRpcProviders: ', GlobalRpcProviders.getGlobalUniRpcProviders(log).has(chainId))
           if (!GlobalRpcProviders.getGlobalUniRpcProviders(log).has(chainId)) {
             // Check existence of env var for chain that doesn't use RPC gateway.
             // (If use RPC gateway, the check for env var will be executed elsewhere.)
