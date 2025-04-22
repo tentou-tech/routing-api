@@ -1,5 +1,5 @@
 import Joi from '@hapi/joi'
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 import { ChainId, Currency, CurrencyAmount, Token, TradeType } from '@tentou-tech/uniswap-sdk-core'
 import {
   AlphaRouterConfig,
@@ -799,6 +799,11 @@ export class QuoteHandler extends APIGLambdaHandler<
           case Protocol.V3:
             if (URVersionsToProtocolVersions[universalRouterVersion].includes(Protocol.V3)) {
               protocols.push(Protocol.V3)
+            }
+            break
+          case Protocol.V3S1:
+            if (URVersionsToProtocolVersions[universalRouterVersion].includes(Protocol.V3S1)) {
+              protocols.push(Protocol.V3S1)
             }
             break
           case Protocol.V4:

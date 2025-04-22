@@ -7,6 +7,7 @@ import {
   setGlobalLogger,
   setGlobalMetric,
   V3HeuristicGasModelFactory,
+  V3PiperxHeuristicGasModelFactory,
 } from '@tentou-tech/smart-order-router'
 import { MetricsLogger } from 'aws-embedded-metrics'
 import { APIGatewayProxyEvent, Context } from 'aws-lambda'
@@ -135,6 +136,7 @@ export class QuoteHandlerInjector extends InjectorSOR<
           onChainQuoteProvider,
           gasPriceProvider,
           v3GasModelFactory: new V3HeuristicGasModelFactory(provider),
+          v3PiperxGasModelFactory: new V3PiperxHeuristicGasModelFactory(provider),
           blockedTokenListProvider,
           tokenProvider,
           v2PoolProvider,
