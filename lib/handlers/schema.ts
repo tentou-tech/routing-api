@@ -31,6 +31,8 @@ export type V4PoolInRoute = {
 export type V3PoolInRoute = {
   type: 'v3-pool'
   address: string
+  routerAddress: string
+  dexName: string
   tokenIn: TokenInRoute
   tokenOut: TokenInRoute
   sqrtRatioX96: string
@@ -44,6 +46,8 @@ export type V3PoolInRoute = {
 export type V3S1PoolInRoute = {
   type: 'v3s1-pool'
   address: string
+  routerAddress: string
+  dexName: string
   tokenIn: TokenInRoute
   tokenOut: TokenInRoute
   sqrtRatioX96: string

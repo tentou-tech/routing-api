@@ -1,8 +1,16 @@
 import Joi from '@hapi/joi'
 import { Protocol } from '@tentou-tech/uniswap-router-sdk'
-import { ChainId, Currency, CurrencyAmount, Token, TradeType } from '@tentou-tech/uniswap-sdk-core'
+import {
+  ChainId,
+  Currency,
+  CurrencyAmount,
+  SWAP_ROUTER_02_ADDRESSES,
+  Token,
+  TradeType,
+} from '@tentou-tech/uniswap-sdk-core'
 import {
   AlphaRouterConfig,
+  DEXES,
   getAddress,
   ID_TO_NETWORK_NAME,
   IMetric,
@@ -13,6 +21,7 @@ import {
   sortsBefore,
   SwapOptions,
   SwapRoute,
+  V3S1_ROUTER_ADDRESSES,
   V4_ETH_WETH_FAKE_POOL,
 } from '@tentou-tech/smart-order-router'
 import { Pool as V3Pool } from '@tentou-tech/uniswap-v3-sdk'
@@ -601,9 +610,17 @@ export class QuoteHandler extends APIGLambdaHandler<
             amountOut: edgeAmountOut,
           })
         } else if (nextPool instanceof V3Pool) {
+          const address = v3PoolProvider.getPoolAddress(nextPool.token0, nextPool.token1, nextPool.fee).poolAddress
+
+          const routerAddress = SWAP_ROUTER_02_ADDRESSES(chainId)
+          if (!routerAddress) {
+            throw new Error(`V3 quoter address not found for chainId ${chainId}`)
+          }
           curRoute.push({
             type: 'v3-pool',
-            address: v3PoolProvider.getPoolAddress(nextPool.token0, nextPool.token1, nextPool.fee).poolAddress,
+            address,
+            routerAddress,
+            dexName: DEXES.StoryHunt.DexName,
             tokenIn: {
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
@@ -624,9 +641,18 @@ export class QuoteHandler extends APIGLambdaHandler<
             amountOut: edgeAmountOut,
           })
         } else if (nextPool instanceof V3S1Pool) {
+          const address = v3s1PoolProvider.getPoolAddress(nextPool.token0, nextPool.token1, nextPool.fee).poolAddress
+
+          // TODO: Add router address to smart-order-router
+          const routerAddress = V3S1_ROUTER_ADDRESSES[`${chainId}-${Protocol.V3S1}`]
+          if (!routerAddress) {
+            throw new Error(`V3S1 quoter address not found for chainId ${chainId}`)
+          }
           curRoute.push({
             type: 'v3s1-pool',
-            address: v3s1PoolProvider.getPoolAddress(nextPool.token0, nextPool.token1, nextPool.fee).poolAddress,
+            address,
+            routerAddress,
+            dexName: DEXES.PiPerxV3.DexName,
             tokenIn: {
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
