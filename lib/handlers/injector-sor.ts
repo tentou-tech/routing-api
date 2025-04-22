@@ -47,6 +47,9 @@ import {
   V3PoolProvider,
   V3PoolPiperxProvider,
   V4PoolProvider,
+  IV3PiperxSubgraphProvider,
+  IV3PiperxPoolProvider,
+  StaticV3PiperxSubgraphProvider,
 } from '@tentou-tech/smart-order-router'
 import { TokenList } from '@uniswap/token-lists'
 import { default as bunyan, default as Logger } from 'bunyan'
@@ -57,6 +60,7 @@ import { BaseRInj, Injector } from './handler'
 import {
   V2AWSSubgraphProvider,
   V3AWSSubgraphProvider,
+  V3S1AWSSubgraphProvider,
   V4AWSSubgraphProvider,
 } from './router-entities/aws-subgraph-provider'
 import { AWSTokenListProvider } from './router-entities/aws-token-list-provider'
@@ -124,6 +128,7 @@ export interface RequestInjected<Router> extends BaseRInj {
   metric: IMetric
   v4PoolProvider: IV4PoolProvider
   v3PoolProvider: IV3PoolProvider
+  v3s1PoolProvider: IV3PiperxPoolProvider
   v2PoolProvider: IV2PoolProvider
   tokenProvider: ITokenProvider
   tokenListProvider: ITokenListProvider
@@ -136,6 +141,7 @@ export type ContainerDependencies = {
   provider: StaticJsonRpcProvider
   v4SubgraphProvider: IV4SubgraphProvider
   v3SubgraphProvider: IV3SubgraphProvider
+  v3s1SubgraphProvider: IV3PiperxSubgraphProvider
   v2SubgraphProvider: IV2SubgraphProvider
   tokenListProvider: ITokenListProvider
   gasPriceProvider: IGasPriceProvider
@@ -143,6 +149,7 @@ export type ContainerDependencies = {
   blockedTokenListProvider: ITokenListProvider
   v4PoolProvider: IV4PoolProvider
   v3PoolProvider: IV3PoolProvider
+  v3s1PoolProvider: IV3PiperxPoolProvider
   v2PoolProvider: IV2PoolProvider
   tokenProvider: ITokenProvider
   multicallProvider: UniswapMulticallProvider
@@ -324,6 +331,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
             blockedTokenListProvider,
             v4SubgraphProvider,
             v3SubgraphProvider,
+            v3s1SubgraphProvider,
             v2SubgraphProvider,
           ] = await Promise.all([
             AWSTokenListProvider.fromTokenListS3Bucket(chainId, TOKEN_LIST_CACHE_BUCKET!, DEFAULT_TOKEN_LIST),
@@ -343,6 +351,13 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
               POOL_CACHE_GZIP_KEY!,
               v3PoolProvider
             )) as V3AWSSubgraphProvider,
+            (await this.instantiateSubgraphProvider(
+              chainId,
+              Protocol.V3S1,
+              POOL_CACHE_BUCKET_3!,
+              POOL_CACHE_GZIP_KEY!,
+              v3s1PoolProvider
+            )) as V3S1AWSSubgraphProvider,
             (await this.instantiateSubgraphProvider(
               chainId,
               Protocol.V2,
@@ -590,9 +605,11 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
               ),
               v4SubgraphProvider,
               v3SubgraphProvider,
+              v3s1SubgraphProvider,
               onChainQuoteProvider: quoteProvider,
               v4PoolProvider,
               v3PoolProvider,
+              v3s1PoolProvider,
               v2PoolProvider,
               v2QuoteProvider: new V2QuoteProvider(),
               v2SubgraphProvider,
@@ -629,7 +646,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
     protocol: Protocol,
     poolCacheBucket: string,
     poolCacheKey: string,
-    poolProvider: IV2PoolProvider | IV3PoolProvider | IV4PoolProvider,
+    poolProvider: IV2PoolProvider | IV3PoolProvider | IV4PoolProvider | IV3PiperxPoolProvider,
     v4PoolsParams?: Array<[number, number, string]>
   ) {
     try {
@@ -646,6 +663,8 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
           return await V4AWSSubgraphProvider.EagerBuild(poolCacheBucket!, poolCacheKey!, chainId)
         case Protocol.V3:
           return await V3AWSSubgraphProvider.EagerBuild(poolCacheBucket!, poolCacheKey!, chainId)
+        case Protocol.V3S1:
+          return await V3S1AWSSubgraphProvider.EagerBuild(poolCacheBucket!, poolCacheKey!, chainId)
         case Protocol.V2:
           return await V2AWSSubgraphProvider.EagerBuild(poolCacheBucket!, poolCacheKey!, chainId)
         default:
@@ -657,6 +676,8 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
           return new StaticV4SubgraphProvider(chainId, poolProvider as IV4PoolProvider, v4PoolsParams)
         case Protocol.V3:
           return new StaticV3SubgraphProvider(chainId, poolProvider as IV3PoolProvider)
+        case Protocol.V3S1:
+          return new StaticV3PiperxSubgraphProvider(chainId, poolProvider as IV3PiperxPoolProvider)
         case Protocol.V2:
           return new StaticV2SubgraphProvider(chainId)
         default:

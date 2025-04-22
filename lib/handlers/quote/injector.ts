@@ -107,6 +107,8 @@ export class QuoteHandlerInjector extends InjectorSOR<
       mixedSupported,
       v4PoolParams,
       cachedRoutesCacheInvalidationFixRolloutPercentage,
+      v3s1SubgraphProvider,
+      v3s1PoolProvider,
     } = dependencies[chainIdEnum]!
 
     let onChainQuoteProvider = dependencies[chainIdEnum]!.onChainQuoteProvider
@@ -126,8 +128,10 @@ export class QuoteHandlerInjector extends InjectorSOR<
           v4SubgraphProvider,
           v4PoolProvider,
           v3SubgraphProvider,
+          v3PiperxSubgraphProvider: v3s1SubgraphProvider,
           multicall2Provider: multicallProvider,
           v3PoolProvider,
+          v3PiperxPoolProvider: v3s1PoolProvider,
           onChainQuoteProvider,
           gasPriceProvider,
           v3GasModelFactory: new V3HeuristicGasModelFactory(provider),
@@ -157,6 +161,7 @@ export class QuoteHandlerInjector extends InjectorSOR<
       router,
       v4PoolProvider,
       v3PoolProvider,
+      v3s1PoolProvider,
       v2PoolProvider,
       tokenProvider,
       tokenListProvider,
