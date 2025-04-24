@@ -10,7 +10,7 @@ import { ADDRESS_ZERO, Protocol } from '@tentou-tech/uniswap-router-sdk'
 import { ChainId, CurrencyAmount, Ether, TradeType } from '@tentou-tech/uniswap-sdk-core'
 import JSBI from 'jsbi'
 import { encodeSqrtRatioX96, FeeAmount, Pool as V3Pool } from '@tentou-tech/uniswap-v3-sdk'
-import { Pool as V4Pool } from '@uniswap/v4-sdk'
+import { Pool as V4Pool } from '@tentou-tech/uniswap-v4-sdk'
 import { WNATIVE_ON } from '../../../../../utils/tokens'
 import {
   CacheMode,

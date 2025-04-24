@@ -1,5 +1,5 @@
 import { ChainId } from '@tentou-tech/uniswap-sdk-core'
-import { ADDRESS_ZERO } from '@uniswap/router-sdk'
+import { ADDRESS_ZERO } from '@tentou-tech/uniswap-router-sdk'
 
 // all hook addresses need to be lower case, since the check in isHooksPoolRoutable assumes lower case
 export const extraHooksAddressesOnSepolia = '0x0000000000000000000000000000000000000020'

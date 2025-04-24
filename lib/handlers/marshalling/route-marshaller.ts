@@ -16,9 +16,9 @@ import {
 } from './v3/pool-marshaller'
 import { MarshalledPool as V4MarshalledPool, PoolMarshaller as V4PoolMarshaller } from './v4/pool-marshaller'
 import { Pool as V3Pool } from '@tentou-tech/uniswap-v3-sdk'
-import { Pool as V4Pool } from '@uniswap/v4-sdk'
+import { Pool as V4Pool } from '@tentou-tech/uniswap-v4-sdk'
 import { SupportedRoutes } from '@tentou-tech/smart-order-router'
-import { Pair } from '@uniswap/v2-sdk'
+import { Pair } from '@tentou-tech/uniswap-v2-sdk'
 
 export interface MarshalledV2Route {
   protocol: Protocol

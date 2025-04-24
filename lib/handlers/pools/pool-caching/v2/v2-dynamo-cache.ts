@@ -1,5 +1,5 @@
 import { ICache } from '@tentou-tech/smart-order-router/build/main/providers/cache'
-import { Pair } from '@uniswap/v2-sdk'
+import { Pair } from '@tentou-tech/uniswap-v2-sdk'
 import { BatchGetItemInput, DocumentClient } from 'aws-sdk/clients/dynamodb'
 import { log, metric, MetricLoggerUnit } from '@tentou-tech/smart-order-router'
 import { MarshalledPair, PairMarshaller } from '../../../marshalling'

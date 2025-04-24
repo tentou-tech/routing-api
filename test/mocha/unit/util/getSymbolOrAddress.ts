@@ -1,5 +1,5 @@
 import { getSymbolOrAddress } from '../../../../lib/util/getSymbolOrAddress'
-import { ADDRESS_ZERO } from '@uniswap/router-sdk'
+import { ADDRESS_ZERO } from '@tentou-tech/uniswap-router-sdk'
 import { ChainId } from '@tentou-tech/uniswap-sdk-core'
 import { expect } from 'chai'
 

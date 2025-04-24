@@ -1,6 +1,6 @@
-import { Pair } from '@uniswap/v2-sdk'
+import { Pair } from '@tentou-tech/uniswap-v2-sdk'
 import { CurrencyAmountMarshaller, MarshalledCurrencyAmount } from './currency-amount-marshaller'
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 
 export interface MarshalledPair {
   protocol: Protocol

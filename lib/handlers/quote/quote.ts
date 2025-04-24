@@ -26,7 +26,7 @@ import {
 } from '@tentou-tech/smart-order-router'
 import { Pool as V3Pool } from '@tentou-tech/uniswap-v3-sdk'
 import { Pool as V3S1Pool } from '@tentou-tech/uniswap-v3s1-sdk'
-import { Pool as V4Pool } from '@uniswap/v4-sdk'
+import { Pool as V4Pool } from '@tentou-tech/uniswap-v4-sdk'
 import JSBI from 'jsbi'
 import _ from 'lodash'
 import { APIGLambdaHandler, ErrorResponse, HandleRequestParams, Response } from '../handler'
@@ -49,7 +49,7 @@ import { SwapOptionsFactory } from './SwapOptionsFactory'
 import { GlobalRpcProviders } from '../../rpc/GlobalRpcProviders'
 import { adhocCorrectGasUsed } from '../../util/estimateGasUsed'
 import { adhocCorrectGasUsedUSD } from '../../util/estimateGasUsedUSD'
-import { Pair } from '@uniswap/v2-sdk'
+import { Pair } from '@tentou-tech/uniswap-v2-sdk'
 import { UniversalRouterVersion } from '@tentou-tech/uniswap-universal-router-sdk'
 import {
   convertStringRouterVersionToEnum,
