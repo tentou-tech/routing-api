@@ -12,7 +12,7 @@ import { ProviderConfig } from '@tentou-tech/smart-order-router/build/main/provi
 import { QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION } from '../util/quote-provider-traffic-switch-configuration'
 import { BigNumber } from 'ethers'
 import { LIKELY_OUT_OF_GAS_THRESHOLD, NEW_QUOTER_DEPLOY_BLOCK } from '../../../util/onChainQuoteProviderConfigs'
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 
 export type TrafficSwitchOnChainQuoteProviderProps = {
   currentQuoteProvider: IOnChainQuoteProvider

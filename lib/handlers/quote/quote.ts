@@ -7,6 +7,7 @@ import {
   SWAP_ROUTER_02_ADDRESSES,
   Token,
   TradeType,
+  V2_ROUTER_ADDRESSES,
 } from '@tentou-tech/uniswap-sdk-core'
 import {
   AlphaRouterConfig,
@@ -26,7 +27,7 @@ import {
 } from '@tentou-tech/smart-order-router'
 import { Pool as V3Pool } from '@tentou-tech/uniswap-v3-sdk'
 import { Pool as V3S1Pool } from '@tentou-tech/uniswap-v3s1-sdk'
-import { Pool as V4Pool } from '@uniswap/v4-sdk'
+import { Pool as V4Pool } from '@tentou-tech/uniswap-v4-sdk'
 import JSBI from 'jsbi'
 import _ from 'lodash'
 import { APIGLambdaHandler, ErrorResponse, HandleRequestParams, Response } from '../handler'
@@ -49,7 +50,7 @@ import { SwapOptionsFactory } from './SwapOptionsFactory'
 import { GlobalRpcProviders } from '../../rpc/GlobalRpcProviders'
 import { adhocCorrectGasUsed } from '../../util/estimateGasUsed'
 import { adhocCorrectGasUsedUSD } from '../../util/estimateGasUsedUSD'
-import { Pair } from '@uniswap/v2-sdk'
+import { Pair } from '@tentou-tech/uniswap-v2-sdk'
 import { UniversalRouterVersion } from '@tentou-tech/uniswap-universal-router-sdk'
 import {
   convertStringRouterVersionToEnum,
@@ -679,6 +680,8 @@ export class QuoteHandler extends APIGLambdaHandler<
           curRoute.push({
             type: 'v2-pool',
             address: v2PoolProvider.getPoolAddress(nextPool.token0, nextPool.token1).poolAddress,
+            routerAddress: V2_ROUTER_ADDRESSES[chainId],
+            dexName: 'PiperX V2',
             tokenIn: {
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),

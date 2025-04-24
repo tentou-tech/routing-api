@@ -1,4 +1,4 @@
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 import {
   setGlobalLogger,
   setGlobalMetric,

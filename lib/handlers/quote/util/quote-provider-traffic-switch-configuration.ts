@@ -1,5 +1,5 @@
 import { ChainId } from '@tentou-tech/uniswap-sdk-core'
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 
 export type QuoteProviderTrafficSwitchConfiguration = {
   switchExactInPercentage: number

@@ -1,4 +1,4 @@
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 import { ChainId, Currency, TradeType } from '@tentou-tech/uniswap-sdk-core'
 import { CachedRoutes, getAddress } from '@tentou-tech/smart-order-router'
 

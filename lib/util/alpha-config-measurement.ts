@@ -1,5 +1,5 @@
 import { ChainId, Currency, CurrencyAmount } from '@tentou-tech/uniswap-sdk-core'
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 import { log, metric, MetricLoggerUnit, SwapRoute } from '@tentou-tech/smart-order-router'
 
 export const getDistribution = (distributionPercent: number) => {

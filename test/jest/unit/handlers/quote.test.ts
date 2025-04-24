@@ -1,7 +1,7 @@
 import { expect } from '@jest/globals'
 import { QuoteHandler } from '../../../../lib/handlers/quote/quote'
 import { ChainId } from '@tentou-tech/uniswap-sdk-core'
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 import { UniversalRouterVersion } from '@tentou-tech/uniswap-universal-router-sdk'
 
 describe('QuoteHandler', () => {

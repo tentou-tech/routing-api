@@ -3,7 +3,7 @@ import {
   convertStringRouterVersionToEnum,
   protocolVersionsToBeExcludedFromMixed,
 } from '../../../../lib/util/supportedProtocolVersions'
-import { Protocol } from '@uniswap/router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 import { expect } from 'chai'
 
 describe('supported protocol versions', () => {
