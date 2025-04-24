@@ -66,6 +66,8 @@ export type V2Reserve = {
 export type V2PoolInRoute = {
   type: 'v2-pool'
   address: string
+  routerAddress: string
+  dexName: string
   tokenIn: TokenInRoute
   tokenOut: TokenInRoute
   reserve0: V2Reserve

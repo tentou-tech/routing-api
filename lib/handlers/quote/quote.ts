@@ -7,6 +7,7 @@ import {
   SWAP_ROUTER_02_ADDRESSES,
   Token,
   TradeType,
+  V2_ROUTER_ADDRESSES,
 } from '@tentou-tech/uniswap-sdk-core'
 import {
   AlphaRouterConfig,
@@ -679,6 +680,8 @@ export class QuoteHandler extends APIGLambdaHandler<
           curRoute.push({
             type: 'v2-pool',
             address: v2PoolProvider.getPoolAddress(nextPool.token0, nextPool.token1).poolAddress,
+            routerAddress: V2_ROUTER_ADDRESSES[chainId],
+            dexName: 'PiperX V2',
             tokenIn: {
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
