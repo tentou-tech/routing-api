@@ -1,6 +1,6 @@
 import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 // import { V2SubgraphProvider, V3SubgraphProvider, V4SubgraphProvider } from '@tentou-tech/smart-order-router'
-import { V3SubgraphProvider, V3PiperxSubgraphProvider } from '@tentou-tech/smart-order-router'
+import { V3SubgraphProvider, V3PiperxSubgraphProvider, V2SubgraphProvider } from '@tentou-tech/smart-order-router'
 import { ChainId } from '@tentou-tech/uniswap-sdk-core'
 
 // during local cdk stack update, the env vars are not populated
@@ -102,6 +102,8 @@ export const v2SubgraphUrlOverride = (chainId: ChainId) => {
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v2-unichain-mainnet/api`
     case ChainId.SONEIUM:
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v2-soneium-mainnet/api`
+    case ChainId.STORY_AENEID:
+      return 'https://graph-api-testnet.tentou.tech/subgraphs/name/mimboku'
     default:
       return undefined
   }
@@ -114,7 +116,7 @@ export const v3TrackedEthThreshold = 0.01 // Pools need at least 0.01 of tracked
 const v3UntrackedUsdThreshold = 25000 // Pools need at least 25K USD (untracked) to be selected (for metrics only)
 
 export const v2TrackedEthThreshold = 0.025 // Pairs need at least 0.025 of trackedEth to be selected
-// const v2UntrackedUsdThreshold = Number.MAX_VALUE // Pairs need at least 1K USD (untracked) to be selected (for metrics only)
+const v2UntrackedUsdThreshold = Number.MAX_VALUE // Pairs need at least 1K USD (untracked) to be selected (for metrics only)
 
 export const chainProtocols = [
   // V3.
@@ -328,6 +330,21 @@ export const chainProtocols = [
       v3UntrackedUsdThreshold,
       v3SubgraphUrlOverride(ChainId.STORY_AENEID)
     ),
+  },
+  {
+    protocol: Protocol.V2,
+    chainId: ChainId.STORY_AENEID,
+    timeout: 840000,
+    provider: new V2SubgraphProvider(
+      ChainId.STORY_AENEID,
+      5,
+      900000,
+      true,
+      1000,
+      v2TrackedEthThreshold,
+      v2UntrackedUsdThreshold,
+      v2SubgraphUrlOverride(ChainId.STORY_AENEID)
+    ), // 1000 is the largest page size supported by thegraph
   },
   // V2.
   // {
