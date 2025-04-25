@@ -314,7 +314,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
           )
 
           // TODO: currently using onChainTokenFeeFetcher, but we should use trafficSwitcherTokenFetcher
-          const tokenFeeFetcher = new OnChainTokenFeeFetcher(chainId, provider);
+          const tokenFeeFetcher = new OnChainTokenFeeFetcher(chainId, provider)
           const tokenPropertiesProvider = new TokenPropertiesProvider(
             chainId,
             new NodeJSCache(new NodeCache({ stdTTL: 30000, useClones: false })),
