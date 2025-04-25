@@ -3,7 +3,7 @@ import {
   CachingGasStationProvider,
   CachingTokenListProvider,
   CachingTokenProviderWithFallback,
-  CachingV2PoolProvider,
+  // CachingV2PoolProvider,
   // CachingV3PoolProvider,
   CachingV4PoolProvider,
   EIP1559GasPriceProvider,
@@ -71,7 +71,7 @@ import { DynamoRouteCachingProvider } from './router-entities/route-caching/dyna
 import { DefaultEVMClient } from './evm/EVMClient'
 import { InstrumentedEVMProvider } from './evm/provider/InstrumentedEVMProvider'
 import { deriveProviderName } from './evm/provider/ProviderName'
-import { V2DynamoCache } from './pools/pool-caching/v2/v2-dynamo-cache'
+// import { V2DynamoCache } from './pools/pool-caching/v2/v2-dynamo-cache'
 import { OnChainTokenFeeFetcher } from '@tentou-tech/smart-order-router/build/main/providers/token-fee-fetcher'
 import { PortionProvider } from '@tentou-tech/smart-order-router/build/main/providers/portion-provider'
 import { GlobalRpcProviders } from '../rpc/GlobalRpcProviders'
@@ -89,9 +89,9 @@ import { v4 } from 'uuid/index'
 import { chainProtocols } from '../cron/cache-config'
 import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 import { UniJsonRpcProvider } from '../rpc/UniJsonRpcProvider'
-import { GraphQLTokenFeeFetcher } from '../graphql/graphql-token-fee-fetcher'
-import { UniGraphQLProvider } from '../graphql/graphql-provider'
-import { TrafficSwitcherITokenFeeFetcher } from '../util/traffic-switch/traffic-switcher-i-token-fee-fetcher'
+// import { GraphQLTokenFeeFetcher } from '../graphql/graphql-token-fee-fetcher'
+// import { UniGraphQLProvider } from '../graphql/graphql-provider'
+// import { TrafficSwitcherITokenFeeFetcher } from '../util/traffic-switch/traffic-switcher-i-token-fee-fetcher'
 import {
   emptyV4FeeTickSpacingsHookAddresses,
   EXTRA_V4_FEE_TICK_SPACINGS_HOOK_ADDRESSES,
@@ -200,7 +200,7 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
         ROUTES_CACHING_REQUEST_FLAG_TABLE_NAME,
         CACHED_ROUTES_TABLE_NAME,
         AWS_LAMBDA_FUNCTION_NAME,
-        V2_PAIRS_CACHE_TABLE_NAME,
+        // V2_PAIRS_CACHE_TABLE_NAME,
         CACHING_ROUTING_LAMBDA_FUNCTION_NAME,
       } = process.env
 
@@ -290,39 +290,44 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
           //   sourceOfTruthPoolProvider: noCacheV3PoolProvider,
           // })
 
-          const onChainTokenFeeFetcher = new OnChainTokenFeeFetcher(chainId, provider)
-          const graphQLTokenFeeFetcher = new GraphQLTokenFeeFetcher(
-            new UniGraphQLProvider(),
-            onChainTokenFeeFetcher,
-            chainId
-          )
-          const trafficSwitcherTokenFetcher = new TrafficSwitcherITokenFeeFetcher('TokenFetcherExperimentV2', {
-            control: graphQLTokenFeeFetcher,
-            treatment: onChainTokenFeeFetcher,
-            aliasControl: 'graphQLTokenFeeFetcher',
-            aliasTreatment: 'onChainTokenFeeFetcher',
-            customization: {
-              pctEnabled: 0.0,
-              pctShadowSampling: 0.005,
-            },
-          })
+          // const onChainTokenFeeFetcher = new OnChainTokenFeeFetcher(chainId, provider)
+          // const graphQLTokenFeeFetcher = new GraphQLTokenFeeFetcher(
+          //   new UniGraphQLProvider(),
+          //   onChainTokenFeeFetcher,
+          //   chainId
+          // )
+          // const trafficSwitcherTokenFetcher = new TrafficSwitcherITokenFeeFetcher('TokenFetcherExperimentV2', {
+          //   control: graphQLTokenFeeFetcher,
+          //   treatment: onChainTokenFeeFetcher,
+          //   aliasControl: 'graphQLTokenFeeFetcher',
+          //   aliasTreatment: 'onChainTokenFeeFetcher',
+          //   customization: {
+          //     pctEnabled: 0.0,
+          //     pctShadowSampling: 0.005,
+          //   },
+          // })
 
           const tokenValidatorProvider = new TokenValidatorProvider(
             chainId,
             multicall2Provider,
             new NodeJSCache(new NodeCache({ stdTTL: 30000, useClones: false }))
           )
+
+          // TODO: currently using onChainTokenFeeFetcher, but we should use trafficSwitcherTokenFetcher
+          const tokenFeeFetcher = new OnChainTokenFeeFetcher(chainId, provider);
           const tokenPropertiesProvider = new TokenPropertiesProvider(
             chainId,
             new NodeJSCache(new NodeCache({ stdTTL: 30000, useClones: false })),
-            trafficSwitcherTokenFetcher
+            tokenFeeFetcher
           )
-          const underlyingV2PoolProvider = new V2PoolProvider(chainId, multicall2Provider, tokenPropertiesProvider)
-          const v2PoolProvider = new CachingV2PoolProvider(
-            chainId,
-            underlyingV2PoolProvider,
-            new V2DynamoCache(V2_PAIRS_CACHE_TABLE_NAME!)
-          )
+
+          // TODO: currently using V2PoolProvider, but we should use CachingV2PoolProvider
+          const v2PoolProvider = new V2PoolProvider(chainId, multicall2Provider, tokenPropertiesProvider)
+          // const v2PoolProvider = new CachingV2PoolProvider(
+          //   chainId,
+          //   underlyingV2PoolProvider,
+          //   new V2DynamoCache(V2_PAIRS_CACHE_TABLE_NAME!)
+          // )
           const v4PoolParams = getApplicableV4FeesTickspacingsHooks(chainId).concat(
             EXTRA_V4_FEE_TICK_SPACINGS_HOOK_ADDRESSES[chainId] ?? emptyV4FeeTickSpacingsHookAddresses
           )
