@@ -559,6 +559,8 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
             ChainId.MONAD_TESTNET,
             ChainId.UNICHAIN,
             ChainId.SONEIUM,
+            ChainId.STORY_AENEID,
+            ChainId.STORY,
           ]
 
           const v4Supported = [
