@@ -1,6 +1,11 @@
 import Joi from '@hapi/joi'
-import { ChainId } from '@tentou-tech/uniswap-sdk-core'
+//import { ChainId } from '@tentou-tech/uniswap-sdk-core'
 import PROD_CONFIG from '../config/rpcProviderProdConfig.json'
+
+export enum ChainId {
+  STORY_AENEID = 1315,
+  STORY = 1514,
+}
 
 export interface ChainConfig {
   chainId: number
