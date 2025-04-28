@@ -77,7 +77,7 @@
     "@middy/input-output-logger": "^2.4.1",
     "@middy/validator": "^2.4.1",
     "@pinata/sdk": "^1.1.23",
-    "@tentou-tech/smart-order-router": "^4.20.41",
+    "@tentou-tech/smart-order-router": "^4.20.42",
     "@tentou-tech/uniswap-sdk-core": "^0.0.16",
     "@tentou-tech/uniswap-v3-sdk": "0.1.2",
     "@typechain/ethers-v5": "^7.0.1",
