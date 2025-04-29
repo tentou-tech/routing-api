@@ -578,8 +578,8 @@ export class RoutingDashboardStack extends cdk.NestedStack {
       MAINNETS.concat(TESTNETS)
     ).generateWidgets()
 
-    new aws_cloudwatch.CfnDashboard(this, 'RoutingAPIDashboard', {
-      dashboardName: `RoutingDashboard`,
+    new aws_cloudwatch.CfnDashboard(this, `RoutingAPIDashboard`, {
+      dashboardName: `RoutingDashboard-${region}`,
       dashboardBody: JSON.stringify({
         periodOverride: 'inherit',
         widgets: perChainWidgetsForRoutingDashboard
@@ -1015,8 +1015,8 @@ export class RoutingDashboardStack extends cdk.NestedStack {
     })
 
     const quoteAmountsWidgets = new QuoteAmountsWidgetsFactory(NAMESPACE, region)
-    new aws_cloudwatch.CfnDashboard(this, 'RoutingAPITrackedPairsDashboard', {
-      dashboardName: 'RoutingAPITrackedPairsDashboard',
+    new aws_cloudwatch.CfnDashboard(this, `RoutingAPITrackedPairsDashboard`, {
+      dashboardName: `RoutingAPITrackedPairsDashboard-${region}`,
       dashboardBody: JSON.stringify({
         periodOverride: 'inherit',
         widgets: quoteAmountsWidgets.generateWidgets(),
@@ -1024,16 +1024,16 @@ export class RoutingDashboardStack extends cdk.NestedStack {
     })
 
     const cachedRoutesWidgets = new CachedRoutesWidgetsFactory(NAMESPACE, region, routingLambdaName)
-    new aws_cloudwatch.CfnDashboard(this, 'CachedRoutesPerformanceDashboard', {
-      dashboardName: 'CachedRoutesPerformanceDashboard',
+    new aws_cloudwatch.CfnDashboard(this, `CachedRoutesPerformanceDashboard`, {
+      dashboardName: `CachedRoutesPerformanceDashboard-${region}`,
       dashboardBody: JSON.stringify({
         periodOverride: 'inherit',
         widgets: cachedRoutesWidgets.generateWidgets(),
       }),
     })
 
-    new aws_cloudwatch.CfnDashboard(this, 'RoutingAPIQuoteProviderDashboard', {
-      dashboardName: `RoutingQuoteProviderDashboard`,
+    new aws_cloudwatch.CfnDashboard(this, `RoutingAPIQuoteProviderDashboard`, {
+      dashboardName: `RoutingQuoteProviderDashboard-${region}`,
       dashboardBody: JSON.stringify({
         periodOverride: 'inherit',
         widgets: [

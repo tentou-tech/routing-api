@@ -783,8 +783,8 @@ export class RpcGatewayDashboardStack extends cdk.NestedStack {
       },
     ])
 
-    new aws_cloudwatch.CfnDashboard(this, 'RpcGatewayDashboard', {
-      dashboardName: `RpcGatewayDashboard`,
+    new aws_cloudwatch.CfnDashboard(this, `RpcGatewayDashboard`, {
+      dashboardName: `RpcGatewayDashboard-${region}`,
       dashboardBody: JSON.stringify({
         periodOverride: 'inherit',
         widgets: perChainWidgets,
