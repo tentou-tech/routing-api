@@ -21,12 +21,16 @@ jobs:
           npm i
       - name: Build
         run: npm run build
+      - name: Uppercase branch name
+        run: |
+          branch_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          echo "BRANCH_NAME=${branch_name^^}" >>${GITHUB_ENV}
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@master
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-access-key-id: ${{ secrets[format('AWS_{0}_ACCESS_KEY', env.BRANCH_NAME)] }}
+          aws-secret-access-key: ${{ secrets[format('AWS_{0}_SECRET_KEY', env.BRANCH_NAME)] }}
+          aws-region: ${{ secrets[format('AWS_{0}_REGION', env.BRANCH_NAME)] }}
       - name: Run CDK deploy
         run: |
           cdk deploy RoutingAPIStack --require-approval=never  > /dev/null || (echo "CDK deploy failed" && exit 1)
