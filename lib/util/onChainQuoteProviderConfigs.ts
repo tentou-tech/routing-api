@@ -166,12 +166,12 @@ export const OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]: { 
     },
     [ChainId.STORY_AENEID]: {
       multicallChunk: 80,
-      gasLimitPerCall: 20_000_000,
+      gasLimitPerCall: 200_000_000,
       quoteMinSuccessRate: 0.1,
     },
     [ChainId.STORY]: {
       multicallChunk: 80,
-      gasLimitPerCall: 20_000_000,
+      gasLimitPerCall: 200_000_000,
       quoteMinSuccessRate: 0.1,
     },
   },
@@ -264,12 +264,12 @@ export const OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]: { 
     },
     [ChainId.STORY_AENEID]: {
       multicallChunk: 80,
-      gasLimitPerCall: 20_000_000,
+      gasLimitPerCall: 200_000_000,
       quoteMinSuccessRate: 0.1,
     },
     [ChainId.STORY]: {
       multicallChunk: 80,
-      gasLimitPerCall: 20_000_000,
+      gasLimitPerCall: 200_000_000,
       quoteMinSuccessRate: 0.1,
     },
   },
@@ -282,12 +282,12 @@ export const OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]: { 
     },
     [ChainId.STORY_AENEID]: {
       multicallChunk: 80,
-      gasLimitPerCall: 20_000_000,
+      gasLimitPerCall: 200_000_000,
       quoteMinSuccessRate: 0.1,
     },
     [ChainId.STORY]: {
       multicallChunk: 80,
-      gasLimitPerCall: 20_000_000,
+      gasLimitPerCall: 200_000_000,
       quoteMinSuccessRate: 0.1,
     },
   },
@@ -464,12 +464,12 @@ export const OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]: { 
     },
     [ChainId.STORY_AENEID]: {
       multicallChunk: 80,
-      gasLimitPerCall: 20_000_000,
+      gasLimitPerCall: 200_000_000,
       quoteMinSuccessRate: 0.1,
     },
     [ChainId.STORY]: {
       multicallChunk: 80,
-      gasLimitPerCall: 20_000_000,
+      gasLimitPerCall: 200_000_000,
       quoteMinSuccessRate: 0.1,
     },
   },
@@ -664,12 +664,12 @@ export const NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]
       },
       [ChainId.STORY_AENEID]: {
         multicallChunk: 80,
-        gasLimitPerCall: 20_000_000,
+        gasLimitPerCall: 200_000_000,
         quoteMinSuccessRate: 0.1,
       },
       [ChainId.STORY]: {
         multicallChunk: 80,
-        gasLimitPerCall: 20_000_000,
+        gasLimitPerCall: 200_000_000,
         quoteMinSuccessRate: 0.1,
       },
     },
@@ -846,12 +846,12 @@ export const NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]
       },
       [ChainId.STORY_AENEID]: {
         multicallChunk: 80,
-        gasLimitPerCall: 20_000_000,
+        gasLimitPerCall: 200_000_000,
         quoteMinSuccessRate: 0.1,
       },
       [ChainId.STORY]: {
         multicallChunk: 80,
-        gasLimitPerCall: 20_000_000,
+        gasLimitPerCall: 200_000_000,
         quoteMinSuccessRate: 0.1,
       },
     },
@@ -908,11 +908,11 @@ export const GAS_ERROR_FAILURE_OVERRIDES: { [chainId: number]: FailureOverrides 
     multicallChunk: 45,
   },
   [ChainId.STORY_AENEID]: {
-    gasLimitOverride: 20_000_000,
+    gasLimitOverride: 200_000_000,
     multicallChunk: 40,
   },
   [ChainId.STORY]: {
-    gasLimitOverride: 20_000_000,
+    gasLimitOverride: 200_000_000,
     multicallChunk: 40,
   },
 }
@@ -968,11 +968,11 @@ export const SUCCESS_RATE_FAILURE_OVERRIDES: { [chainId: number]: FailureOverrid
     multicallChunk: 45,
   },
   [ChainId.STORY_AENEID]: {
-    gasLimitOverride: 20_000_000,
+    gasLimitOverride: 200_000_000,
     multicallChunk: 40,
   },
   [ChainId.STORY]: {
-    gasLimitOverride: 20_000_000,
+    gasLimitOverride: 200_000_000,
     multicallChunk: 40,
   },
 }
