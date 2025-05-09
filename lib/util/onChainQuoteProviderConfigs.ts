@@ -164,6 +164,16 @@ export const OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]: { 
       gasLimitPerCall: 1_200_000,
       quoteMinSuccessRate: 0.1,
     },
+    [ChainId.STORY_AENEID]: {
+      multicallChunk: 80,
+      gasLimitPerCall: 20_000_000,
+      quoteMinSuccessRate: 0.1,
+    },
+    [ChainId.STORY]: {
+      multicallChunk: 80,
+      gasLimitPerCall: 20_000_000,
+      quoteMinSuccessRate: 0.1,
+    },
   },
   [Protocol.V3]: {
     ...constructSameBatchParamsMap(DEFAULT_BATCH_PARAMS),
@@ -252,12 +262,32 @@ export const OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]: { 
       gasLimitPerCall: 1_200_000,
       quoteMinSuccessRate: 0.1,
     },
+    [ChainId.STORY_AENEID]: {
+      multicallChunk: 80,
+      gasLimitPerCall: 20_000_000,
+      quoteMinSuccessRate: 0.1,
+    },
+    [ChainId.STORY]: {
+      multicallChunk: 80,
+      gasLimitPerCall: 20_000_000,
+      quoteMinSuccessRate: 0.1,
+    },
   },
   [Protocol.V3S1]: {
     ...constructSameBatchParamsMap(DEFAULT_BATCH_PARAMS),
     [ChainId.BASE]: {
       multicallChunk: 1320,
       gasLimitPerCall: 100_000,
+      quoteMinSuccessRate: 0.1,
+    },
+    [ChainId.STORY_AENEID]: {
+      multicallChunk: 80,
+      gasLimitPerCall: 20_000_000,
+      quoteMinSuccessRate: 0.1,
+    },
+    [ChainId.STORY]: {
+      multicallChunk: 80,
+      gasLimitPerCall: 20_000_000,
       quoteMinSuccessRate: 0.1,
     },
   },
@@ -430,6 +460,16 @@ export const OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]: { 
     [ChainId.SONEIUM]: {
       multicallChunk: 80,
       gasLimitPerCall: 1_200_000,
+      quoteMinSuccessRate: 0.1,
+    },
+    [ChainId.STORY_AENEID]: {
+      multicallChunk: 80,
+      gasLimitPerCall: 20_000_000,
+      quoteMinSuccessRate: 0.1,
+    },
+    [ChainId.STORY]: {
+      multicallChunk: 80,
+      gasLimitPerCall: 20_000_000,
       quoteMinSuccessRate: 0.1,
     },
   },
@@ -622,6 +662,16 @@ export const NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]
         gasLimitPerCall: 200_000,
         quoteMinSuccessRate: 0.1,
       },
+      [ChainId.STORY_AENEID]: {
+        multicallChunk: 80,
+        gasLimitPerCall: 20_000_000,
+        quoteMinSuccessRate: 0.1,
+      },
+      [ChainId.STORY]: {
+        multicallChunk: 80,
+        gasLimitPerCall: 20_000_000,
+        quoteMinSuccessRate: 0.1,
+      },
     },
     // V4 can be the same as V4 to begin. likely v4 is more gas efficient because of pool singleton for swaps by accounting mechanism
     [Protocol.V4]: {
@@ -794,6 +844,16 @@ export const NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]
         gasLimitPerCall: 1_200_000,
         quoteMinSuccessRate: 0.1,
       },
+      [ChainId.STORY_AENEID]: {
+        multicallChunk: 80,
+        gasLimitPerCall: 20_000_000,
+        quoteMinSuccessRate: 0.1,
+      },
+      [ChainId.STORY]: {
+        multicallChunk: 80,
+        gasLimitPerCall: 20_000_000,
+        quoteMinSuccessRate: 0.1,
+      },
     },
   }
 
@@ -847,6 +907,14 @@ export const GAS_ERROR_FAILURE_OVERRIDES: { [chainId: number]: FailureOverrides 
     gasLimitOverride: 3_000_000,
     multicallChunk: 45,
   },
+  [ChainId.STORY_AENEID]: {
+    gasLimitOverride: 20_000_000,
+    multicallChunk: 40,
+  },
+  [ChainId.STORY]: {
+    gasLimitOverride: 20_000_000,
+    multicallChunk: 40,
+  },
 }
 
 export const SUCCESS_RATE_FAILURE_OVERRIDES: { [chainId: number]: FailureOverrides } = {
@@ -898,6 +966,14 @@ export const SUCCESS_RATE_FAILURE_OVERRIDES: { [chainId: number]: FailureOverrid
   [ChainId.SONEIUM]: {
     gasLimitOverride: 3_000_000,
     multicallChunk: 45,
+  },
+  [ChainId.STORY_AENEID]: {
+    gasLimitOverride: 20_000_000,
+    multicallChunk: 40,
+  },
+  [ChainId.STORY]: {
+    gasLimitOverride: 20_000_000,
+    multicallChunk: 40,
   },
 }
 
