@@ -593,6 +593,8 @@ export abstract class InjectorSOR<Router, QueryParams> extends Injector<
             ChainId.WORLDCHAIN,
             ChainId.ZORA,
             ChainId.SONEIUM,
+            ChainId.STORY_AENEID,
+            ChainId.STORY,
           ]
 
           const cachedRoutesCacheInvalidationFixRolloutPercentage = NEW_CACHED_ROUTES_ROLLOUT_PERCENT[chainId]
