@@ -69,6 +69,8 @@ export const v3SubgraphUrlOverride = (chainId: ChainId) => {
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY_2}/uniswap-2/uniswap-v3-soneium-mainnet/api`
     case ChainId.STORY_AENEID:
       return 'https://graph-api-testnet.tentou.tech/subgraphs/name/mimboku'
+    case ChainId.STORY:
+      return 'https://graph-api.tentou.tech/subgraphs/name/mimboku'
     default:
       return undefined
   }
@@ -104,6 +106,8 @@ export const v2SubgraphUrlOverride = (chainId: ChainId) => {
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v2-soneium-mainnet/api`
     case ChainId.STORY_AENEID:
       return 'https://graph-api-testnet.tentou.tech/subgraphs/name/mimboku-v2'
+    case ChainId.STORY:
+      return 'https://graph-api.tentou.tech/subgraphs/name/mimboku-v2'
     default:
       return undefined
   }
@@ -344,6 +348,49 @@ export const chainProtocols = [
       v2TrackedEthThreshold,
       v2UntrackedUsdThreshold,
       v2SubgraphUrlOverride(ChainId.STORY_AENEID)
+    ), // 1000 is the largest page size supported by thegraph
+  },
+  {
+    protocol: Protocol.V3,
+    chainId: ChainId.STORY,
+    timeout: 90000,
+    provider: new V3SubgraphProvider(
+      ChainId.STORY,
+      3,
+      90000,
+      true,
+      v3TrackedEthThreshold,
+      v3UntrackedUsdThreshold,
+      v3SubgraphUrlOverride(ChainId.STORY)
+    ),
+  },
+  {
+    protocol: Protocol.V3S1,
+    chainId: ChainId.STORY,
+    timeout: 90000,
+    provider: new V3PiperxSubgraphProvider(
+      ChainId.STORY,
+      3,
+      90000,
+      true,
+      v3TrackedEthThreshold,
+      v3UntrackedUsdThreshold,
+      v3SubgraphUrlOverride(ChainId.STORY)
+    ),
+  },
+  {
+    protocol: Protocol.V2,
+    chainId: ChainId.STORY,
+    timeout: 840000,
+    provider: new V2SubgraphProvider(
+      ChainId.STORY,
+      5,
+      900000,
+      true,
+      1000,
+      v2TrackedEthThreshold,
+      v2UntrackedUsdThreshold,
+      v2SubgraphUrlOverride(ChainId.STORY)
     ), // 1000 is the largest page size supported by thegraph
   },
   // V2.
