@@ -71,9 +71,9 @@ export const v3SubgraphUrlOverride = (chainId: ChainId) => {
     case ChainId.SONEIUM:
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY_2}/uniswap-2/uniswap-v3-soneium-mainnet/api`
     case ChainId.STORY_AENEID:
-      return process.env.GQL_URL_TESTNET_V3
+      return 'https://graph-api-testnet.tentou.tech/subgraphs/name/mimboku'
     case ChainId.STORY:
-      return process.env.GQL_URL_MAINNET_V3
+      return 'https://graph-api.tentou.tech/subgraphs/name/mimboku'
     default:
       return undefined
   }
@@ -108,9 +108,9 @@ export const v2SubgraphUrlOverride = (chainId: ChainId) => {
     case ChainId.SONEIUM:
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v2-soneium-mainnet/api`
     case ChainId.STORY_AENEID:
-      return process.env.GQL_URL_TESTNET_V2
+      return 'https://graph-api-testnet.tentou.tech/subgraphs/name/mimboku-v2'
     case ChainId.STORY:
-      return process.env.GQL_URL_MAINNET_V2
+      return 'https://graph-api.tentou.tech/subgraphs/name/mimboku-v2-1'
     default:
       return undefined
   }
