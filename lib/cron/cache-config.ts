@@ -2,6 +2,9 @@ import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 // import { V2SubgraphProvider, V3SubgraphProvider, V4SubgraphProvider } from '@tentou-tech/smart-order-router'
 import { V3SubgraphProvider, V3PiperxSubgraphProvider, V2SubgraphProvider } from '@tentou-tech/smart-order-router'
 import { ChainId } from '@tentou-tech/uniswap-sdk-core'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 // during local cdk stack update, the env vars are not populated
 // make sure to fill in the env vars below
@@ -68,9 +71,9 @@ export const v3SubgraphUrlOverride = (chainId: ChainId) => {
     case ChainId.SONEIUM:
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY_2}/uniswap-2/uniswap-v3-soneium-mainnet/api`
     case ChainId.STORY_AENEID:
-      return 'https://graph-api-testnet.tentou.tech/subgraphs/name/mimboku'
+      return process.env.GQL_URL_TESTNET_V3
     case ChainId.STORY:
-      return 'https://graph-api.tentou.tech/subgraphs/name/mimboku'
+      return process.env.GQL_URL_MAINNET_V3
     default:
       return undefined
   }
@@ -105,9 +108,9 @@ export const v2SubgraphUrlOverride = (chainId: ChainId) => {
     case ChainId.SONEIUM:
       return `https://subgraph.satsuma-prod.com/${process.env.ALCHEMY_QUERY_KEY}/uniswap/uniswap-v2-soneium-mainnet/api`
     case ChainId.STORY_AENEID:
-      return 'https://graph-api-testnet.tentou.tech/subgraphs/name/mimboku-v2'
+      return process.env.GQL_URL_TESTNET_V2
     case ChainId.STORY:
-      return 'https://graph-api.tentou.tech/subgraphs/name/mimboku-v2'
+      return process.env.GQL_URL_MAINNET_V2
     default:
       return undefined
   }
