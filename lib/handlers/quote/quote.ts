@@ -25,7 +25,7 @@ import {
   V3S1_ROUTER_ADDRESSES,
   V4_ETH_WETH_FAKE_POOL,
 } from '@tentou-tech/smart-order-router'
-import { Pool as V3Pool } from '@tentou-tech/uniswap-v3-sdk'
+import { ADDRESS_ZERO, Pool as V3Pool } from '@tentou-tech/uniswap-v3-sdk'
 import { Pool as V3S1Pool } from '@tentou-tech/uniswap-v3s1-sdk'
 import { Pool as V4Pool } from '@tentou-tech/uniswap-v4-sdk'
 import JSBI from 'jsbi'
@@ -580,6 +580,15 @@ export class QuoteHandler extends APIGLambdaHandler<
             continue
           }
 
+          let tokenInAddress = getAddress(tokenIn)
+          let tokenOutAddress = getAddress(tokenOut)
+          if (i === 0 && currencyIn.isNative) {
+            tokenInAddress = ADDRESS_ZERO
+          }
+          if (i === pools.length - 1 && currencyOut.isNative) {
+            tokenOutAddress = ADDRESS_ZERO
+          }
+
           curRoute.push({
             type: 'v4-pool',
             address: v4PoolProvider.getPoolId(
@@ -592,13 +601,13 @@ export class QuoteHandler extends APIGLambdaHandler<
             tokenIn: {
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
-              address: getAddress(tokenIn),
+              address: tokenInAddress,
               symbol: tokenIn.symbol!,
             },
             tokenOut: {
               chainId: tokenOut.chainId,
               decimals: tokenOut.decimals.toString(),
-              address: getAddress(tokenOut),
+              address: tokenOutAddress,
               symbol: tokenOut.symbol!,
             },
             fee: nextPool.fee.toString(),
@@ -617,6 +626,15 @@ export class QuoteHandler extends APIGLambdaHandler<
           if (!routerAddress) {
             throw new Error(`V3 quoter address not found for chainId ${chainId}`)
           }
+
+          let tokenInAddress = tokenIn.wrapped.address
+          let tokenOutAddress = tokenOut.wrapped.address
+          if (i === 0 && currencyIn.isNative) {
+            tokenInAddress = ADDRESS_ZERO
+          }
+          if (i === pools.length - 1 && currencyOut.isNative) {
+            tokenOutAddress = ADDRESS_ZERO
+          }
           curRoute.push({
             type: 'v3-pool',
             address,
@@ -625,13 +643,13 @@ export class QuoteHandler extends APIGLambdaHandler<
             tokenIn: {
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
-              address: tokenIn.wrapped.address,
+              address: tokenInAddress,
               symbol: tokenIn.symbol!,
             },
             tokenOut: {
               chainId: tokenOut.chainId,
               decimals: tokenOut.decimals.toString(),
-              address: tokenOut.wrapped.address,
+              address: tokenOutAddress,
               symbol: tokenOut.symbol!,
             },
             fee: nextPool.fee.toString(),
@@ -649,6 +667,16 @@ export class QuoteHandler extends APIGLambdaHandler<
           if (!routerAddress) {
             throw new Error(`V3S1 quoter address not found for chainId ${chainId}`)
           }
+
+          let tokenInAddress = tokenIn.wrapped.address
+          let tokenOutAddress = tokenOut.wrapped.address
+          if (i === 0 && currencyIn.isNative) {
+            tokenInAddress = ADDRESS_ZERO
+          }
+          if (i === pools.length - 1 && currencyOut.isNative) {
+            tokenOutAddress = ADDRESS_ZERO
+          }
+
           curRoute.push({
             type: 'v3s1-pool',
             address,
@@ -677,6 +705,15 @@ export class QuoteHandler extends APIGLambdaHandler<
           const reserve0 = nextPool.reserve0
           const reserve1 = nextPool.reserve1
 
+          let tokenInAddress = tokenIn.wrapped.address
+          let tokenOutAddress = tokenOut.wrapped.address
+          if (i === 0 && currencyIn.isNative) {
+            tokenInAddress = ADDRESS_ZERO
+          }
+          if (i === pools.length - 1 && currencyOut.isNative) {
+            tokenOutAddress = ADDRESS_ZERO
+          }
+
           curRoute.push({
             type: 'v2-pool',
             address: v2PoolProvider.getPoolAddress(nextPool.token0, nextPool.token1).poolAddress,
@@ -685,7 +722,7 @@ export class QuoteHandler extends APIGLambdaHandler<
             tokenIn: {
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
-              address: tokenIn.wrapped.address,
+              address: tokenInAddress,
               symbol: tokenIn.symbol!,
               buyFeeBps: this.deriveBuyFeeBps(tokenIn, reserve0, reserve1, enableFeeOnTransferFeeFetching),
               sellFeeBps: this.deriveSellFeeBps(tokenIn, reserve0, reserve1, enableFeeOnTransferFeeFetching),
@@ -693,7 +730,7 @@ export class QuoteHandler extends APIGLambdaHandler<
             tokenOut: {
               chainId: tokenOut.chainId,
               decimals: tokenOut.decimals.toString(),
-              address: tokenOut.wrapped.address,
+              address: tokenOutAddress,
               symbol: tokenOut.symbol!,
               buyFeeBps: this.deriveBuyFeeBps(tokenOut, reserve0, reserve1, enableFeeOnTransferFeeFetching),
               sellFeeBps: this.deriveSellFeeBps(tokenOut, reserve0, reserve1, enableFeeOnTransferFeeFetching),
