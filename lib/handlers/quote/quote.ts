@@ -581,12 +581,16 @@ export class QuoteHandler extends APIGLambdaHandler<
           }
 
           let tokenInAddress = getAddress(tokenIn)
+          let tokenInSymbol = tokenIn.symbol!
           let tokenOutAddress = getAddress(tokenOut)
+          let tokenOutSymbol = tokenOut.symbol!
           if (i === 0 && currencyIn.isNative) {
             tokenInAddress = ADDRESS_ZERO
+            tokenInSymbol = currencyIn.symbol!
           }
           if (i === pools.length - 1 && currencyOut.isNative) {
             tokenOutAddress = ADDRESS_ZERO
+            tokenOutSymbol = currencyOut.symbol!
           }
 
           curRoute.push({
@@ -602,13 +606,13 @@ export class QuoteHandler extends APIGLambdaHandler<
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
               address: tokenInAddress,
-              symbol: tokenIn.symbol!,
+              symbol: tokenInSymbol,
             },
             tokenOut: {
               chainId: tokenOut.chainId,
               decimals: tokenOut.decimals.toString(),
               address: tokenOutAddress,
-              symbol: tokenOut.symbol!,
+              symbol: tokenOutSymbol,
             },
             fee: nextPool.fee.toString(),
             tickSpacing: nextPool.tickSpacing.toString(),
@@ -628,12 +632,16 @@ export class QuoteHandler extends APIGLambdaHandler<
           }
 
           let tokenInAddress = tokenIn.wrapped.address
+          let tokenInSymbol = tokenIn.symbol!
           let tokenOutAddress = tokenOut.wrapped.address
+          let tokenOutSymbol = tokenOut.symbol!
           if (i === 0 && currencyIn.isNative) {
             tokenInAddress = ADDRESS_ZERO
+            tokenInSymbol = currencyIn.symbol!
           }
           if (i === pools.length - 1 && currencyOut.isNative) {
             tokenOutAddress = ADDRESS_ZERO
+            tokenOutSymbol = currencyOut.symbol!
           }
           curRoute.push({
             type: 'v3-pool',
@@ -644,13 +652,13 @@ export class QuoteHandler extends APIGLambdaHandler<
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
               address: tokenInAddress,
-              symbol: tokenIn.symbol!,
+              symbol: tokenInSymbol,
             },
             tokenOut: {
               chainId: tokenOut.chainId,
               decimals: tokenOut.decimals.toString(),
               address: tokenOutAddress,
-              symbol: tokenOut.symbol!,
+              symbol: tokenOutSymbol,
             },
             fee: nextPool.fee.toString(),
             liquidity: nextPool.liquidity.toString(),
@@ -669,12 +677,16 @@ export class QuoteHandler extends APIGLambdaHandler<
           }
 
           let tokenInAddress = tokenIn.wrapped.address
+          let tokenInSymbol = tokenIn.symbol!
           let tokenOutAddress = tokenOut.wrapped.address
+          let tokenOutSymbol = tokenOut.symbol!
           if (i === 0 && currencyIn.isNative) {
             tokenInAddress = ADDRESS_ZERO
+            tokenInSymbol = currencyIn.symbol!
           }
           if (i === pools.length - 1 && currencyOut.isNative) {
             tokenOutAddress = ADDRESS_ZERO
+            tokenOutSymbol = currencyOut.symbol!
           }
 
           curRoute.push({
@@ -685,14 +697,14 @@ export class QuoteHandler extends APIGLambdaHandler<
             tokenIn: {
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
-              address: tokenIn.wrapped.address,
-              symbol: tokenIn.symbol!,
+              address: tokenInAddress,
+              symbol: tokenInSymbol,
             },
             tokenOut: {
               chainId: tokenOut.chainId,
               decimals: tokenOut.decimals.toString(),
-              address: tokenOut.wrapped.address,
-              symbol: tokenOut.symbol!,
+              address: tokenOutAddress,
+              symbol: tokenOutSymbol,
             },
             fee: nextPool.fee.toString(),
             liquidity: nextPool.liquidity.toString(),
@@ -706,12 +718,16 @@ export class QuoteHandler extends APIGLambdaHandler<
           const reserve1 = nextPool.reserve1
 
           let tokenInAddress = tokenIn.wrapped.address
+          let tokenInSymbol = tokenIn.symbol!
           let tokenOutAddress = tokenOut.wrapped.address
+          let tokenOutSymbol = tokenOut.symbol!
           if (i === 0 && currencyIn.isNative) {
             tokenInAddress = ADDRESS_ZERO
+            tokenInSymbol = currencyIn.symbol!
           }
           if (i === pools.length - 1 && currencyOut.isNative) {
             tokenOutAddress = ADDRESS_ZERO
+            tokenOutSymbol = currencyOut.symbol!
           }
 
           curRoute.push({
@@ -723,7 +739,7 @@ export class QuoteHandler extends APIGLambdaHandler<
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
               address: tokenInAddress,
-              symbol: tokenIn.symbol!,
+              symbol: tokenInSymbol,
               buyFeeBps: this.deriveBuyFeeBps(tokenIn, reserve0, reserve1, enableFeeOnTransferFeeFetching),
               sellFeeBps: this.deriveSellFeeBps(tokenIn, reserve0, reserve1, enableFeeOnTransferFeeFetching),
             },
@@ -731,7 +747,7 @@ export class QuoteHandler extends APIGLambdaHandler<
               chainId: tokenOut.chainId,
               decimals: tokenOut.decimals.toString(),
               address: tokenOutAddress,
-              symbol: tokenOut.symbol!,
+              symbol: tokenOutSymbol,
               buyFeeBps: this.deriveBuyFeeBps(tokenOut, reserve0, reserve1, enableFeeOnTransferFeeFetching),
               sellFeeBps: this.deriveSellFeeBps(tokenOut, reserve0, reserve1, enableFeeOnTransferFeeFetching),
             },
