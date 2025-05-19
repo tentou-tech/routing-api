@@ -140,8 +140,8 @@ export class RoutingLambdaStack extends cdk.NestedStack {
         //          A version for this Lambda function exists ( 261 ). Modify the function to create a new version.
         //          Hence we do not want to modify the table name below.
         ROUTES_TABLE_NAME: DynamoDBTableProps.RoutesDbTable.Name,
-        ROUTES_CACHING_REQUEST_FLAG_TABLE_NAME: DynamoDBTableProps.RoutesDbCachi DynamoDBTableProps.CacheRouteDynamoDbTable.NamengRequestFlagTable.Name,
-        CACHED_ROUTES_TABLE_NAME:,
+        ROUTES_CACHING_REQUEST_FLAG_TABLE_NAME: DynamoDBTableProps.RoutesDbCachingRequestFlagTable.Name,
+        CACHED_ROUTES_TABLE_NAME: DynamoDBTableProps.CacheRouteDynamoDbTable.Name,
         CACHING_REQUEST_FLAG_TABLE_NAME: DynamoDBTableProps.CachingRequestFlagDynamoDbTable.Name,
         CACHED_V3_POOLS_TABLE_NAME: DynamoDBTableProps.V3PoolsDynamoDbTable.Name,
         V2_PAIRS_CACHE_TABLE_NAME: DynamoDBTableProps.V2PairsDynamoCache.Name,
