@@ -140,8 +140,8 @@ export class RoutingLambdaStack extends cdk.NestedStack {
         //          A version for this Lambda function exists ( 261 ). Modify the function to create a new version.
         //          Hence we do not want to modify the table name below.
         ROUTES_TABLE_NAME: DynamoDBTableProps.RoutesDbTable.Name,
-        ROUTES_CACHING_REQUEST_FLAG_TABLE_NAME: DynamoDBTableProps.RoutesDbCachingRequestFlagTable.Name,
-        CACHED_ROUTES_TABLE_NAME: DynamoDBTableProps.CacheRouteDynamoDbTable.Name,
+        ROUTES_CACHING_REQUEST_FLAG_TABLE_NAME: DynamoDBTableProps.RoutesDbCachi DynamoDBTableProps.CacheRouteDynamoDbTable.NamengRequestFlagTable.Name,
+        CACHED_ROUTES_TABLE_NAME:,
         CACHING_REQUEST_FLAG_TABLE_NAME: DynamoDBTableProps.CachingRequestFlagDynamoDbTable.Name,
         CACHED_V3_POOLS_TABLE_NAME: DynamoDBTableProps.V3PoolsDynamoDbTable.Name,
         V2_PAIRS_CACHE_TABLE_NAME: DynamoDBTableProps.V2PairsDynamoCache.Name,
@@ -295,11 +295,11 @@ export class RoutingLambdaStack extends cdk.NestedStack {
 
     const enableProvisionedConcurrency = provisionedConcurrency > 0
 
-    // const cachingRoutingLambdaAlias = new aws_lambda.Alias(this, 'CachingRoutingLiveAlias', {
-    //   aliasName: 'live',
-    //   version: cachingRoutingLambda.currentVersion,
-    //   provisionedConcurrentExecutions: enableProvisionedConcurrency ? provisionedConcurrency : undefined,
-    // })
+    const cachingRoutingLambdaAlias = new aws_lambda.Alias(this, 'CachingRoutingLiveAlias', {
+      aliasName: 'live',
+      version: cachingRoutingLambda.currentVersion,
+      provisionedConcurrentExecutions: enableProvisionedConcurrency ? provisionedConcurrency : undefined,
+    })
     this.routingLambdaAlias = new aws_lambda.Alias(this, 'RoutingLiveAlias', {
       aliasName: 'live',
       version: this.routingLambda.currentVersion,
@@ -307,20 +307,20 @@ export class RoutingLambdaStack extends cdk.NestedStack {
     })
 
     if (enableProvisionedConcurrency) {
-      // const cachingTarget = new asg.ScalableTarget(this, 'CachingRoutingProvConcASG', {
-      //   serviceNamespace: asg.ServiceNamespace.LAMBDA,
-      //   maxCapacity: provisionedConcurrency * 10,
-      //   minCapacity: provisionedConcurrency,
-      //   resourceId: `function:${cachingRoutingLambdaAlias.lambda.functionName}:${cachingRoutingLambdaAlias.aliasName}`,
-      //   scalableDimension: 'lambda:function:ProvisionedConcurrency',
-      // })
+      const cachingTarget = new asg.ScalableTarget(this, 'CachingRoutingProvConcASG', {
+        serviceNamespace: asg.ServiceNamespace.LAMBDA,
+        maxCapacity: provisionedConcurrency * 10,
+        minCapacity: provisionedConcurrency,
+        resourceId: `function:${cachingRoutingLambdaAlias.lambda.functionName}:${cachingRoutingLambdaAlias.aliasName}`,
+        scalableDimension: 'lambda:function:ProvisionedConcurrency',
+      })
 
-      // cachingTarget.node.addDependency(cachingRoutingLambdaAlias)
+      cachingTarget.node.addDependency(cachingRoutingLambdaAlias)
 
-      // cachingTarget.scaleToTrackMetric('CachingRoutingProvConcTracking', {
-      //   targetValue: 0.7,
-      //   predefinedMetric: asg.PredefinedMetric.LAMBDA_PROVISIONED_CONCURRENCY_UTILIZATION,
-      // })
+      cachingTarget.scaleToTrackMetric('CachingRoutingProvConcTracking', {
+        targetValue: 0.7,
+        predefinedMetric: asg.PredefinedMetric.LAMBDA_PROVISIONED_CONCURRENCY_UTILIZATION,
+      })
 
       const target = new asg.ScalableTarget(this, 'RoutingProvConcASG', {
         serviceNamespace: asg.ServiceNamespace.LAMBDA,
