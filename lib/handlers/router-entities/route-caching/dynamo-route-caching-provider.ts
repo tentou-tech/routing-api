@@ -44,7 +44,7 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
   private readonly routesCachingRequestFlagTableName: string
   private readonly cachingQuoteLambdaName?: string
 
-  private readonly DEFAULT_CACHEMODE_ROUTES_DB = CacheMode.Livemode
+  private readonly DEFAULT_CACHEMODE_ROUTES_DB = CacheMode.Darkmode
   private readonly ROUTES_DB_TTL = 24 * 60 * 60 // 24 hours
   private readonly ROUTES_DB_FLAG_TTL = 2 * 60 // 2 minutes
 
