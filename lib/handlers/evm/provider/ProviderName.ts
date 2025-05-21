@@ -6,7 +6,7 @@ export enum ProviderName {
   FORNO = 'FORNO',
   ALCHEMY = 'ALCHEMY',
   NIRVANA = 'NIRVANA',
-  UNKNOWN = 'UNKNOWN',
+  UNKNOWN = 'DEFAULT',
 }
 
 export function deriveProviderName(url: string): ProviderName {
