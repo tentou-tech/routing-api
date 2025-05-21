@@ -1,20 +1,2 @@
 [
-  {
-    "chainId": 1315,
-    "useMultiProviderProb": 1,
-    "latencyEvaluationSampleProb": 0,
-    "healthCheckSampleProb": 0,
-    "providerInitialWeights": [1, -1],
-    "providerUrls": ["DEFAULT_1315","STORY_1315"],
-    "providerNames": ["DEFAULT","STORY"]
-  },
-  {
-    "chainId": 1514,
-    "useMultiProviderProb": 1,
-    "latencyEvaluationSampleProb": 0,
-    "healthCheckSampleProb": 0,
-    "providerInitialWeights": [1, -1, -1],
-    "providerUrls": ["DEFAULT_1514","STORY_1514","ANKR_1514"],
-    "providerNames": ["DEFAULT","STORY","ANKR"]
-  }
 ]
