@@ -4,7 +4,7 @@ import { ChainId } from '@tentou-tech/uniswap-sdk-core'
 import _ from 'lodash'
 import { ID_TO_NETWORK_NAME } from '@tentou-tech/smart-order-router/build/main/util/chains'
 import { ProviderName } from '../handlers/evm/provider/ProviderName'
-import { getProviderNameForChain} from '../../bin/stacks/rpc-gateway-dashboard.ts'
+import { getProviderNameForChain} from '../../bin/stacks/rpc-gateway-dashboard'
 
 const ID_TO_PROVIDER = (id: ChainId): string => {
   switch (id) {
