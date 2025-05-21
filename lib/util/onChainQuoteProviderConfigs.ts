@@ -845,13 +845,13 @@ export const NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]
         quoteMinSuccessRate: 0.1,
       },
       [ChainId.STORY_AENEID]: {
-        multicallChunk: 6,
-        gasLimitPerCall: 5_000_000,
+        multicallChunk: 20,
+        gasLimitPerCall: 1_500_000,
         quoteMinSuccessRate: 0.1,
       },
       [ChainId.STORY]: {
-        multicallChunk: 6,
-        gasLimitPerCall: 5_000_000,
+        multicallChunk: 20,
+        gasLimitPerCall: 1_500_000,
         quoteMinSuccessRate: 0.1,
       },
     },
