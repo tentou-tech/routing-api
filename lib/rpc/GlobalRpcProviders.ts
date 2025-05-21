@@ -38,7 +38,7 @@ export class GlobalRpcProviders {
         //chainConfig.providerUrls[i] = generateProviderUrl(urlEnvVar, process.env[urlEnvVar]!, chainConfig.chainId)
 
         // use config in utils switch case
-        chainConfig.providerUrls[i] = generateProviderUrl(urlEnvVar, "dummy,value", chainConfig.chainId)
+        chainConfig.providerUrls[i] = generateProviderUrl(urlEnvVar, 'dummy,value', chainConfig.chainId)
       }
     }
     return prodConfig
