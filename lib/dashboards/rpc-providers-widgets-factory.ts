@@ -33,7 +33,7 @@ const ID_TO_PROVIDER = (id: ChainId): string => {
       return ProviderName.ALCHEMY
     case ChainId.STORY:
     case ChainId.STORY_AENEID:
-      return getProviderNameForChain(id)
+      return getProviderNameForChain(id)[0]
     default:
       return ProviderName.UNKNOWN
   }
