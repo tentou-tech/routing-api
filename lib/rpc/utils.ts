@@ -157,10 +157,10 @@ export function generateProviderUrl(key: string, value: string, chainId: number)
     //   return `https://unichain-sepolia.g.alchemy.com/v2/${tokens[0]}`
     // }
     case 'DEFAULT_1315': {
-      return `${process.env.WEB3_RPC_1315}`
+      return  process.env.WEB3_RPC_1315 ? process.env.WEB3_RPC_1315 : 'https://aeneid.storyrpc.io' 
     }
     case 'DEFAULT_1514': {
-      return `${process.env.WEB3_RPC_1514}`
+      return process.env.WEB3_RPC_1514 ? process.env.WEB3_RPC_1514 : 'https://mainnet.storyrpc.io'
     }
     case 'STORY_1315': {
       return `https://aeneid.storyrpc.io`
