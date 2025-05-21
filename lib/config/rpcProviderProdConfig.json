@@ -1,6 +1,6 @@
 [
   {
-    "chainId": 1315,
+    "chainId": 42220,
     "useMultiProviderProb": 1,
     "latencyEvaluationSampleProb": 0,
     "healthCheckSampleProb": 0,
@@ -9,7 +9,7 @@
     "providerNames": ["DEFAULT"]
   },
   {
-    "chainId": 1514,
+    "chainId": 43114,
     "useMultiProviderProb": 1,
     "latencyEvaluationSampleProb": 0,
     "healthCheckSampleProb": 0,
