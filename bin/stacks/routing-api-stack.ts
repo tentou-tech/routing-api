@@ -1,4 +1,4 @@
-import { SUPPORTED_CHAINS } from '@tentou-tech/smart-order-router'
+import { SUPPORTED_CHAINS } from '../../lib/handlers/injector-sor'
 import * as cdk from 'aws-cdk-lib'
 import { ChainId } from '@tentou-tech/uniswap-sdk-core'
 import { CfnOutput, Duration } from 'aws-cdk-lib'
