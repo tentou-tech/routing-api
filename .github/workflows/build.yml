@@ -19,12 +19,14 @@ jobs:
           cat .env
           npm install -g aws-cdk
           npm i
-      - name: Build
-        run: npm run build
       - name: Uppercase branch name
         run: |
           branch_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
           echo "BRANCH_NAME=${branch_name^^}" >>${GITHUB_ENV}
+      - name: Build
+        env:
+          API_KEY: ${{ secrets[format('API_{0}_KEY', env.BRANCH_NAME)] }}
+        run: npm run build
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@master
         with:

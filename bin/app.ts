@@ -444,7 +444,7 @@ new RoutingAPIStack(app, 'RoutingAPIStack', {
   ethGasStationInfoUrl: process.env.ETH_GAS_STATION_INFO_URL!,
   chatbotSNSArn: process.env.CHATBOT_SNS_ARN,
   stage: STAGE.LOCAL,
-  internalApiKey: 'test-api-key',
+  internalApiKey: process.env.API_KEY ? process.env.API_KEY : 'test-api-key',
   route53Arn: process.env.ROLE_ARN,
   pinata_key: process.env.PINATA_API_KEY!,
   pinata_secret: process.env.PINATA_API_SECRET!,
