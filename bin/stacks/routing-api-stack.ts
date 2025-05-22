@@ -1,4 +1,4 @@
-import { SUPPORTED_CHAINS } from '@tentou-tech/smart-order-router'
+import { SUPPORTED_CHAINS } from '../../lib/handlers/injector-sor'
 import * as cdk from 'aws-cdk-lib'
 import { ChainId } from '@tentou-tech/uniswap-sdk-core'
 import { CfnOutput, Duration } from 'aws-cdk-lib'
@@ -22,7 +22,16 @@ import { TESTNETS } from '../../lib/util/testNets'
 import { RpcGatewayFallbackStack } from './rpc-gateway-fallback-stack'
 
 export const CHAINS_NOT_MONITORED: ChainId[] = TESTNETS
-export const REQUEST_SOURCES_NOT_MONITORED = ['unknown']
+export const REQUEST_SOURCES_NOT_MONITORED = [
+                                              'undefined',
+                                              'unknown',
+                                              'uniswap-ios',
+                                              'uniswap-android',
+                                              'uniswap-web',
+                                              'external-api',
+                                              'routing-api',
+                                              'uniswap-extension',
+                                            ]
 
 export class RoutingAPIStack extends cdk.Stack {
   public readonly url: CfnOutput
