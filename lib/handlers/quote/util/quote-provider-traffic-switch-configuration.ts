@@ -254,8 +254,8 @@ export const QUOTE_PROVIDER_TRAFFIC_SWITCH_CONFIGURATION = (
     // If we accidentally switch a traffic, we have the protection to shadow sample only 0.1% of traffic
     default:
       return {
-        switchExactInPercentage: 100,
-        samplingExactInPercentage: 0.0,
+        switchExactInPercentage: 0.0,
+        samplingExactInPercentage: 0.1,
         switchExactOutPercentage: 0.0,
         samplingExactOutPercentage: 0.0,
       } as QuoteProviderTrafficSwitchConfiguration
