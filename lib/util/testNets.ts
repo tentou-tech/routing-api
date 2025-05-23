@@ -27,4 +27,5 @@ export const TESTNETS = [
   ChainId.ZKSYNC,
   ChainId.WORLDCHAIN,
   ChainId.SONEIUM,
+  ChainId.STORY_AENEID,
 ]

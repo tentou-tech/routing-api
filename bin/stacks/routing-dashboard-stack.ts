@@ -99,7 +99,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
       poolCacheLambdaMetrics.push(['.', `${poolCacheLambdaName}Invocations`, '.', '.'])
     })
 
-    const perChainWidgetsForRoutingDashboard: any[] = _.flatMap([MAINNETS, TESTNETS], (chains) => [
+    const perChainWidgetsForRoutingDashboard: any[] = _.flatMap([MAINNETS], (chains) => [
       {
         height: 8,
         width: 24,
@@ -142,7 +142,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
         properties: {
           view: 'timeSeries',
           stacked: false,
-          metrics: _.flatMap(chains, (chainId) => [
+          metrics: _.flatMap(SUPPORTED_CHAINS, (chainId) => [
             [
               NAMESPACE,
               `GET_QUOTE_LATENCY_CHAIN_${chainId}_INTENT_quote`,
@@ -174,7 +174,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
         properties: {
           view: 'timeSeries',
           stacked: false,
-          metrics: _.flatMap(chains, (chainId) => [
+          metrics: _.flatMap(SUPPORTED_CHAINS, (chainId) => [
             [
               NAMESPACE,
               `GET_QUOTE_LATENCY_CHAIN_${chainId}_INTENT_quote`,
@@ -205,7 +205,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
         properties: {
           view: 'timeSeries',
           stacked: false,
-          metrics: _.flatMap(chains, (chainId) => [
+          metrics: _.flatMap(SUPPORTED_CHAINS, (chainId) => [
             [
               NAMESPACE,
               `GET_QUOTE_LATENCY_CHAIN_${chainId}_INTENT_quote`,
@@ -236,7 +236,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
         properties: {
           view: 'timeSeries',
           stacked: false,
-          metrics: _.flatMap(chains, (chainId) => [
+          metrics: _.flatMap(SUPPORTED_CHAINS, (chainId) => [
             [
               NAMESPACE,
               `GET_QUOTE_LATENCY_CHAIN_${chainId}_INTENT_quote`,
@@ -274,7 +274,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
         properties: {
           view: 'timeSeries',
           stacked: false,
-          metrics: _.flatMap(chains, (chainId) => [
+          metrics: _.flatMap(SUPPORTED_CHAINS, (chainId) => [
             [
               NAMESPACE,
               `GET_QUOTE_LATENCY_CHAIN_${chainId}_INTENT_caching`,
@@ -306,7 +306,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
         properties: {
           view: 'timeSeries',
           stacked: false,
-          metrics: _.flatMap(chains, (chainId) => [
+          metrics: _.flatMap(SUPPORTED_CHAINS, (chainId) => [
             [
               NAMESPACE,
               `GET_QUOTE_LATENCY_CHAIN_${chainId}_INTENT_caching`,
@@ -337,7 +337,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
         properties: {
           view: 'timeSeries',
           stacked: false,
-          metrics: _.flatMap(chains, (chainId) => [
+          metrics: _.flatMap(SUPPORTED_CHAINS, (chainId) => [
             [
               NAMESPACE,
               `GET_QUOTE_LATENCY_CHAIN_${chainId}_INTENT_caching`,
@@ -368,7 +368,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
         properties: {
           view: 'timeSeries',
           stacked: false,
-          metrics: _.flatMap(chains, (chainId) => [
+          metrics: _.flatMap(SUPPORTED_CHAINS, (chainId) => [
             [
               NAMESPACE,
               `GET_QUOTE_LATENCY_CHAIN_${chainId}_INTENT_caching`,
@@ -396,7 +396,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
         width: 12,
         type: 'metric',
         properties: {
-          metrics: _.flatMap(chains, (chainId) => [
+          metrics: _.flatMap(SUPPORTED_CHAINS, (chainId) => [
             [
               {
                 expression: `(m200c${chainId} / (mreqc${chainId} - m400c${chainId})) * 100`,
@@ -446,7 +446,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
         width: 12,
         type: 'metric',
         properties: {
-          metrics: _.flatMap(chains, (chainId) => [
+          metrics: _.flatMap(SUPPORTED_CHAINS, (chainId) => [
             [
               {
                 expression: `(m200c${chainId} / mreqc${chainId}) * 100`,
@@ -489,7 +489,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
         width: 12,
         type: 'metric',
         properties: {
-          metrics: _.flatMap(chains, (chainId) => [
+          metrics: _.flatMap(SUPPORTED_CHAINS, (chainId) => [
             [
               {
                 expression: `(m500c${chainId} / mreqc${chainId}) * 100`,
@@ -532,7 +532,7 @@ export class RoutingDashboardStack extends cdk.NestedStack {
         width: 12,
         type: 'metric',
         properties: {
-          metrics: _.flatMap(chains, (chainId) => [
+          metrics: _.flatMap(SUPPORTED_CHAINS, (chainId) => [
             [
               {
                 expression: `(m400c${chainId} / mreqc${chainId}) * 100`,
