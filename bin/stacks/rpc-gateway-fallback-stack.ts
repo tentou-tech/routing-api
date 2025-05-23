@@ -114,7 +114,7 @@ export class RpcGatewayFallbackStack extends cdk.NestedStack {
           usingMetrics: {
             p50Latency: new aws_cloudwatch.Metric({
               namespace: 'Uniswap',
-              metricName: `RPC_GATEWAY_${chainId}_${providerNameFix}_evaluated_0_latency_getBlockNumber`,
+              metricName: `RPC_GATEWAY_${chainId}_${providerNameFix}_evaluated_latency_getBlockNumber`,
               dimensionsMap: { Service: 'RoutingAPI' },
               unit: aws_cloudwatch.Unit.NONE,
               period: cdk.Duration.minutes(5),
