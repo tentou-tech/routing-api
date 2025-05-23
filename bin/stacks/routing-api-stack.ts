@@ -19,19 +19,19 @@ import { RoutingDatabaseStack } from './routing-database-stack'
 import { RpcGatewayDashboardStack } from './rpc-gateway-dashboard'
 import { REQUEST_SOURCES } from '../../lib/util/requestSources'
 import { TESTNETS } from '../../lib/util/testNets'
-import { RpcGatewayFallbackStack } from './rpc-gateway-fallback-stack'
+// import { RpcGatewayFallbackStack } from './rpc-gateway-fallback-stack'
 
 export const CHAINS_NOT_MONITORED: ChainId[] = TESTNETS
 export const REQUEST_SOURCES_NOT_MONITORED = [
-                                              'undefined',
-                                              'unknown',
-                                              'uniswap-ios',
-                                              'uniswap-android',
-                                              'uniswap-web',
-                                              'external-api',
-                                              'routing-api',
-                                              'uniswap-extension',
-                                            ]
+  'undefined',
+  'unknown',
+  'uniswap-ios',
+  'uniswap-android',
+  'uniswap-web',
+  'external-api',
+  'routing-api',
+  'uniswap-extension',
+]
 
 export class RoutingAPIStack extends cdk.Stack {
   public readonly url: CfnOutput
@@ -259,7 +259,7 @@ export class RoutingAPIStack extends cdk.Stack {
     })
 
     new RpcGatewayDashboardStack(this, 'RpcGatewayDashboardStack')
-    new RpcGatewayFallbackStack(this, 'RpcGatewayFallbackStack', { rpcProviderHealthStateDynamoDb })
+    // new RpcGatewayFallbackStack(this, 'RpcGatewayFallbackStack', { rpcProviderHealthStateDynamoDb })
 
     const lambdaIntegration = new aws_apigateway.LambdaIntegration(routingLambdaAlias)
 
