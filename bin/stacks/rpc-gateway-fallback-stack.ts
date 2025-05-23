@@ -6,6 +6,7 @@ import { getRpcGatewayEnabledChains } from '../../lib/rpc/ProdConfig'
 import { ComparisonOperator, MathExpression } from 'aws-cdk-lib/aws-cloudwatch'
 import { RetentionDays } from 'aws-cdk-lib/aws-logs'
 import { DynamoDBTableProps } from './routing-database-stack'
+import { CallType } from '../../lib/rpc/SingleJsonRpcProvider'
 import * as aws_dynamodb from 'aws-cdk-lib/aws-dynamodb'
 
 export interface RpcGatewayFallbackStackPros extends cdk.NestedStackProps {
@@ -24,6 +25,7 @@ export class RpcGatewayFallbackStack extends cdk.NestedStack {
         aws_iam.ManagedPolicy.fromAwsManagedPolicyName('CloudWatchLambdaInsightsExecutionRolePolicy'),
         aws_iam.ManagedPolicy.fromAwsManagedPolicyName('AWSXRayDaemonWriteAccess'),
       ],
+      
     })
 
     const rpcHealthProviderStateDynamoDB = props.rpcProviderHealthStateDynamoDb
@@ -107,38 +109,40 @@ export class RpcGatewayFallbackStack extends cdk.NestedStack {
     // Add latency alarms for each {chainId, provider} pair.
     for (const [chainId, providerNames] of getRpcGatewayEnabledChains()) {
       for (const providerName of providerNames) {
-        const providerNameFix = providerName === 'QUICKNODE' ? 'QUIKNODE' : providerName
-        const alarmName = `RoutingAPI-RpcGateway-LatencyAlarm-ChainId-${chainId}-Provider-${providerNameFix}`
-        const metric = new MathExpression({
-          expression: 'p50Latency',
-          usingMetrics: {
-            p50Latency: new aws_cloudwatch.Metric({
-              namespace: 'Uniswap',
-              metricName: `RPC_GATEWAY_${chainId}_${providerNameFix}_evaluated_latency_getBlockNumber`,
-              dimensionsMap: { Service: 'RoutingAPI' },
-              unit: aws_cloudwatch.Unit.NONE,
-              period: cdk.Duration.minutes(5),
-              statistic: 'p50',
-            }),
-          },
-        })
-        const alarm = new aws_cloudwatch.Alarm(this, alarmName, {
-          alarmName,
-          metric,
-          comparisonOperator: ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
-          // TODO(jie): Resume to a reasonable threshold once we verified the workflow in prod.
-          threshold: 150, // Alarm when latency >= 150ms
-          evaluationPeriods: 1,
-        })
+        for (const callType in CallType) {
+          const providerNameFix = providerName === 'QUICKNODE' ? 'QUIKNODE' : providerName
+          const alarmName = `RoutingAPI-RpcGateway-LatencyAlarm-ChainId-${chainId}-Provider-${providerNameFix}`
+          const metric = new MathExpression({
+            expression: 'p50Latency',
+            usingMetrics: {
+              p50Latency: new aws_cloudwatch.Metric({
+                namespace: 'Uniswap',
+                metricName: `RPC_GATEWAY_${chainId}_${providerNameFix}_evaluated_${callType}_latency_getBlockNumber`,
+                dimensionsMap: { Service: 'RoutingAPI' },
+                unit: aws_cloudwatch.Unit.NONE,
+                period: cdk.Duration.minutes(5),
+                statistic: 'p50',
+              }),
+            },
+          })
+          const alarm = new aws_cloudwatch.Alarm(this, alarmName, {
+            alarmName,
+            metric,
+            comparisonOperator: ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
+            // TODO(jie): Resume to a reasonable threshold once we verified the workflow in prod.
+            threshold: 150, // Alarm when latency >= 150ms
+            evaluationPeriods: 1,
+          })
 
-        const lambdaAliasName = `Latency-${chainId}-${providerNameFix}`
-        const lambdaAlias = new aws_lambda.Alias(this, lambdaAliasName, {
-          aliasName: lambdaAliasName,
-          version: providerFallbackLambda.currentVersion,
-        })
+          const lambdaAliasName = `Latency-${chainId}-${providerNameFix}`
+          const lambdaAlias = new aws_lambda.Alias(this, lambdaAliasName, {
+            aliasName: lambdaAliasName,
+            version: providerFallbackLambda.currentVersion,
+          })
 
-        alarm.addAlarmAction(new aws_cloudwatch_actions.LambdaAction(lambdaAlias))
-        alarm.addOkAction(new aws_cloudwatch_actions.LambdaAction(lambdaAlias))
+          alarm.addAlarmAction(new aws_cloudwatch_actions.LambdaAction(lambdaAlias))
+          alarm.addOkAction(new aws_cloudwatch_actions.LambdaAction(lambdaAlias))
+        }
       }
     }
   }
