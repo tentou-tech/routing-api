@@ -73,7 +73,7 @@ export const v3SubgraphUrlOverride = (chainId: ChainId) => {
     case ChainId.STORY_AENEID:
       return 'https://graph-api-testnet.tentou.tech/subgraphs/name/mimboku'
     case ChainId.STORY:
-      return 'https://graph-api.tentou.tech/subgraphs/name/mimboku-v3'
+      return 'https://graph-api.tentou.tech/subgraphs/name/mimboku'
     default:
       return undefined
   }
