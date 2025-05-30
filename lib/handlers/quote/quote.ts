@@ -37,6 +37,7 @@ import {
   DEFAULT_ROUTING_CONFIG_BY_CHAIN,
   FEE_ON_TRANSFER_SPECIFIC_CONFIG,
   INTENT_SPECIFIC_CONFIG,
+  POOLS_FEE_ON_TRANSFER_TOKENS,
   QUOTE_SPEED_CONFIG,
 } from '../shared'
 import { QuoteQueryParams, QuoteQueryParamsJoi, TradeTypeParam } from './schema/quote-schema'
@@ -729,11 +730,26 @@ export class QuoteHandler extends APIGLambdaHandler<
             tokenOutAddress = ADDRESS_ZERO
             tokenOutSymbol = currencyOut.symbol!
           }
+          let routerAddress = V2_ROUTER_ADDRESSES[chainId]
+          if (!routerAddress) {
+            throw new Error(`V2 router address not found for chainId ${chainId}`)
+          }
+
+          let feeOnTransferToken = 0.0
+          const poolAddress = v2PoolProvider.getPoolAddress(nextPool.token0, nextPool.token1).poolAddress
+          for (const [key, value] of Object.entries(POOLS_FEE_ON_TRANSFER_TOKENS)) {
+            if (poolAddress.toLowerCase() === key.toLowerCase()) {
+              routerAddress = value.routerAddress
+              feeOnTransferToken = value.feeOnTransferToken
+              break
+            }
+          }
 
           curRoute.push({
             type: 'v2-pool',
-            address: v2PoolProvider.getPoolAddress(nextPool.token0, nextPool.token1).poolAddress,
-            routerAddress: V2_ROUTER_ADDRESSES[chainId],
+            address: poolAddress,
+            routerAddress,
+            feeOnTransferToken,
             dexName: 'PiperX V2',
             tokenIn: {
               chainId: tokenIn.chainId,
