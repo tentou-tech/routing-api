@@ -9,7 +9,6 @@ import {
 } from '@tentou-tech/smart-order-router'
 import { FeeOptions } from '@tentou-tech/uniswap-v3-sdk'
 import { FlatFeeOptions } from '@tentou-tech/uniswap-universal-router-sdk'
-import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 
 export const SECONDS_PER_BLOCK_BY_CHAIN_ID: { [chainId in ChainId]?: number } = {
   [ChainId.MAINNET]: 30,
