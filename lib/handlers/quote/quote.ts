@@ -738,10 +738,15 @@ export class QuoteHandler extends APIGLambdaHandler<
           let feeOnTransferToken = 0.0
           const poolAddress = v2PoolProvider.getPoolAddress(nextPool.token0, nextPool.token1).poolAddress
           for (const [key, value] of Object.entries(POOLS_FEE_ON_TRANSFER_TOKENS)) {
-            if (poolAddress.toLowerCase() === key.toLowerCase()) {
-              routerAddress = value.routerAddress
-              feeOnTransferToken = value.feeOnTransferToken
-              break
+            for (const token of value) {
+              if (
+                tokenInAddress.toLowerCase() === token.tokenAddress.toLowerCase() ||
+                tokenOutAddress.toLowerCase() === token.tokenAddress.toLowerCase()
+              ) {
+                feeOnTransferToken = token.feeOnTransferToken
+                routerAddress = key
+                break
+              }
             }
           }
 
