@@ -423,7 +423,7 @@ export const ROUTER_ADDRESS_FEE_ON_TRANSFER_TOKENS: {
 } = {
   [`0xc25423Ee59aCfFee31E8EcD5308c2704aC36939A`]: [
     {
-      tokenAddress: '0x48c5d816058e75be4a7c6fe5fc2a8a0df06f47ef',
+      tokenAddress: '0x2f7f07691615188b07Ea8198cF47A8BB11A3f2fc',
       feeOnTransferToken: 1.0,
     },
   ],
