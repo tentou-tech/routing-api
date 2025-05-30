@@ -417,3 +417,14 @@ export function computePortionAmount(currencyOut: CurrencyAmount<Currency>, port
 
 export const DEFAULT_DEADLINE = 600 // 10 minutes
 export const UNISWAP_DOT_ETH_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35BC'
+
+export const ROUTER_ADDRESS_FEE_ON_TRANSFER_TOKENS: {
+  [routerAddress: string]: { tokenAddress: string; feeOnTransferToken: number }[]
+} = {
+  [`0xc25423Ee59aCfFee31E8EcD5308c2704aC36939A`]: [
+    {
+      tokenAddress: '0x2f7f07691615188b07Ea8198cF47A8BB11A3f2fc',
+      feeOnTransferToken: 1.0,
+    },
+  ],
+}

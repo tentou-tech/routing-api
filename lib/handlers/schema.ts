@@ -67,6 +67,7 @@ export type V2PoolInRoute = {
   type: 'v2-pool'
   address: string
   routerAddress: string
+  feeOnTransferToken: number
   dexName: string
   tokenIn: TokenInRoute
   tokenOut: TokenInRoute
