@@ -9,6 +9,7 @@ import {
 } from '@tentou-tech/smart-order-router'
 import { FeeOptions } from '@tentou-tech/uniswap-v3-sdk'
 import { FlatFeeOptions } from '@tentou-tech/uniswap-universal-router-sdk'
+import { Protocol } from '@tentou-tech/uniswap-router-sdk'
 
 export const SECONDS_PER_BLOCK_BY_CHAIN_ID: { [chainId in ChainId]?: number } = {
   [ChainId.MAINNET]: 30,
@@ -417,3 +418,14 @@ export function computePortionAmount(currencyOut: CurrencyAmount<Currency>, port
 
 export const DEFAULT_DEADLINE = 600 // 10 minutes
 export const UNISWAP_DOT_ETH_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35BC'
+
+export const ROUTER_ADDRESS_FEE_ON_TRANSFER_TOKENS: {
+  [routerAddress: string]: { tokenAddress: string; feeOnTransferToken: number }[]
+} = {
+  [`0x302d6B5F52eD539be69bab19Ed7dC36d9455cC7B`]: [
+    {
+      tokenAddress: '0x48c5d816058e75be4a7c6fe5fc2a8a0df06f47ef',
+      feeOnTransferToken: 1.0,
+    },
+  ],
+}
