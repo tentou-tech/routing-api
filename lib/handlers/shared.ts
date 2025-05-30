@@ -422,11 +422,7 @@ export const UNISWAP_DOT_ETH_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35
 export const ROUTER_ADDRESS_FEE_ON_TRANSFER_TOKENS: {
   [routerAddress: string]: { tokenAddress: string; feeOnTransferToken: number }[]
 } = {
-  [`0x48c5d816058e75be4a7c6fe5fc2a8a0df06f47ef`]: [
-    {
-      tokenAddress: '0x48c5d816058e75be4a7c6fe5fc2a8a0df06f47ef',
-      feeOnTransferToken: 1.0,
-    },
+  [`0x302d6B5F52eD539be69bab19Ed7dC36d9455cC7B`]: [
     {
       tokenAddress: '0x48c5d816058e75be4a7c6fe5fc2a8a0df06f47ef',
       feeOnTransferToken: 1.0,
