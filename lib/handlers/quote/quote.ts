@@ -37,7 +37,7 @@ import {
   DEFAULT_ROUTING_CONFIG_BY_CHAIN,
   FEE_ON_TRANSFER_SPECIFIC_CONFIG,
   INTENT_SPECIFIC_CONFIG,
-  POOLS_FEE_ON_TRANSFER_TOKENS,
+  ROUTER_ADDRESS_FEE_ON_TRANSFER_TOKENS,
   QUOTE_SPEED_CONFIG,
 } from '../shared'
 import { QuoteQueryParams, QuoteQueryParamsJoi, TradeTypeParam } from './schema/quote-schema'
@@ -737,7 +737,7 @@ export class QuoteHandler extends APIGLambdaHandler<
 
           let feeOnTransferToken = 0.0
           const poolAddress = v2PoolProvider.getPoolAddress(nextPool.token0, nextPool.token1).poolAddress
-          for (const [key, value] of Object.entries(POOLS_FEE_ON_TRANSFER_TOKENS)) {
+          for (const [key, value] of Object.entries(ROUTER_ADDRESS_FEE_ON_TRANSFER_TOKENS)) {
             for (const token of value) {
               if (
                 tokenInAddress.toLowerCase() === token.tokenAddress.toLowerCase() ||
