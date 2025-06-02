@@ -35,10 +35,10 @@ export class GlobalRpcProviders {
         // if (process.env[urlEnvVar] === undefined) {
         //   throw new Error(`Environmental variable ${urlEnvVar} isn't defined!`)
         // }
-        //chainConfig.providerUrls[i] = generateProviderUrl(urlEnvVar, process.env[urlEnvVar]!, chainConfig.chainId)
 
-        // use config in utils switch case
-        chainConfig.providerUrls[i] = generateProviderUrl(urlEnvVar, 'dummy,value', chainConfig.chainId)
+        // check env inside utils
+        chainConfig.providerUrls[i] = generateProviderUrl(urlEnvVar, process.env[urlEnvVar], chainConfig.chainId)
+
       }
     }
     return prodConfig
