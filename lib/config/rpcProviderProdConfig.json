@@ -5,7 +5,7 @@
     "latencyEvaluationSampleProb": 0,
     "healthCheckSampleProb": 0,
     "providerInitialWeights": [1],
-    "providerUrls": ["DEFAULT_1315"],
+    "providerUrls": ["WEB3_RPC_1315"],
     "providerNames": ["DEFAULT"]
   },
   {
@@ -14,7 +14,7 @@
     "latencyEvaluationSampleProb": 0,
     "healthCheckSampleProb": 0,
     "providerInitialWeights": [1],
-    "providerUrls": ["DEFAULT_1514"],
+    "providerUrls": ["WEB3_RPC_1514"],
     "providerNames": ["DEFAULT"]
   }
 ]

@@ -42,7 +42,7 @@ export function chainIdToNetworkName(networkId: ChainId): string {
   }
 }
 
-export function generateProviderUrl(key: string, value: string, chainId: number): string {
+export function generateProviderUrl(key: string, value: string | undefined, chainId: number): string {
   if (key === 'UNIRPC_0') {
     // UNIRPC_0 is a special case for the Uniswap RPC
     // - env value will contain the generic unirpc endpoint - no trailing '/'
@@ -156,20 +156,14 @@ export function generateProviderUrl(key: string, value: string, chainId: number)
     // case 'ALCHEMY_1301': {
     //   return `https://unichain-sepolia.g.alchemy.com/v2/${tokens[0]}`
     // }
-    case 'DEFAULT_1315': {
-      return process.env.WEB3_RPC_1315 ? process.env.WEB3_RPC_1315 : 'https://aeneid.storyrpc.io'
+    case 'WEB3_RPC_1315': {
+      return value ? value : 'https://aeneid.storyrpc.io'
     }
-    case 'DEFAULT_1514': {
-      return process.env.WEB3_RPC_1514 ? process.env.WEB3_RPC_1514 : 'https://mainnet.storyrpc.io'
-    }
-    case 'STORY_1315': {
-      return `https://aeneid.storyrpc.io`
-    }
-    case 'STORY_1514': {
-      return `https://mainnet.storyrpc.io`
-    }
-    case 'ANKR_1514': {
-      return `https://rpc.ankr.com/story_mainnet`
+    case 'WEB3_RPC_1514': {
+      if (value === undefined) {
+        throw new Error(`Environmental variable ${key} isn't defined!`)
+      }
+      return value
     }
   }
   throw new Error(`Unknown provider-chainId pair: ${key}`)
