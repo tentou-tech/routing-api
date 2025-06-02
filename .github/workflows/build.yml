@@ -4,8 +4,7 @@ on:
   push:
     branches: [ dev, staging ]
 env:
-  API_KEY: ${{ secrets[format('API_{0}_KEY', env.BRANCH_NAME)] }}
-  WEB3_RPC_1514: ${{ secrets[format('WEB3_RPC_{0}_1514', env.BRANCH_NAME)] }}
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,7 +24,10 @@ jobs:
           branch_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
           echo "BRANCH_NAME=${branch_name^^}" >>${GITHUB_ENV}
       - name: Build
-        run: npm run build
+        run: |
+          echo API_KEY=${{ secrets[format('API_{0}_KEY', env.BRANCH_NAME)] }} >> .env
+          echo WEB3_RPC_1514=${{ secrets[format('WEB3_RPC_{0}_1514', env.BRANCH_NAME)] }} >> .env
+          npm run build
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@master
         with:
