@@ -161,7 +161,7 @@ export function generateProviderUrl(key: string, value: string | undefined, chai
     }
     case 'WEB3_RPC_1514': {
       if (value === undefined) {
-        throw new Error(`Environmental variable ${urlEnvVar} isn't defined!`)
+        throw new Error(`Environmental variable ${key} isn't defined!`)
       }
       return value
     }
