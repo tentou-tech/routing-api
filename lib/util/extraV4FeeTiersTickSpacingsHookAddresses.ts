@@ -52,4 +52,5 @@ export const EXTRA_V4_FEE_TICK_SPACINGS_HOOK_ADDRESSES: { [chain in ChainId]: Ar
   [ChainId.SONEIUM]: emptyV4FeeTickSpacingsHookAddresses,
   [ChainId.STORY_AENEID]: emptyV4FeeTickSpacingsHookAddresses,
   [ChainId.STORY]: emptyV4FeeTickSpacingsHookAddresses,
+  [ChainId.HYPER_EVM]: emptyV4FeeTickSpacingsHookAddresses,
 }
