@@ -88,7 +88,7 @@ export class FallbackHandler {
     if (alarmEvent.state === 'ALARM') {
       const { oldHealthiness, newHealthiness } = await this.updateDbItemForAlarmEvent(alarmEvent)
       if (oldHealthiness !== newHealthiness) {
-        metric.putMetric(`RPC_GATEWAY_FALLBACK_${alarmEvent.providerId}_INTO_UNHEALTHY`, 1, MetricLoggerUnit.Count)
+        /* `RPC_GATEWAY_FALLBACK_${alarmEvent.providerId}_INTO_UNHEALTHY`, 1, MetricLoggerUnit.Count */
         this.log.error(
           `${alarmEvent.providerId} becomes UNHEALTHY due to ${alarmEvent.previousState}=>ALARM in ${alarmEvent.alarmName}`
         )
@@ -97,7 +97,7 @@ export class FallbackHandler {
     } else if (alarmEvent.state === 'OK') {
       const { oldHealthiness, newHealthiness } = await this.updateDbItemForOkEvent(alarmEvent)
       if (oldHealthiness !== newHealthiness) {
-        metric.putMetric(`RPC_GATEWAY_FALLBACK_${alarmEvent.providerId}_INTO_HEALTHY`, 1, MetricLoggerUnit.Count)
+        /* `RPC_GATEWAY_FALLBACK_${alarmEvent.providerId}_INTO_HEALTHY`, 1, MetricLoggerUnit.Count */
         this.log.error(
           `${alarmEvent.providerId} becomes HEALTHY due to ${alarmEvent.previousState}=>OK in ${alarmEvent.alarmName}`
         )

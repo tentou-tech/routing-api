@@ -48,7 +48,7 @@ export const measureDistributionPercentChangeImpact = (
       quote currency ${currencyOut.symbol}
       trade type ${tradeType}
       chain id ${chainId}`)
-    metric.putMetric('BEST_SWAP_ROUTE_DISTRIBUTION_PERCENT_CHANGE_IMPACTED', 1, MetricLoggerUnit.Count)
+    /* 'BEST_SWAP_ROUTE_DISTRIBUTION_PERCENT_CHANGE_IMPACTED', 1, MetricLoggerUnit.Count */
     metric.putMetric(
       'ROUTES_WITH_VALID_QUOTE_DISTRIBUTION_PERCENT_CHANGE_IMPACTED',
       routesImpacted.length,
