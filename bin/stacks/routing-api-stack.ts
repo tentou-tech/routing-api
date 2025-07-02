@@ -13,10 +13,10 @@ import * as aws_waf from 'aws-cdk-lib/aws-wafv2'
 import { Construct } from 'constructs'
 import { STAGE } from '../../lib/util/stage'
 import { RoutingCachingStack } from './routing-caching-stack'
-import { RoutingDashboardStack } from './routing-dashboard-stack'
+// import { RoutingDashboardStack } from './routing-dashboard-stack'
 import { RoutingLambdaStack } from './routing-lambda-stack'
 import { RoutingDatabaseStack } from './routing-database-stack'
-import { RpcGatewayDashboardStack } from './rpc-gateway-dashboard'
+// import { RpcGatewayDashboardStack } from './rpc-gateway-dashboard'
 import { REQUEST_SOURCES } from '../../lib/util/requestSources'
 import { TESTNETS } from '../../lib/util/testNets'
 // import { RpcGatewayFallbackStack } from './rpc-gateway-fallback-stack'
@@ -93,8 +93,10 @@ export class RoutingAPIStack extends cdk.Stack {
       poolCacheBucket3,
       poolCacheKey,
       poolCacheGzipKey,
+      // @ts-ignore
       poolCacheLambdaNameArray,
       tokenListCacheBucket,
+      // @ts-ignore
       ipfsPoolCachingLambda,
     } = new RoutingCachingStack(this, 'RoutingCachingStack', {
       chatbotSNSArn,
@@ -117,7 +119,8 @@ export class RoutingAPIStack extends cdk.Stack {
       tokenPropertiesCachingDynamoDb,
       rpcProviderHealthStateDynamoDb,
     } = new RoutingDatabaseStack(this, 'RoutingDatabaseStack', {})
-
+    
+    // @ts-ignore
     const { routingLambda, routingLambdaAlias } = new RoutingLambdaStack(this, 'RoutingLambdaStack', {
       poolCacheBucket,
       poolCacheBucket2,
@@ -251,14 +254,14 @@ export class RoutingAPIStack extends cdk.Stack {
       webAclArn: ipThrottlingACL.getAtt('Arn').toString(),
     })
 
-    new RoutingDashboardStack(this, 'RoutingDashboardStack', {
-      apiName: api.restApiName,
-      routingLambdaName: routingLambda.functionName,
-      poolCacheLambdaNameArray,
-      ipfsPoolCacheLambdaName: ipfsPoolCachingLambda ? ipfsPoolCachingLambda.functionName : undefined,
-    })
+    // new RoutingDashboardStack(this, 'RoutingDashboardStack', {
+    //   apiName: api.restApiName,
+    //   routingLambdaName: routingLambda.functionName,
+    //   poolCacheLambdaNameArray,
+    //   ipfsPoolCacheLambdaName: ipfsPoolCachingLambda ? ipfsPoolCachingLambda.functionName : undefined,
+    // })
 
-    new RpcGatewayDashboardStack(this, 'RpcGatewayDashboardStack')
+    // new RpcGatewayDashboardStack(this, 'RpcGatewayDashboardStack')
     // new RpcGatewayFallbackStack(this, 'RpcGatewayFallbackStack', { rpcProviderHealthStateDynamoDb })
 
     const lambdaIntegration = new aws_apigateway.LambdaIntegration(routingLambdaAlias)
