@@ -118,7 +118,7 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
     })
 
     // If no cachedRoutes were found, we try to fetch from the RoutesDb
-    metric.putMetric('RoutesDbQuery', 1, MetricLoggerUnit.Count)
+    /* 'RoutesDbQuery', 1, MetricLoggerUnit.Count */
 
     try {
       const queryParams = {
@@ -134,7 +134,7 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
 
       const result = await this.ddbClient.query(queryParams).promise()
       if (result.Items && result.Items.length > 0) {
-        metric.putMetric('RoutesDbPreFilterEntriesFound', result.Items.length, MetricLoggerUnit.Count)
+        /* 'RoutesDbPreFilterEntriesFound', result.Items.length, MetricLoggerUnit.Count */
 
         // At this point we might have gotten all the routes we have discovered in the last 24 hours for this pair
         // We will sort the routes by blockNumber, and take the first `ROUTES_TO_TAKE_FROM_ROUTES_DB` routes
@@ -148,11 +148,11 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
 
         return this.parseCachedRoutes(result, chainId, currentBlockNumber, optimistic, partitionKey, amount, protocols)
       } else {
-        metric.putMetric('RoutesDbEntriesNotFound', 1, MetricLoggerUnit.Count)
+        /* 'RoutesDbEntriesNotFound', 1, MetricLoggerUnit.Count */
         log.warn(`[DynamoRouteCachingProvider] No items found in the query response for ${partitionKey.toString()}`)
       }
     } catch (error) {
-      metric.putMetric('RoutesDbFetchError', 1, MetricLoggerUnit.Count)
+      /* 'RoutesDbFetchError', 1, MetricLoggerUnit.Count */
       log.error({ partitionKey, error }, `[DynamoRouteCachingProvider] Error while fetching route from RouteDb`)
     }
 
@@ -168,16 +168,16 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
     amount: CurrencyAmount<Currency>,
     protocols: Protocol[]
   ): CachedRoutes {
-    metric.putMetric(`RoutesDbEntriesFound`, result.Items!.length, MetricLoggerUnit.Count)
+    /* `RoutesDbEntriesFound`, result.Items!.length, MetricLoggerUnit.Count */
     const cachedRoutesArr: CachedRoutes[] = result.Items!.map((record) => {
       if (record.plainRoutes && record.plainRoutes?.toString().trim() !== '') {
-        metric.putMetric(`RoutesDbEntryPlainTextRouteFound`, 1, MetricLoggerUnit.Count)
+        /* `RoutesDbEntryPlainTextRouteFound`, 1, MetricLoggerUnit.Count */
 
         const cachedRoutesJson = JSON.parse(record.plainRoutes)
         return CachedRoutesMarshaller.unmarshal(cachedRoutesJson)
       } else {
         // Once this metric drops to zero, then we can stop writing binaryCachedRoutes into the item column
-        metric.putMetric(`RoutesDbEntrySerializedRouteFound`, 1, MetricLoggerUnit.Count)
+        /* `RoutesDbEntrySerializedRouteFound`, 1, MetricLoggerUnit.Count */
 
         // If we got a response with more than 1 item, we extract the binary field from the response
         const itemBinary = record.item
@@ -201,7 +201,7 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
     ).length
     const numberOfNotExpiredCachedRoutes = cachedRoutesArr.length - numberOfExpiredCachedRoutes
     if (numberOfExpiredCachedRoutes > 0 && numberOfNotExpiredCachedRoutes > 0) {
-      metric.putMetric(`RoutesDbArrayWithMixedExpiredCachedRoutes_Opt_${optimistic}`, 1, MetricLoggerUnit.Count)
+      /* `RoutesDbArrayWithMixedExpiredCachedRoutes_Opt_${optimistic}`, 1, MetricLoggerUnit.Count */
       metric.putMetric(
         `RoutesDbArrayWithMixedExpiredCachedRoutes_${ID_TO_NETWORK_NAME(chainId)}_Opt_${optimistic}`,
         1,
@@ -230,7 +230,7 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
         MetricLoggerUnit.Count
       )
     } else {
-      metric.putMetric(`RoutesDbArrayWithoutMixedExpiredCachedRoutes_Opt_${optimistic}`, 1, MetricLoggerUnit.Count)
+      /* `RoutesDbArrayWithoutMixedExpiredCachedRoutes_Opt_${optimistic}`, 1, MetricLoggerUnit.Count */
       metric.putMetric(
         `RoutesDbArrayWithoutMixedExpiredCachedRoutes_${ID_TO_NETWORK_NAME(chainId)}_Opt_${optimistic}`,
         1,
@@ -239,7 +239,7 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
     }
 
     cachedRoutesArr.forEach((cachedRoutes) => {
-      metric.putMetric(`RoutesDbPerBlockFound`, cachedRoutes.routes.length, MetricLoggerUnit.Count)
+      /* `RoutesDbPerBlockFound`, cachedRoutes.routes.length, MetricLoggerUnit.Count */
       cachedRoutes.routes.forEach((cachedRoute) => {
         // we use the stringified route as identifier
         const routeId = routeToString(cachedRoute.route)
@@ -274,20 +274,20 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
       blocksToLive: first.blocksToLive,
     })
 
-    metric.putMetric(`UniqueRoutesDbFound`, cachedRoutes.routes.length, MetricLoggerUnit.Count)
+    /* `UniqueRoutesDbFound`, cachedRoutes.routes.length, MetricLoggerUnit.Count */
 
     log.info({ cachedRoutes }, `[DynamoRouteCachingProvider] Returning the cached and unmarshalled route.`)
 
     // Normalize blocks difference, if the route is from a new block (which could happen in L2s), consider it same block
     const blocksDifference = Math.max(0, currentBlockNumber - blockNumber)
-    metric.putMetric(`RoutesDbBlockDifference`, blocksDifference, MetricLoggerUnit.Count)
-    metric.putMetric(`RoutesDbBlockDifference_${ID_TO_NETWORK_NAME(chainId)}`, blocksDifference, MetricLoggerUnit.Count)
+    /* `RoutesDbBlockDifference`, blocksDifference, MetricLoggerUnit.Count */
+    /* `RoutesDbBlockDifference_${ID_TO_NETWORK_NAME(chainId)}`, blocksDifference, MetricLoggerUnit.Count */
 
     const notExpiredCachedRoute = cachedRoutes.notExpired(currentBlockNumber, optimistic)
     if (notExpiredCachedRoute) {
-      metric.putMetric(`RoutesDbNotExpired`, 1, MetricLoggerUnit.Count)
+      /* `RoutesDbNotExpired`, 1, MetricLoggerUnit.Count */
     } else {
-      metric.putMetric(`RoutesDbExpired`, 1, MetricLoggerUnit.Count)
+      /* `RoutesDbExpired`, 1, MetricLoggerUnit.Count */
     }
 
     // Caching requests are not `optimistic`, we need to be careful of not removing this flag
@@ -329,7 +329,7 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
         },
       }
 
-      metric.putMetric('CachingQuoteForRoutesDbCheck', 1, MetricLoggerUnit.Count)
+      /* 'CachingQuoteForRoutesDbCheck', 1, MetricLoggerUnit.Count */
 
       const result = await this.ddbClient.query(queryParams).promise()
       const shouldSendCachingRequest =
@@ -345,7 +345,7 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
 
       // if no Item is found it means we need to send a caching request
       if (shouldSendCachingRequest) {
-        metric.putMetric('CachingQuoteForRoutesDbRequestSent', 1, MetricLoggerUnit.Count)
+        /* 'CachingQuoteForRoutesDbRequestSent', 1, MetricLoggerUnit.Count */
         this.sendAsyncCachingRequest(
           partitionKey,
           [Protocol.V2, Protocol.V3, Protocol.V4, Protocol.MIXED],
@@ -354,7 +354,7 @@ export class DynamoRouteCachingProvider extends IRouteCachingProvider {
         )
         this.setRoutesDbCachingIntentFlag(partitionKey, amount, currentBlockNumber)
       } else {
-        metric.putMetric('CachingQuoteForRoutesDbRequestNotNeeded', 1, MetricLoggerUnit.Count)
+        /* 'CachingQuoteForRoutesDbRequestNotNeeded', 1, MetricLoggerUnit.Count */
       }
     } catch (e) {
       log.error(`[DynamoRouteCachingProvider] Error checking if caching request for RoutesDb was sent: ${e}.`)

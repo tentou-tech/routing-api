@@ -66,18 +66,18 @@ export class GraphQLTokenFeeFetcher implements ITokenFeeFetcher {
             }
           }
         })
-        metric.putMetric('GraphQLTokenFeeFetcherFetchFeesSuccess', 1, MetricLoggerUnit.Count)
+        /* 'GraphQLTokenFeeFetcherFetchFeesSuccess', 1, MetricLoggerUnit.Count */
       }
     } catch (err) {
       log.error({ err }, `Error calling GraphQLTokenFeeFetcher for tokens: ${addressesToFetchFeesWithGraphQL}`)
 
-      metric.putMetric('GraphQLTokenFeeFetcherFetchFeesFailure', 1, MetricLoggerUnit.Count)
+      /* 'GraphQLTokenFeeFetcherFetchFeesFailure', 1, MetricLoggerUnit.Count */
     }
 
     // If we couldn't fetch all addresses from GraphQL then use fallback on chain fetcher for the rest.
     const addressesToFetchFeesWithFallbackFetcher = addresses.filter((address) => !tokenFeeMap[address])
     if (addressesToFetchFeesWithFallbackFetcher.length > 0) {
-      metric.putMetric('GraphQLTokenFeeFetcherOnChainCallbackRequest', 1, MetricLoggerUnit.Count)
+      /* 'GraphQLTokenFeeFetcherOnChainCallbackRequest', 1, MetricLoggerUnit.Count */
       try {
         const tokenFeeMapFromFallback = await this.onChainFeeFetcherFallback.fetchFees(
           addressesToFetchFeesWithFallbackFetcher,

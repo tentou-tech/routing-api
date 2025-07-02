@@ -46,7 +46,7 @@ export class V2DynamoCache implements ICache<{ pair: Pair; block?: number }> {
     const unprocessedKeys = result?.UnprocessedKeys?.[this.tableName]?.Keys
 
     if (unprocessedKeys && unprocessedKeys.length > 0) {
-      metric.putMetric('V2_PAIRS_DYNAMO_CACHING_UNPROCESSED_KEYS', unprocessedKeys.length, MetricLoggerUnit.None)
+      /* 'V2_PAIRS_DYNAMO_CACHING_UNPROCESSED_KEYS', unprocessedKeys.length, MetricLoggerUnit.None */
     }
 
     return (

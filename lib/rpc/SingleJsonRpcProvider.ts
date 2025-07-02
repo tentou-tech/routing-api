@@ -199,13 +199,13 @@ export class SingleJsonRpcProvider extends StaticJsonRpcProvider {
   }
 
   logProviderCallSuccessMetric(methodName: string) {
-    metric.putMetric(`${this.metricPrefix}_SUCCESS`, 1, MetricLoggerUnit.Count)
-    metric.putMetric(`${this.metricPrefix}_${methodName}_SUCCESS`, 1, MetricLoggerUnit.Count)
+    /* `${this.metricPrefix}_SUCCESS`, 1, MetricLoggerUnit.Count */
+    /* `${this.metricPrefix}_${methodName}_SUCCESS`, 1, MetricLoggerUnit.Count */
   }
 
   logProviderCallFailureMetric(methodName: string) {
-    metric.putMetric(`${this.metricPrefix}_FAILED`, 1, MetricLoggerUnit.Count)
-    metric.putMetric(`${this.metricPrefix}_${methodName}_FAILED`, 1, MetricLoggerUnit.Count)
+    /* `${this.metricPrefix}_FAILED`, 1, MetricLoggerUnit.Count */
+    /* `${this.metricPrefix}_${methodName}_FAILED`, 1, MetricLoggerUnit.Count */
   }
 
   logLatencyMetrics(methodName: string, latencyInMs: number, callType: CallType) {
@@ -217,39 +217,39 @@ export class SingleJsonRpcProvider extends StaticJsonRpcProvider {
   }
 
   logCheckHealth() {
-    metric.putMetric(`${this.metricPrefix}_check_health`, 1, MetricLoggerUnit.Count)
+    /* `${this.metricPrefix}_check_health`, 1, MetricLoggerUnit.Count */
   }
 
   logEvaluateLatency() {
-    metric.putMetric(`${this.metricPrefix}_evaluate_latency`, 1, MetricLoggerUnit.Count)
+    /* `${this.metricPrefix}_evaluate_latency`, 1, MetricLoggerUnit.Count */
   }
 
   logProviderSelection() {
-    metric.putMetric(`${this.metricPrefix}_selected`, 1, MetricLoggerUnit.Count)
+    /* `${this.metricPrefix}_selected`, 1, MetricLoggerUnit.Count */
   }
 
   logDbSyncRequested() {
-    metric.putMetric(`${this.metricPrefix}_db_sync_REQUESTED`, 1, MetricLoggerUnit.Count)
+    /* `${this.metricPrefix}_db_sync_REQUESTED`, 1, MetricLoggerUnit.Count */
   }
 
   logDbSyncSampled() {
-    metric.putMetric(`${this.metricPrefix}_db_sync_SAMPLED`, 1, MetricLoggerUnit.Count)
+    /* `${this.metricPrefix}_db_sync_SAMPLED`, 1, MetricLoggerUnit.Count */
   }
 
   logDbSyncSuccess() {
-    metric.putMetric(`${this.metricPrefix}_db_sync_SUCCESS`, 1, MetricLoggerUnit.Count)
+    /* `${this.metricPrefix}_db_sync_SUCCESS`, 1, MetricLoggerUnit.Count */
   }
 
   logDbSyncFailure() {
-    metric.putMetric(`${this.metricPrefix}_db_sync_FAIL`, 1, MetricLoggerUnit.Count)
+    /* `${this.metricPrefix}_db_sync_FAIL`, 1, MetricLoggerUnit.Count */
   }
 
   logHealthinessChanged(newHealthiness: ProviderHealthiness) {
-    metric.putMetric(`${this.metricPrefix}_becomes_${newHealthiness}`, 1, MetricLoggerUnit.Count)
+    /* `${this.metricPrefix}_becomes_${newHealthiness}`, 1, MetricLoggerUnit.Count */
   }
 
   logSendMetrod(method: string) {
-    metric.putMetric(`${this.metricPrefix}_send_${method}`, 1, MetricLoggerUnit.Count)
+    /* `${this.metricPrefix}_send_${method}`, 1, MetricLoggerUnit.Count */
   }
 
   logRpcResponseMatch(method: string, otherProvider: SingleJsonRpcProvider) {
