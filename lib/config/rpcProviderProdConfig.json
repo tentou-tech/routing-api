@@ -16,5 +16,14 @@
     "providerInitialWeights": [1],
     "providerUrls": ["WEB3_RPC_1514"],
     "providerNames": ["DEFAULT"]
+  },
+  {
+    "chainId": 999,
+    "useMultiProviderProb": 1,
+    "latencyEvaluationSampleProb": 0,
+    "healthCheckSampleProb": 0,
+    "providerInitialWeights": [1],
+    "providerUrls": ["WEB3_RPC_999"],
+    "providerNames": ["DEFAULT"]
   }
 ]
