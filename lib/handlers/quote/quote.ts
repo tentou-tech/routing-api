@@ -648,7 +648,7 @@ export class QuoteHandler extends APIGLambdaHandler<
             type: 'v3-pool',
             address,
             routerAddress,
-            dexName: DEXES.StoryHunt.DexName,
+            dexName: DEXES[`${chainId}-${Protocol.V3}`].DexName,
             tokenIn: {
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
@@ -694,7 +694,7 @@ export class QuoteHandler extends APIGLambdaHandler<
             type: 'v3s1-pool',
             address,
             routerAddress,
-            dexName: DEXES.PiPerxV3.DexName,
+            dexName: DEXES[`${chainId}-${Protocol.V3S1}`].DexName,
             tokenIn: {
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
@@ -755,7 +755,7 @@ export class QuoteHandler extends APIGLambdaHandler<
             address: poolAddress,
             routerAddress,
             feeOnTransferToken,
-            dexName: 'PiperX V2',
+            dexName: DEXES[`${chainId}-${Protocol.V2}`].DexName,
             tokenIn: {
               chainId: tokenIn.chainId,
               decimals: tokenIn.decimals.toString(),
