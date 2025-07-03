@@ -113,6 +113,8 @@ export const v2SubgraphUrlOverride = (chainId: ChainId) => {
       return 'https://graph-api-testnet.tentou.tech/subgraphs/name/mimboku-v2'
     case ChainId.STORY:
       return 'https://graph-api.tentou.tech/subgraphs/name/mimboku-v2'
+    case ChainId.HYPER_EVM:
+      return 'https://hyperliquid-testnet-graph-api.tentou.tech/subgraphs/name/hyperevm/'
     default:
       return undefined
   }
