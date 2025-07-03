@@ -174,6 +174,11 @@ export const OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]: { 
       gasLimitPerCall: 1_500_000,
       quoteMinSuccessRate: 0.1,
     },
+    [ChainId.HYPER_EVM]: {
+      multicallChunk: 4,
+      gasLimitPerCall: 500_000,
+      quoteMinSuccessRate: 0.1,
+    },
   },
   [Protocol.V3]: {
     ...constructSameBatchParamsMap(DEFAULT_BATCH_PARAMS),
@@ -272,6 +277,11 @@ export const OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]: { 
       gasLimitPerCall: 1_500_000,
       quoteMinSuccessRate: 0.1,
     },
+    [ChainId.HYPER_EVM]: {
+      multicallChunk: 4,
+      gasLimitPerCall: 500_000,
+      quoteMinSuccessRate: 0.1,
+    },
   },
   [Protocol.V3S1]: {
     ...constructSameBatchParamsMap(DEFAULT_BATCH_PARAMS),
@@ -288,6 +298,11 @@ export const OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]: { 
     [ChainId.STORY]: {
       multicallChunk: 20,
       gasLimitPerCall: 1_500_000,
+      quoteMinSuccessRate: 0.1,
+    },
+    [ChainId.HYPER_EVM]: {
+      multicallChunk: 4,
+      gasLimitPerCall: 500_000,
       quoteMinSuccessRate: 0.1,
     },
   },
@@ -472,6 +487,11 @@ export const OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]: { 
       gasLimitPerCall: 1_500_000,
       quoteMinSuccessRate: 0.1,
     },
+    [ChainId.HYPER_EVM]: {
+      multicallChunk: 4,
+      gasLimitPerCall: 500_000,
+      quoteMinSuccessRate: 0.1,
+    },
   },
 }
 
@@ -564,6 +584,11 @@ export const NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]
       [ChainId.SONEIUM]: {
         multicallChunk: 80,
         gasLimitPerCall: 1_200_000,
+        quoteMinSuccessRate: 0.1,
+      },
+      [ChainId.HYPER_EVM]: {
+        multicallChunk: 4,
+        gasLimitPerCall: 500_000,
         quoteMinSuccessRate: 0.1,
       },
     },
@@ -664,6 +689,11 @@ export const NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]
         gasLimitPerCall: 1_500_000,
         quoteMinSuccessRate: 0.1,
       },
+      [ChainId.HYPER_EVM]: {
+        multicallChunk: 4,
+        gasLimitPerCall: 500_000,
+        quoteMinSuccessRate: 0.1,
+      },
     },
     [Protocol.V3S1]: {
       ...constructSameBatchParamsMap(DEFAULT_BATCH_PARAMS),
@@ -680,6 +710,11 @@ export const NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]
       [ChainId.STORY]: {
         multicallChunk: 20,
         gasLimitPerCall: 1_500_000,
+        quoteMinSuccessRate: 0.1,
+      },
+      [ChainId.HYPER_EVM]: {
+        multicallChunk: 4,
+        gasLimitPerCall: 500_000,
         quoteMinSuccessRate: 0.1,
       },
     },
@@ -769,6 +804,11 @@ export const NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]
       [ChainId.SONEIUM]: {
         multicallChunk: 80,
         gasLimitPerCall: 1_200_000,
+        quoteMinSuccessRate: 0.1,
+      },
+      [ChainId.HYPER_EVM]: {
+        multicallChunk: 4,
+        gasLimitPerCall: 500_000,
         quoteMinSuccessRate: 0.1,
       },
     },
@@ -862,6 +902,11 @@ export const NON_OPTIMISTIC_CACHED_ROUTES_BATCH_PARAMS: { [protocol in Protocol]
       [ChainId.STORY]: {
         multicallChunk: 20,
         gasLimitPerCall: 1_500_000,
+        quoteMinSuccessRate: 0.1,
+      },
+      [ChainId.HYPER_EVM]: {
+        multicallChunk: 4,
+        gasLimitPerCall: 500_000,
         quoteMinSuccessRate: 0.1,
       },
     },
@@ -985,6 +1030,10 @@ export const SUCCESS_RATE_FAILURE_OVERRIDES: { [chainId: number]: FailureOverrid
     gasLimitOverride: 3_000_000,
     multicallChunk: 10,
   },
+  [ChainId.HYPER_EVM]: {
+    gasLimitOverride: 1_000_000,
+    multicallChunk: 2,
+  },
 }
 
 export const BLOCK_NUMBER_CONFIGS: { [chainId: number]: BlockNumberConfig } = {
@@ -1106,6 +1155,7 @@ export const NEW_QUOTER_DEPLOY_BLOCK: { [chainId in ChainId]: number } = {
   [ChainId.SONEIUM]: -1,
   [ChainId.STORY_AENEID]: -1,
   [ChainId.STORY]: -1,
+  [ChainId.HYPER_EVM]: -1,
 }
 
 // 0 threshold means it's not deployed yet
@@ -1142,6 +1192,7 @@ export const LIKELY_OUT_OF_GAS_THRESHOLD: { [chainId in ChainId]: number } = {
   [ChainId.SONEIUM]: 0,
   [ChainId.STORY_AENEID]: 0,
   [ChainId.STORY]: 0,
+  [ChainId.HYPER_EVM]: 0,
 }
 
 // TODO: Move this new addresses to SOR

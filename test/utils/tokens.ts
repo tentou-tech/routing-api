@@ -40,6 +40,7 @@ import {
   USDC_BASE_SEPOLIA,
   USDC_UNICHAIN,
   USDC_SONEIUM,
+  USDT_HYPER_EVM,
 } from '@tentou-tech/smart-order-router'
 import { ethers } from 'ethers'
 import NodeCache from 'node-cache'
@@ -156,6 +157,8 @@ export const USDC_ON = (chainId: ChainId): Token => {
       return USDC_UNICHAIN
     case ChainId.SONEIUM:
       return USDC_SONEIUM
+    case ChainId.HYPER_EVM:
+      return USDT_HYPER_EVM
     default:
       throw new Error(`Chain id: ${chainId} not supported`)
   }

@@ -37,4 +37,5 @@ export const NEW_CACHED_ROUTES_ROLLOUT_PERCENT: { [chain in ChainId]: number } =
   [ChainId.SONEIUM]: 100,
   [ChainId.STORY_AENEID]: 100,
   [ChainId.STORY]: 100,
+  [ChainId.HYPER_EVM]: 100,
 }

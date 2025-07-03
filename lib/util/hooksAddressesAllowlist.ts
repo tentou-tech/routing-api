@@ -67,4 +67,5 @@ export const HOOKS_ADDRESSES_ALLOWLIST: { [chain in ChainId]: Array<string> } = 
   [ChainId.SONEIUM]: [ADDRESS_ZERO],
   [ChainId.STORY_AENEID]: [ADDRESS_ZERO],
   [ChainId.STORY]: [ADDRESS_ZERO],
+  [ChainId.HYPER_EVM]: [ADDRESS_ZERO],
 }

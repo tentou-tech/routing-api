@@ -136,7 +136,8 @@ export class InstrumentedEVMProvider extends ethers.providers.StaticJsonRpcProvi
           throw error
         }
       )
-      .finally(() => {}
+      .finally(
+        () => {}
         /* `${this.metricPrefix}_GETBLOCKWITHTRANSACTION_REQUESTED`, 1, MetricLoggerUnit.Count */
       )
   }
@@ -273,7 +274,8 @@ export class InstrumentedEVMProvider extends ethers.providers.StaticJsonRpcProvi
           throw error
         }
       )
-      .finally(() => {}
+      .finally(
+        () => {}
         /* `${this.metricPrefix}_GETTRANSACTIONRECEIPT_REQUESTED`, 1, MetricLoggerUnit.Count */
       )
   }

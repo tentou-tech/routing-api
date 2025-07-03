@@ -121,6 +121,7 @@ export const SUPPORTED_CHAINS: ChainId[] = [
   // ChainId.SONEIUM,
   ChainId.STORY,
   ChainId.STORY_AENEID,
+  ChainId.HYPER_EVM,
 ]
 const DEFAULT_TOKEN_LIST = 'https://raw.githubusercontent.com/tentou-tech/token-list/refs/heads/main/tokenlist.org'
 
