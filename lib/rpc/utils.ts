@@ -37,6 +37,8 @@ export function chainIdToNetworkName(networkId: ChainId): string {
       return 'story-aeneid'
     case ChainId.STORY:
       return 'story'
+    case ChainId.HYPER_EVM:
+      return 'hyper-evm'
     default:
       return 'ethereum'
   }
@@ -164,6 +166,10 @@ export function generateProviderUrl(key: string, value: string | undefined, chai
         throw new Error(`Environmental variable ${key} isn't defined!`)
       }
       return value
+    }
+
+    case 'WEB3_RPC_999': {
+      return value ? value : 'https://rpc.hyperliquid.xyz/evm'
     }
   }
   throw new Error(`Unknown provider-chainId pair: ${key}`)
