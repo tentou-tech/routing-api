@@ -119,7 +119,7 @@ export class RoutingAPIStack extends cdk.Stack {
       tokenPropertiesCachingDynamoDb,
       rpcProviderHealthStateDynamoDb,
     } = new RoutingDatabaseStack(this, 'RoutingDatabaseStack', {})
-    
+
     // @ts-ignore
     const { routingLambda, routingLambdaAlias } = new RoutingLambdaStack(this, 'RoutingLambdaStack', {
       poolCacheBucket,
