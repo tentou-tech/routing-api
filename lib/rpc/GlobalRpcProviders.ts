@@ -39,6 +39,7 @@ export class GlobalRpcProviders {
         // check env inside utils
         chainConfig.providerUrls[i] = generateProviderUrl(urlEnvVar, process.env[urlEnvVar], chainConfig.chainId)
 
+
       }
     }
     return prodConfig

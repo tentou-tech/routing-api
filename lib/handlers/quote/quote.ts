@@ -96,7 +96,7 @@ export class QuoteHandler extends APIGLambdaHandler<
       switch (result.statusCode) {
         case 200:
         case 202:
-          metric.putMetric(`GET_QUOTE_200_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count)
+          /* `GET_QUOTE_200_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count */
           metric.putMetric(
             `GET_QUOTE_200_REQUEST_SOURCE: ${params.requestQueryParams.source}`,
             1,
@@ -113,7 +113,7 @@ export class QuoteHandler extends APIGLambdaHandler<
         case 404:
         case 408:
         case 409:
-          metric.putMetric(`GET_QUOTE_400_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count)
+          /* `GET_QUOTE_400_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count */
           metric.putMetric(
             `GET_QUOTE_400_REQUEST_SOURCE: ${params.requestQueryParams.source}`,
             1,
@@ -136,9 +136,9 @@ export class QuoteHandler extends APIGLambdaHandler<
           )
           break
         case 500:
-          metric.putMetric(`GET_QUOTE_500_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count)
+          /* `GET_QUOTE_500_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count */
           if (useRpcGateway) {
-            metric.putMetric(`RPC_GATEWAY_GET_QUOTE_500_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count)
+            /* `RPC_GATEWAY_GET_QUOTE_500_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count */
           }
           metric.putMetric(
             `GET_QUOTE_500_REQUEST_SOURCE: ${params.requestQueryParams.source}`,
@@ -163,11 +163,11 @@ export class QuoteHandler extends APIGLambdaHandler<
           break
       }
     } catch (err) {
-      metric.putMetric(`GET_QUOTE_500_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count)
+      /* `GET_QUOTE_500_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count */
       if (useRpcGateway) {
-        metric.putMetric(`RPC_GATEWAY_GET_QUOTE_500_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count)
+        /* `RPC_GATEWAY_GET_QUOTE_500_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count */
       }
-      metric.putMetric(`GET_QUOTE_500_REQUEST_SOURCE: ${params.requestQueryParams.source}`, 1, MetricLoggerUnit.Count)
+      /* `GET_QUOTE_500_REQUEST_SOURCE: ${params.requestQueryParams.source}`, 1, MetricLoggerUnit.Count */
       metric.putMetric(
         `GET_QUOTE_500_REQUEST_SOURCE_AND_CHAINID: ${params.requestQueryParams.source} ${chainId}`,
         1,
@@ -179,10 +179,10 @@ export class QuoteHandler extends APIGLambdaHandler<
       throw err
     } finally {
       // This metric is logged after calling the internal handler to correlate with the status metrics
-      metric.putMetric(`GET_QUOTE_REQUEST_SOURCE: ${params.requestQueryParams.source}`, 1, MetricLoggerUnit.Count)
-      metric.putMetric(`GET_QUOTE_REQUESTED_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count)
+      /* `GET_QUOTE_REQUEST_SOURCE: ${params.requestQueryParams.source}`, 1, MetricLoggerUnit.Count */
+      /* `GET_QUOTE_REQUESTED_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count */
       if (useRpcGateway) {
-        metric.putMetric(`RPC_GATEWAY_GET_QUOTE_REQUESTED_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count)
+        /* `RPC_GATEWAY_GET_QUOTE_REQUESTED_CHAINID: ${chainId}`, 1, MetricLoggerUnit.Count */
       }
       metric.putMetric(
         `GET_QUOTE_REQUEST_SOURCE_AND_CHAINID: ${params.requestQueryParams.source} ${chainId}`,
@@ -190,7 +190,7 @@ export class QuoteHandler extends APIGLambdaHandler<
         MetricLoggerUnit.Count
       )
 
-      metric.putMetric(`GET_QUOTE_LATENCY_CHAIN_${chainId}`, Date.now() - startTime, MetricLoggerUnit.Milliseconds)
+      /* `GET_QUOTE_LATENCY_CHAIN_${chainId}`, Date.now() - startTime, MetricLoggerUnit.Milliseconds */
       if (useRpcGateway) {
         metric.putMetric(
           `RPC_GATEWAY_GET_QUOTE_LATENCY_CHAIN_${chainId}`,
@@ -282,11 +282,11 @@ export class QuoteHandler extends APIGLambdaHandler<
     const shouldEnableMixedRouteEthWeth = enableMixedRouteEthWeth(requestSourceHeader)
 
     if (requestSourceHeader) {
-      metric.putMetric(`RequestSource.${requestSourceHeader}`, 1)
+      /* `RequestSource.${requestSourceHeader}`, 1 */
     }
 
     if (appVersion) {
-      metric.putMetric(`AppVersion.${appVersion}`, 1)
+      /* `AppVersion.${appVersion}`, 1 */
     }
 
     const protocols = QuoteHandler.protocolsFromRequest(
@@ -318,7 +318,7 @@ export class QuoteHandler extends APIGLambdaHandler<
       currencyLookup.searchForToken(tokenOutAddress, tokenOutChainId),
     ])
 
-    metric.putMetric('TokenInOutStrToToken', Date.now() - currencyLookupStartTime, MetricLoggerUnit.Milliseconds)
+    /* 'TokenInOutStrToToken', Date.now() - currencyLookupStartTime, MetricLoggerUnit.Milliseconds */
 
     if (!currencyIn) {
       return {
@@ -368,7 +368,7 @@ export class QuoteHandler extends APIGLambdaHandler<
       ...(cachedRoutesRouteIds ? { cachedRoutesRouteIds } : {}),
     }
 
-    metric.putMetric(`${intent}Intent`, 1, MetricLoggerUnit.Count)
+    /* `${intent}Intent`, 1, MetricLoggerUnit.Count */
 
     let swapRoute: SwapRoute | null
     let amount: CurrencyAmount<Currency>
@@ -407,7 +407,7 @@ export class QuoteHandler extends APIGLambdaHandler<
     })
 
     if (swapParams?.simulate?.fromAddress) {
-      metric.putMetric('Simulation Requested', 1, MetricLoggerUnit.Count)
+      /* 'Simulation Requested', 1, MetricLoggerUnit.Count */
     }
 
     let output
@@ -531,24 +531,24 @@ export class QuoteHandler extends APIGLambdaHandler<
     )
 
     if (simulationStatus == SimulationStatus.Failed) {
-      metric.putMetric('SimulationFailed', 1, MetricLoggerUnit.Count)
+      /* 'SimulationFailed', 1, MetricLoggerUnit.Count */
     } else if (simulationStatus == SimulationStatus.Succeeded) {
-      metric.putMetric('SimulationSuccessful', 1, MetricLoggerUnit.Count)
+      /* 'SimulationSuccessful', 1, MetricLoggerUnit.Count */
     } else if (simulationStatus == SimulationStatus.InsufficientBalance) {
-      metric.putMetric('SimulationInsufficientBalance', 1, MetricLoggerUnit.Count)
+      /* 'SimulationInsufficientBalance', 1, MetricLoggerUnit.Count */
     } else if (simulationStatus == SimulationStatus.NotApproved) {
-      metric.putMetric('SimulationNotApproved', 1, MetricLoggerUnit.Count)
+      /* 'SimulationNotApproved', 1, MetricLoggerUnit.Count */
     } else if (simulationStatus == SimulationStatus.NotSupported) {
-      metric.putMetric('SimulationNotSupported', 1, MetricLoggerUnit.Count)
+      /* 'SimulationNotSupported', 1, MetricLoggerUnit.Count */
     } else if (simulationStatus == SimulationStatus.SystemDown) {
-      metric.putMetric('SimulationSystemDown', 1, MetricLoggerUnit.Count)
-      metric.putMetric(`SimulationSystemDownChainId${chainId}`, 1, MetricLoggerUnit.Count)
+      /* 'SimulationSystemDown', 1, MetricLoggerUnit.Count */
+      /* `SimulationSystemDownChainId${chainId}`, 1, MetricLoggerUnit.Count */
     } else if (simulationStatus == SimulationStatus.SlippageTooLow) {
-      metric.putMetric('SlippageTooLow', 1, MetricLoggerUnit.Count)
-      metric.putMetric(`SlippageTooLowChainId${chainId}`, 1, MetricLoggerUnit.Count)
+      /* 'SlippageTooLow', 1, MetricLoggerUnit.Count */
+      /* `SlippageTooLowChainId${chainId}`, 1, MetricLoggerUnit.Count */
     } else if (simulationStatus == SimulationStatus.TransferFromFailed) {
-      metric.putMetric('TransferFromFailed', 1, MetricLoggerUnit.Count)
-      metric.putMetric(`TransferFromFailedChainId${chainId}`, 1, MetricLoggerUnit.Count)
+      /* 'TransferFromFailed', 1, MetricLoggerUnit.Count */
+      /* `TransferFromFailedChainId${chainId}`, 1, MetricLoggerUnit.Count */
     }
 
     const routeResponse: Array<SupportedPoolInRoute[]> = []

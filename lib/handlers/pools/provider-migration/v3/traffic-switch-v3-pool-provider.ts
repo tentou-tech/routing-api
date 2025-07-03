@@ -49,10 +49,10 @@ export class TrafficSwitchV3PoolProvider implements IV3PoolProvider {
     let currentProviderPools
     let targetProviderPools
 
-    metric.putMetric('V3_POOL_PROVIDER_POOL_TRAFFIC_TOTAL', 1, MetricLoggerUnit.None)
+    /* 'V3_POOL_PROVIDER_POOL_TRAFFIC_TOTAL', 1, MetricLoggerUnit.None */
 
     if (sampleTraffic) {
-      metric.putMetric('V3_POOL_PROVIDER_POOL_TRAFFIC_SAMPLING', 1, MetricLoggerUnit.None)
+      /* 'V3_POOL_PROVIDER_POOL_TRAFFIC_SAMPLING', 1, MetricLoggerUnit.None */
 
       currentProviderPools = await this.currentPoolProvider.getPools(tokenPairs, providerConfig)
       targetProviderPools = await this.targetPoolProvider.getPools(tokenPairs, providerConfig)
@@ -61,11 +61,11 @@ export class TrafficSwitchV3PoolProvider implements IV3PoolProvider {
     }
 
     if (switchTraffic) {
-      metric.putMetric('V3_POOL_PROVIDER_POOL_TRAFFIC_TARGET', 1, MetricLoggerUnit.None)
+      /* 'V3_POOL_PROVIDER_POOL_TRAFFIC_TARGET', 1, MetricLoggerUnit.None */
 
       return targetProviderPools ?? (await this.targetPoolProvider.getPools(tokenPairs, providerConfig))
     } else {
-      metric.putMetric('V3_POOL_PROVIDER_POOL_TRAFFIC_CURRENT', 1, MetricLoggerUnit.None)
+      /* 'V3_POOL_PROVIDER_POOL_TRAFFIC_CURRENT', 1, MetricLoggerUnit.None */
 
       return currentProviderPools ?? (await this.currentPoolProvider.getPools(tokenPairs, providerConfig))
     }
@@ -83,7 +83,7 @@ export class TrafficSwitchV3PoolProvider implements IV3PoolProvider {
       const currentProviderPool = currentProviderPools.getPool(pool.token0, pool.token1, pool.fee)
       if (!currentProviderPool) {
         // We don't expect missing pool, but export metric in case we see any
-        metric.putMetric('V3_POOL_PROVIDER_POOL_CURRENT_MISSING', 1, MetricLoggerUnit.None)
+        /* 'V3_POOL_PROVIDER_POOL_CURRENT_MISSING', 1, MetricLoggerUnit.None */
         log.info(
           `v3 Pool ${pool.token0.symbol} ${pool.token1.symbol} ${pool.fee} not found in the current pool provider.`
         )
@@ -96,27 +96,27 @@ export class TrafficSwitchV3PoolProvider implements IV3PoolProvider {
           log.info(`v3 Pool ${pool.token0.symbol} ${pool.token1.symbol} ${pool.fee} quote mismatch: 
             current ${currentProviderPool.sqrtRatioX96} vs truth ${pool.sqrtRatioX96}.`)
 
-          metric.putMetric('V3_POOL_PROVIDER_POOL_CURRENT_QUOTE_MISMATCH', 1, MetricLoggerUnit.None)
+          /* 'V3_POOL_PROVIDER_POOL_CURRENT_QUOTE_MISMATCH', 1, MetricLoggerUnit.None */
         }
 
         if (!sameLiquidity) {
           log.info(`v3 Pool ${pool.token0.symbol} ${pool.token1.symbol} ${pool.fee} liquidity mismatch: 
             current ${currentProviderPool.liquidity} vs truth ${pool.liquidity}.`)
 
-          metric.putMetric('V3_POOL_PROVIDER_POOL_CURRENT_LIQUIDITY_MISMATCH', 1, MetricLoggerUnit.None)
+          /* 'V3_POOL_PROVIDER_POOL_CURRENT_LIQUIDITY_MISMATCH', 1, MetricLoggerUnit.None */
         }
 
         if (!accurate) {
-          metric.putMetric('V3_POOL_PROVIDER_POOL_CURRENT_ACCURACY_MISMATCH', 1, MetricLoggerUnit.None)
+          /* 'V3_POOL_PROVIDER_POOL_CURRENT_ACCURACY_MISMATCH', 1, MetricLoggerUnit.None */
         } else {
-          metric.putMetric('V3_POOL_PROVIDER_POOL_CURRENT_ACCURACY_MATCH', 1, MetricLoggerUnit.None)
+          /* 'V3_POOL_PROVIDER_POOL_CURRENT_ACCURACY_MATCH', 1, MetricLoggerUnit.None */
         }
       }
 
       const targetProviderPool = targetProviderPools.getPool(pool.token0, pool.token1, pool.fee)
       if (!targetProviderPool) {
         // We don't expect missing pool, but export metric in case we see any
-        metric.putMetric('V3_POOL_PROVIDER_POOL_TARGET_MISSING', 1, MetricLoggerUnit.None)
+        /* 'V3_POOL_PROVIDER_POOL_TARGET_MISSING', 1, MetricLoggerUnit.None */
         log.info(
           `v3 Pool ${pool.token0.symbol} ${pool.token1.symbol} ${pool.fee} not found in the target pool provider.`
         )
@@ -129,20 +129,20 @@ export class TrafficSwitchV3PoolProvider implements IV3PoolProvider {
           log.info(`v3 Pool ${pool.token0.symbol} ${pool.token1.symbol} ${pool.fee} quote mismatch: 
             target ${targetProviderPool.sqrtRatioX96} vs truth ${pool.sqrtRatioX96}.`)
 
-          metric.putMetric('V3_POOL_PROVIDER_POOL_TARGET_QUOTE_MISMATCH', 1, MetricLoggerUnit.None)
+          /* 'V3_POOL_PROVIDER_POOL_TARGET_QUOTE_MISMATCH', 1, MetricLoggerUnit.None */
         }
 
         if (!sameLiquidity) {
           log.info(`v3 Pool ${pool.token0.symbol} ${pool.token1.symbol} ${pool.fee} liquidity mismatch: 
             target ${targetProviderPool.liquidity} vs truth ${pool.liquidity}.`)
 
-          metric.putMetric('V3_POOL_PROVIDER_POOL_TARGET_LIQUIDITY_MISMATCH', 1, MetricLoggerUnit.None)
+          /* 'V3_POOL_PROVIDER_POOL_TARGET_LIQUIDITY_MISMATCH', 1, MetricLoggerUnit.None */
         }
 
         if (!accurate) {
-          metric.putMetric('V3_POOL_PROVIDER_POOL_TARGET_ACCURACY_MISMATCH', 1, MetricLoggerUnit.None)
+          /* 'V3_POOL_PROVIDER_POOL_TARGET_ACCURACY_MISMATCH', 1, MetricLoggerUnit.None */
         } else {
-          metric.putMetric('V3_POOL_PROVIDER_POOL_TARGET_ACCURACY_MATCH', 1, MetricLoggerUnit.None)
+          /* 'V3_POOL_PROVIDER_POOL_TARGET_ACCURACY_MATCH', 1, MetricLoggerUnit.None */
         }
       }
     })

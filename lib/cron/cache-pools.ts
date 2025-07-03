@@ -56,7 +56,7 @@ const handler: ScheduledHandler = metricScope((metrics) => async (event: EventBr
 
   log.info(`Getting pools for ${protocol} on ${chainId}`)
   const metricPrefix = `CachePools.chain_${chainId}.${protocol}_protocol`
-  metric.putMetric(metricPrefix, 1)
+  /* metricPrefix, 1 */
 
   let pools
   try {
@@ -276,15 +276,15 @@ const handler: ScheduledHandler = metricScope((metrics) => async (event: EventBr
       pools = v4HooksPoolsFiltering(chainId, pools as Array<V4SubgraphPool>)
     }
 
-    metric.putMetric(`${metricPrefix}.getPools.latency`, Date.now() - beforeGetPool)
+    /* `${metricPrefix}.getPools.latency`, Date.now() - beforeGetPool */
   } catch (err) {
-    metric.putMetric(`${metricPrefix}.getPools.error`, 1)
+    /* `${metricPrefix}.getPools.error`, 1 */
     log.error({ err }, `Failed to get pools for ${protocol} on ${chainId}`)
     throw new Error(`Failed to get pools for ${protocol} on ${chainId}`)
   }
 
   if (!pools || pools.length == 0) {
-    metric.putMetric(`${metricPrefix}.getPools.empty`, 1)
+    /* `${metricPrefix}.getPools.empty`, 1 */
     log.info(`No ${protocol} pools found from the subgraph for ${chainId.toString()}`)
     return
   }
@@ -305,17 +305,17 @@ const handler: ScheduledHandler = metricScope((metrics) => async (event: EventBr
     })
     .promise()
 
-  metric.putMetric(`${metricPrefix}.s3.latency`, Date.now() - beforeS3)
+  /* `${metricPrefix}.s3.latency`, Date.now() - beforeS3 */
 
   log.info({ result }, `Done ${protocol} for ${chainId.toString()}`)
 
   log.info(`Successfully cached ${chainId} ${protocol} pools to S3 bucket ${process.env.POOL_CACHE_BUCKET_3}`)
-  metric.putMetric(`${metricPrefix}.latency`, Date.now() - beforeAll)
+  /* `${metricPrefix}.latency`, Date.now() - beforeAll */
 
   log.info(
     `compression ratio for ${chainId} ${protocol} pool file is ${serializedPools.length}:${compressedPools.length}`
   )
-  metric.putMetric(`${metricPrefix}.compression_ratio`, serializedPools.length / compressedPools.length)
+  /* `${metricPrefix}.compression_ratio`, serializedPools.length / compressedPools.length */
 })
 
 module.exports = { handler }
