@@ -74,6 +74,8 @@ export const v3SubgraphUrlOverride = (chainId: ChainId) => {
       return 'https://graph-api-testnet.tentou.tech/subgraphs/name/mimboku'
     case ChainId.STORY:
       return 'https://graph-api.tentou.tech/subgraphs/name/mimboku-v3'
+    case ChainId.HYPER_EVM:
+      return 'https://hyperliquid-testnet-graph-api.tentou.tech/subgraphs/name/hyperevm/'
     default:
       return undefined
   }
@@ -394,6 +396,50 @@ export const chainProtocols = [
       v2TrackedEthThreshold,
       v2UntrackedUsdThreshold,
       v2SubgraphUrlOverride(ChainId.STORY)
+    ), // 1000 is the largest page size supported by thegraph
+  },
+  // Hyperliquid
+  {
+    protocol: Protocol.V3,
+    chainId: ChainId.HYPER_EVM,
+    timeout: 90000,
+    provider: new V3SubgraphProvider(
+      ChainId.HYPER_EVM,
+      3,
+      90000,
+      true,
+      v3TrackedEthThreshold,
+      v3UntrackedUsdThreshold,
+      v3SubgraphUrlOverride(ChainId.HYPER_EVM)
+    ),
+  },
+  {
+    protocol: Protocol.V3S1,
+    chainId: ChainId.HYPER_EVM,
+    timeout: 90000,
+    provider: new V3PiperxSubgraphProvider(
+      ChainId.HYPER_EVM,
+      3,
+      90000,
+      true,
+      v3TrackedEthThreshold,
+      v3UntrackedUsdThreshold,
+      v3SubgraphUrlOverride(ChainId.HYPER_EVM)
+    ),
+  },
+  {
+    protocol: Protocol.V2,
+    chainId: ChainId.HYPER_EVM,
+    timeout: 840000,
+    provider: new V2SubgraphProvider(
+      ChainId.HYPER_EVM,
+      5,
+      900000,
+      true,
+      1000,
+      v2TrackedEthThreshold,
+      v2UntrackedUsdThreshold,
+      v2SubgraphUrlOverride(ChainId.HYPER_EVM)
     ), // 1000 is the largest page size supported by thegraph
   },
   // V2.
