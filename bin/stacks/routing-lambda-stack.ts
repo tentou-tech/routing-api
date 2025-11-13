@@ -311,8 +311,10 @@ export class RoutingLambdaStack extends cdk.NestedStack {
     if (enableProvisionedConcurrency) {
       const cachingTarget = new asg.ScalableTarget(this, 'CachingRoutingProvConcASG', {
         serviceNamespace: asg.ServiceNamespace.LAMBDA,
-        maxCapacity: provisionedConcurrency * 10,
-        minCapacity: provisionedConcurrency,
+        // maxCapacity: provisionedConcurrency * 10,
+        // minCapacity: provisionedConcurrency,
+        maxCapacity: 1,
+        minCapacity: 1,
         resourceId: `function:${cachingRoutingLambdaAlias.lambda.functionName}:${cachingRoutingLambdaAlias.aliasName}`,
         scalableDimension: 'lambda:function:ProvisionedConcurrency',
       })
