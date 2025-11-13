@@ -298,7 +298,9 @@ export class RoutingLambdaStack extends cdk.NestedStack {
     const cachingRoutingLambdaAlias = new aws_lambda.Alias(this, 'CachingRoutingLiveAlias', {
       aliasName: 'live',
       version: cachingRoutingLambda.currentVersion,
-      provisionedConcurrentExecutions: enableProvisionedConcurrency ? provisionedConcurrency : undefined,
+      // provisionedConcurrentExecutions: enableProvisionedConcurrency ? provisionedConcurrency : undefined,
+      // reduce provisionedConcurrency
+      provisionedConcurrentExecutions: enableProvisionedConcurrency ? 1 : undefined,
     })
     this.routingLambdaAlias = new aws_lambda.Alias(this, 'RoutingLiveAlias', {
       aliasName: 'live',
