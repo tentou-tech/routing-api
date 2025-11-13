@@ -313,7 +313,7 @@ export class RoutingLambdaStack extends cdk.NestedStack {
         serviceNamespace: asg.ServiceNamespace.LAMBDA,
         // maxCapacity: provisionedConcurrency * 10,
         // minCapacity: provisionedConcurrency,
-        maxCapacity: 1,
+        maxCapacity: 2,
         minCapacity: 1,
         resourceId: `function:${cachingRoutingLambdaAlias.lambda.functionName}:${cachingRoutingLambdaAlias.aliasName}`,
         scalableDimension: 'lambda:function:ProvisionedConcurrency',
