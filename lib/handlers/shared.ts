@@ -122,7 +122,6 @@ export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (chainId: ChainId): AlphaRouterCo
     // batch size and send more multicalls per quote. To reduce the amount of requests each quote sends, we
     // have to adjust the routing config so we explore fewer routes.
     case ChainId.ARBITRUM_ONE:
-    case ChainId.STORY:
       return {
         v2PoolSelection: {
           topN: 3,
@@ -200,32 +199,32 @@ export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (chainId: ChainId): AlphaRouterCo
       return {
         v2PoolSelection: {
           topN: 3,
-          topNDirectSwaps: 2,
+          topNDirectSwaps: 1,
           topNTokenInOut: 5,
           topNSecondHop: 2,
-          topNWithEachBaseToken: 3,
+          topNWithEachBaseToken: 2,
           topNWithBaseToken: 6,
         },
         v3PoolSelection: {
-          topN: 3,
+          topN: 2,
           topNDirectSwaps: 2,
-          topNTokenInOut: 5,
-          topNSecondHop: 2,
+          topNTokenInOut: 2,
+          topNSecondHop: 1,
           topNWithEachBaseToken: 3,
-          topNWithBaseToken: 6,
+          topNWithBaseToken: 2,
         },
         v4PoolSelection: {
           topN: 2,
           topNDirectSwaps: 2,
-          topNTokenInOut: 5,
-          topNSecondHop: 2,
+          topNTokenInOut: 2,
+          topNSecondHop: 1,
           topNWithEachBaseToken: 3,
-          topNWithBaseToken: 6,
+          topNWithBaseToken: 2,
         },
-        maxSwapsPerPath: 3,
+        maxSwapsPerPath: 2,
         minSplits: 1,
         maxSplits: 7,
-        distributionPercent: 10,
+        distributionPercent: 20,
         forceCrossProtocol: false,
       }
     default:
