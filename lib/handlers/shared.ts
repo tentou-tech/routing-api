@@ -211,7 +211,7 @@ export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (chainId: ChainId): AlphaRouterCo
           topNTokenInOut: 2,
           topNSecondHop: 1,
           topNWithEachBaseToken: 3,
-          topNWithBaseToken: 2,
+          topNWithBaseToken: 3,
         },
         v4PoolSelection: {
           topN: 2,
@@ -221,7 +221,7 @@ export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (chainId: ChainId): AlphaRouterCo
           topNWithEachBaseToken: 3,
           topNWithBaseToken: 2,
         },
-        maxSwapsPerPath: 2,
+        maxSwapsPerPath: 3,
         minSplits: 1,
         maxSplits: 7,
         distributionPercent: 20,
