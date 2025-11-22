@@ -209,7 +209,7 @@ export const DEFAULT_ROUTING_CONFIG_BY_CHAIN = (chainId: ChainId): AlphaRouterCo
           topN: 2,
           topNDirectSwaps: 2,
           topNTokenInOut: 2,
-          topNSecondHop: 1,
+          topNSecondHop: 2,
           topNWithEachBaseToken: 3,
           topNWithBaseToken: 3,
         },
